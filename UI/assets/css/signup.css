@@ -1,0 +1,132 @@
+body,
+html {
+  height: 100%;
+  font-family: "Open Sans", "Helvetica", "Verdana", sans-serif;
+  background-color: #ddd;
+}
+* {
+  box-sizing: border-box;
+}
+.text-center {
+  text-align: center;
+}
+.light-text{
+  color: #ddd;  
+}
+/* Begin Nav */
+
+nav {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 5%;
+  /* border: 1px solid black; */
+}
+
+ul {
+  font-size: 15px;
+  font-weight: 400;
+  list-style-type: none;
+  background-color: transparent;
+}
+
+nav ul li {
+  min-width: fit-content;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+nav ul li a {
+  display: inline;
+  color: #504766;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* End Nav */
+
+/* Begin Signup */
+.container {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  min-width: 300px;
+  max-width: 500px;
+  padding: 20px;
+  background-color: #504766;
+  opacity: 0.9;
+  border-radius: 10px;
+}
+
+form h1 {
+  color: #d79cbc;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  background: white;
+}
+form div{
+    margin: 5px 0 22px 0;
+}
+div.form {
+  display: block;
+  text-align: center;
+}
+input[type="email"]:focus,
+input[type="text"]:focus,
+input[type="password"]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.btn {
+  background-color: #d79cbc;
+  color: wite;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+  font-size: 18px;
+}
+
+.btn:hover {
+  background-color: #ddd;
+}
+.text-danger{
+color:red;
+}
+.section-image {
+  background-image: url("../images/download.png");
+  min-height: 380px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  height: 100%;
+}
+
+/* End Signup */
+
+@media only screen and (min-width: 600px) {
+  /* Begin Nav */
+  nav {
+    padding-right: 10%;
+  }
+  ul {
+    font-size: 30px;
+    font-weight: 400;
+  }
+  nav ul li {
+    margin-right: 10px;
+  }
+  /* End Nav */
+}
