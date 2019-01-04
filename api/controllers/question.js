@@ -26,6 +26,7 @@ export default {
       data: [question]
     });
   },
+
   getQuestions: (req, res) => {
     if (questionRecords.length === 0) {
       return res.status(200).send({
@@ -55,4 +56,38 @@ export default {
       data: [question] 
     });
   },
+
+  upvoteQuestion: (req, res) => {
+    const { id } = req.params;
+    const question = questionRecords.find(c => c.id === id);
+
+    if (!question) {
+      return res.status(404).send({ 
+        status: 404, 
+        error: "Question not found" 
+      });
+    }
+    question.votes += 1;
+    return res.status(200).send({ 
+      status: 200, 
+      data: [question] 
+    });
+  },
+
+  downvoteQuestion: (req, res) => {
+    const { id } = req.params;
+    const question = questionRecords.find(c => c.id === id);
+
+    if (!question) {
+      return res.status(404).send({ 
+        status: 404,
+        error: "Question not found" 
+      });
+    }
+    question.votes -= 1;
+    return res.status(200).send({ 
+      status: 200, 
+      data: [question] 
+    });
+  }
 };
