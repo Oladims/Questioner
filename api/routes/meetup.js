@@ -4,7 +4,7 @@ import meetupvalidator from '../validators/meetupvalidator';
 import idValidator from '../validators/idvalidator';
 
 const {
-    createMeetup, getMeetups} = meetupController;
+    createMeetup, getMeetup, getMeetups, getUpcomingMeetups} = meetupController;
 
 const router = express.Router();
 
