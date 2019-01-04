@@ -9,5 +9,6 @@ const router = express.Router();
 
 router.post('/', meetupvalidator, createMeetup);
 router.get('/', getMeetups);
+router.get('/:id', idValidator, getMeetup);
 
 export default router;
