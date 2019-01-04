@@ -1,7 +1,7 @@
 import express from 'express';
 import morgan from 'morgan';
 // import config from 'config';
-import routes from './v1/routes';
+import routes from './routes';
 import path from 'path';
 const app = express();
 import bodyParser from 'body-parser'
