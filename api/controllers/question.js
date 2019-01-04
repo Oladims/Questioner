@@ -25,5 +25,34 @@ export default {
       message: "Your question has been created successfully.",
       data: [question]
     });
-  }
+  },
+  getQuestions: (req, res) => {
+    if (questionRecords.length === 0) {
+      return res.status(200).send({
+        status: 200,
+        message: "Questions record is empty.",
+        data: []
+      });
+    }
+    return res.status(200).send({ 
+      status: 200, 
+      data: questionRecords 
+    });
+  },
+
+  getQuestion: (req, res) => {
+    const { id } = req.params;
+    const question = questionRecords.find(c => c.id === id);
+
+    if (!question) {
+      return res.status(404).send({ 
+        status: 404, 
+        error: "Question not found" 
+      });
+    }
+    return res.status(200).send({ 
+      status: 200, 
+      data: [question] 
+    });
+  },
 };

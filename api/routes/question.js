@@ -6,9 +6,11 @@ import idvalidator from '../validators/idvalidator';
 const router = express.Router();
 
 const {
-  createQuestion
+  createQuestion, getQuestions, getQuestion
 } = questionController;
 
 router.post('/', questionvalidator, createQuestion);
+router.get('/', getQuestions);
+router.get('/:id', idvalidator, getQuestion);
 
 export default router;
