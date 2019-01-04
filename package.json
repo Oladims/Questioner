@@ -1,0 +1,25 @@
+{
+  "name": "questioner",
+  "version": "1.0.0",
+  "description": "Questioner helps the meetup organizer prioritize questions to be answered. Other users can vote on asked questions and they bubble to the top or bottom of the log.",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Oladims/questioner.git"
+  },
+  "author": "Olufowora Ibrahim Oladimeji",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Oladims/questioner/issues"
+  },
+  "homepage": "https://github.com/Oladims/questioner#readme",
+  "devDependencies": {
+    "eslint": "^5.11.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  }
+}
