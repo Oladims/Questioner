@@ -23,3 +23,21 @@ export let meetupRecords = [{
     "tags": [],
     "createdOn": "2019-01-03T07:16:09.975Z"
 }];
+export let questionRecords = [{
+    "id": 1,
+    "meetup": 1,
+    "createdOn": '2020-01-03T07:13:00.135Z',
+    "title": 'When is Concatenate?',
+    "body": 'What time wil the event beginWhat time wil the event begin.',
+    "votes": 1,
+    "createdBy": 1,
+},
+{
+    "id": 2,
+    "meetup": 1,
+    "createdOn": '2020-01-03T07:13:00.135Z',
+    "title": 'When is Concatenate?',
+    "body": 'What time wil the event beginWhat time wil the event begin.',
+    "votes": 1,
+    "createdBy": 1,
+}];
