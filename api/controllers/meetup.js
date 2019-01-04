@@ -40,5 +40,23 @@ export default {
         data: [meetup] 
       });
   },
-
+  getUpcomingMeetups: (req, res) => {
+    const upcomingMeetup = meetupRecords.filter(c => new Date(c.happeningOn) > new Date(Date.now()));
+    if (upcomingMeetup.length === 0) {
+      return res.status(200).send({
+        status: 200,
+        message: 'There are no upcoming meetups yet.',
+        data: []
+      });
+    }
+    const sortDate = upcomingMeetup.sort((a, b) => {
+      const farDate = new Date(a.happeningOn);
+      const nearDate = new Date(b.happeningOn);
+      return farDate - nearDate;
+    });
+    return res.status(200).send({
+       status: 200, 
+       data: sortDate
+       });
+  }
 };
