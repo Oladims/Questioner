@@ -25,6 +25,20 @@ export default {
         status: 200,
         data: meetupRecords 
       });
-  }
-  
+  },
+  getMeetup: (req, res) => {
+    const { id } = req.params;
+    const meetup = meetupRecords.find(c => c.id === id);
+
+    if (!meetup) {
+      return res.status(404).send({
+         status: 404,
+         error: 'Meetup not found' });
+    }
+    return res.status(200).send({
+        status: 200,
+        data: [meetup] 
+      });
+  },
+
 };
