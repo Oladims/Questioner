@@ -12,5 +12,19 @@ export default {
       message: 'Your meetup has been created successfully.',
       data: [meetup]
     });
+  },
+  getMeetups: (req, res) => {
+    if (meetupRecords.length === 0) {
+      return res.status(200).send({
+        status: 200,
+        message: 'Meetup record is empty.',
+        data: []
+      });
+    }
+    return res.status(200).send({ 
+        status: 200,
+        data: meetupRecords 
+      });
   }
+  
 };
