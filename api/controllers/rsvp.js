@@ -1,5 +1,5 @@
 import { meetupRecords, rsvpRecords } from '../db/db';
-import Rsvp from '../models/Rsvp';
+import Rsvp from '../models/rsvp';
 
 export default {
     response: (req, res) => {
