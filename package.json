@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node_modules/.bin/nodemon api/index.js --exec babel-node --",
     "lint": "eslint",
-    "test": "nyc --reporter=text-lcov mocha -c ./api/tests/**/*.js --exit --require babel-core/register"
+    "test": "nyc --reporter=text-Summary mocha -c ./api/tests/**/*.js --exit --require babel-core/register"
   },
   "repository": {
     "type": "git",
