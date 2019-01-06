@@ -3,6 +3,7 @@
  
 [![Build Status](https://travis-ci.com/Oladims/Questioner.svg?branch=develop)](https://travis-ci.com/Oladims/Questioner)
 [![Coverage Status](https://coveralls.io/repos/github/Oladims/Questioner/badge.svg?branch=develop)](https://coveralls.io/github/Oladims/Questioner?branch=develop)
+![Heroku](https://heroku-badge.herokuapp.com/?app=heroku-badge)
 
 Features
 
