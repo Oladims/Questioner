@@ -4,10 +4,13 @@
   "description": "Questioner helps the meetup organizer prioritize questions to be answered. Other users can vote on asked questions and they bubble to the top or bottom of the log.",
   "main": "index.js",
   "scripts": {
-    "start": "node_modules/.bin/nodemon api/index.js --exec babel-node --",
+    "clean": "rm -rf build && mkdir build",
+    "build-server": "babel -d ./build ./api -s",
+    "build": "npm run clean && npm run build-server",
+    "start": "npm run build && node ./build/index.js",
+    "start-dev": "node_modules/.bin/nodemon api/index.js --exec babel-node --",
     "lint": "eslint",
-    "test": "nyc --reporter=text-Summary mocha -c ./api/tests/**/*.js --exit --require babel-core/register",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "test": "nyc --reporter=text-Summary  mocha -c ./api/tests/**/*.js --exit --require babel-core/register"
   },
   "repository": {
     "type": "git",
