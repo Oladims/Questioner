@@ -2,6 +2,7 @@
  Questioner helps the meetup organizer prioritize questions to be answered. Other users can vote on asked questions and they bubble to the top or bottom of the log.
  
 [![Build Status](https://travis-ci.com/Oladims/Questioner.svg?branch=develop)](https://travis-ci.com/Oladims/Questioner)
+[![Coverage Status](https://coveralls.io/repos/github/Oladims/Questioner/badge.svg?branch=develop)](https://coveralls.io/github/Oladims/Questioner?branch=develop)
 
 Features
 
