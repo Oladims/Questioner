@@ -258,13 +258,13 @@ grid-gap: 5px;
   
 }
 .yes:hover{
-  color: green;
+  color: green !important;
 }
 .no:hover{
-  color: red;
+  color: red !important;
 }
 .maybe:hover{
-  color: yellow;
+  color: yellow !important;
 }
 .meetups{
   padding: 10px;
@@ -287,6 +287,9 @@ grid-gap: 5px;
   padding: 2px 16px;
   color: #504766;
   font-weight: 200;
+}
+.response div i{
+ display: none;
 }
 .viewmore{
   display: flex;
@@ -558,7 +561,32 @@ footer {
     font-size: 40px;
   }
   /* End featured-contents */
-
+.response div i{
+  display: inline;
+  font-size: 40px;
+  color: white ;
+  padding-right: 5px;
+}
+.yes:hover{
+  color: green !important;
+}
+.no:hover{
+  color: red !important;
+}
+.maybe:hover{
+  color: yellow !important;
+}
+.response div:hover{
+  font-size: 40px;
+  font-weight: bold;
+}
+.viewdetail:hover{
+  font-size: 20px
+}
+.response div{
+  padding-top: 5px;
+  font-size: 30px
+}
   /* Begin footer */
   footer {
     padding-top: 6px;
