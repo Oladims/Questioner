@@ -6,7 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Questioner</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+    crossorigin="anonymous">
   <link rel="stylesheet" href="./assets/css/style.css" />
+  <style>
+
+  </style>
 </head>
 
 <body>
@@ -24,8 +29,9 @@
 
     <div class="hero-text">
       <h1>Questioner</h1>
-      <p>Crowd-source questions for a meetup</p>
-      <a id="postBtn" class="button" href="./pages/ask.html">Post a Question</a>
+      <p><b>Crowd-source</b> questions for a meetup.</p>
+      <p>Want to <b>attend</b> a meetup?</p>
+      <p>Have <b>Questions</b> for a <b>Meetup</b> you're <b>attending</b> ?</p>
       <a id="signupBtn" class="button" href="./pages/signup.html">Signup</a>
     </div>
   </div>
@@ -56,46 +62,164 @@
   <!-- End Hero -->
 
   <div class="container">
-    <!-- Begin intro-text -->
-    <div class="intro-text">
-      <p class="center">
-        Crowd-source questions for a meetup. Questioner helps the meetup
-        organizer prioritize questions to be answered. Other users can vote on
-        asked questions and they bubble to the top or bottom of the log.
-      </p>
+
+    <!-- Begin intro-section -->
+    <div class="row-4 stepsrow">
+      <div class="center steps" id="createaccount">
+        <h4>Create Account</h4>
+        <br>
+        <div> <a href="./pages/signup.html">
+            <i class="fas fa-user-plus fa-5x"></i>
+          </a>
+        </div>
+        <br>
+        <p>Create an account</p>
+      </div>
+
+      <div class="center steps" id="browsemeetups">
+        <h4>Browse Meetups</h4><br>
+        <div> <a href="./pages/meetup.html"><i class="fas fa-search-plus fa-5x"></i></a></div>
+        <br>
+        <p>Join a Meetup</p>
+      </div>
+
+      <div class="center steps" id="askquestion">
+        <h4>Ask Questions</h4>
+        <br>
+        <div> <a href="./pages/ask.html"><i class="fas fa-question fa-5x"></i></a></div>
+        <br>
+        <p>Post Questions to Meetups you're attending</p>
+      </div>
+
+      <div class="center steps" id="interact">
+        <h4>Interact</h4>
+        <br>
+        <div> <a href="./pages/questions.html"><i class="fas fa-comment-alt fa-5x"></i></a></div>
+        <br>
+        <p>view, vote, and comment on questions</p>
+      </div>
+
     </div>
-    <!-- End intro-text -->
+    <!-- End intro-section -->
+
+    <!-- Begin meetup section -->
+    <div class="meetup-section">
+      <h3 class="center featured-heading">Meetups</h3>
+      <div class="shadow">
+        <div class="row-4 meetups">
+          <div class="meetup hvrbox ">
+            <img class="meetupimage hvrbox-layer_bottom" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1A8Y_qFHiSjEQV5YnFja04rAMpsL7eyGBjmCN8Qa7P30DjWfR"
+              alt="Avatar" style="width:100%">
+            <div class="meetup-container">
+              <h4 class="center"><b>GDG Ajah</b></h4>
+              <p class="center">Building Apps with Flutter</p>
+            </div>
+            <div class="meetup-container hvrbox-layer_top">
+              <div class="hvrbox-text">
+                <h4><a class="viewdetail light-text" href="">View Details</a></h4>
+                <h4> Are you coming?</h4>
+                <div class="response">
+                  <div class="yes">Yes</div>
+                  <div class="no">No</div>
+                  <div class="maybe">Maybe</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="meetup hvrbox">
+            <img class="meetupimage hvrbox-layer_bottom" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1A8Y_qFHiSjEQV5YnFja04rAMpsL7eyGBjmCN8Qa7P30DjWfR"
+              alt="Avatar" style="width:100%">
+            <div class="meetup-container">
+              <h4 class="center"><b>React Summit</b></h4>
+              <p class="center">Demystifying React Hooks</p>
+            </div>
+            <div class="meetup-container hvrbox-layer_top">
+              <div class="hvrbox-text">
+                <h4><a class="viewdetail light-text" href="">View Details</a></h4>
+                <h4> Are you coming?</h4>
+                <div class="response">
+                  <div class="yes">Yes</div>
+                  <div class="no">No</div>
+                  <div class="maybe">Maybe</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="meetup hvrbox">
+            <img class="meetupimage hvrbox-layer_bottom" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1A8Y_qFHiSjEQV5YnFja04rAMpsL7eyGBjmCN8Qa7P30DjWfR"
+              alt="Avatar" style="width:100%">
+            <div class="meetup-container">
+              <h4 class="center"><b>Concatenate</b></h4>
+              <p class="center">Importance of Authentication in your Apps</p>
+            </div>
+            <div class="meetup-container hvrbox-layer_top">
+              <div class="hvrbox-text">
+                <h4><a class="viewdetail light-text" href="">View Details</a></h4>
+                <h4> Are you coming?</h4>
+                <div class="response">
+                  <div class="yes">Yes</div>
+                  <div class="no">No</div>
+                  <div class="maybe">Maybe</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="meetup hvrbox">
+            <img class="meetupimage hvrbox-layer_bottom" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1A8Y_qFHiSjEQV5YnFja04rAMpsL7eyGBjmCN8Qa7P30DjWfR"
+              alt="Avatar" style="width:100%">
+            <div class="meetup-container">
+              <h4 class="center"><b>Node Conf</b></h4>
+              <p class="center">Debugging Node Apps</p>
+            </div>
+            <div class="meetup-container hvrbox-layer_top">
+              <div class="hvrbox-text">
+                <h4><a class="viewdetail light-text" href="">View Details</a></h4>
+                <h4> Are you coming?</h4>
+                <div class="response">
+                  <div class="yes">Yes</div>
+                  <div class="no">No</div>
+                  <div class="maybe">Maybe</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="viewmore"><a href="./pages/meetup.html">View All</a></div>
+      </div>
+    </div>
+    <!-- End meetup section -->
 
     <!-- Begin featured-contents -->
     <div class="activity">
-    <h3 class="center featured-heading">Activity</h3>
-    <div class="featured featured1">
-      <div>
-        <div class="featured-contents featured-contents2 ">90</div>
-        <span class="center light-text centralize">Questions</span>
-      </div>
-      <div>
-        <div class="featured-contents featured-contents2 ">20</div>
-        <span class="center light-text centralize">Meetups</span>
-      </div>
-      <div>
-        <div class="featured-contents featured-contents2 ">30</div>
-        <span class="center light-text centralize">Users</span>
+      <h3 class="center featured-heading">Activity</h3>
+      <div class="featured featured1">
+        <div>
+          <div class="featured-contents featured-contents2 ">90</div>
+          <span class="center light-text centralize">Questions</span>
+        </div>
+        <div>
+          <div class="featured-contents featured-contents2 ">20</div>
+          <span class="center light-text centralize">Meetups</span>
+        </div>
+        <div>
+          <div class="featured-contents featured-contents2 ">30</div>
+          <span class="center light-text centralize">Users</span>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="sponsors">
-    <h3 class="center featured-heading">Sponsors</h3>
-    <div class="featured">
-      <div class="featured-contents"></div>
-      <div class="featured-contents"></div>
-      <div class="featured-contents"></div>
-      <div class="featured-contents"></div>
+    <div class="sponsors">
+      <h3 class="center featured-heading">Sponsors</h3>
+      <div class="featured">
+        <div class="featured-contents"></div>
+        <div class="featured-contents"></div>
+        <div class="featured-contents"></div>
+        <div class="featured-contents"></div>
+      </div>
     </div>
-  </div>
     <!-- End featured-contents -->
   </div>
+
   <!-- Begin Footer -->
   <footer>
     <div class="name">
@@ -107,6 +231,7 @@
     </div>
   </footer>
   <!-- End Footer -->
+
 </body>
 
 </html>
