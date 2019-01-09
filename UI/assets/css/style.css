@@ -83,11 +83,12 @@ nav ul li a {
 nav ul li a:hover {
   color: #504766;
   background-color: #ddd;
-  border-bottom: 1px solid #ddd;
+  border-radius: 5px;  
 }
 nav ul li a.active {
   color: #504766;
   background-color: #ddd;
+  border-radius: 5px;  
 }
 
 /* End Nav */

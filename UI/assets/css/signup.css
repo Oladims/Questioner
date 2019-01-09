@@ -36,19 +36,24 @@ nav ul li {
   display: inline-block;
   margin-right: 10px;
 }
-
 nav ul li a {
   display: inline;
   color: #ddd;
   text-align: center;
   text-decoration: none;
-  padding: 20px 7px;
+  padding: 7px 7px;
 }
 nav ul li a:hover {
   color: #504766;
   background-color: #ddd;
-  border-bottom: 2px solid #ddd;
+  border-radius: 5px;  
 }
+nav ul li a.active {
+  color: #504766;
+  background-color: #ddd;
+  border-radius: 5px;  
+}
+
 /* End Nav */
 
 /* Begin Signup */
@@ -68,7 +73,7 @@ nav ul li a:hover {
 }
 
 form h1 {
-  color: #d79cbc;
+  color: whitesmoke;
 }
 label{
   color: white;
@@ -97,16 +102,19 @@ input[type="password"]:focus {
 }
 
 .btn {
-  background-color: #d79cbc;
-  color: wite;
+  background-color: whitesmoke;
   padding: 16px 20px;
   border: none;
   cursor: pointer;
-  width: 100%;
+  width: 40%;
   opacity: 0.9;
   font-size: 18px;
+  border-radius: 5px;
 }
-
+.centralizeBtn{
+  display: flex;
+  justify-content: center;
+}
 .btn:hover {
   background-color: #ddd;
 }
