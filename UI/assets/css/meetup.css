@@ -23,6 +23,7 @@ nav ul li a {
   padding: 5px;
   text-decoration: none;
   color: #504766;
+  border-radius: 50%;
 }
 .filter{
   display: flex;
