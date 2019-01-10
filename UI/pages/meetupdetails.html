@@ -4,9 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+    crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/meetupdetails.css" />
-    <title>Ask</title>
+    <title>Questioner</title>
   </head>
 
   <body>
@@ -19,74 +21,40 @@
         </ul>
       </nav>
     <!-- End Nav -->
-    <div class="container">
-      <div class="row">
-        <div class="form">
-          <h1 class="text-center">How to Ask</h1>
-          <p><b>Welcome to Questioner!</b></p>
-          <p>
-            We’d love to help you, but the reality is that not every question
-            gets answered. To improve your chances, here are some tips
-          </p>
+    <div class="content">
+        <div class="meetupImage">
+     </div>
+     <div class="container">
+         <div class="members">
+             <h3>Concatenate</h3>
+         </div>
+    <div class="meetupInfo shadow">
+            <p class="small">200 people are going</p>
+         <div class="date">
+                <i class="fas fa-clock"></i>
+                <span class="small">Friday,19th October, 2019</span>
+         </div>
+         <div class="venue">
+                <i class="fas fa-map-marker-alt"></i><span class="small">Zone Tech Park, Gbagada, Lagos, Nigeria</span>
+         </div>
+     </div>
 
-          <h3>Search, and research</h3>
-          <p>
-            Have you thoroughly searched for an answer before asking your
-            question? Sharing your research helps everyone. Tell us what you
-            found (on this site or elsewhere) and why it didn’t meet your needs.
-            This demonstrates that you’ve taken the time to try to help
-            yourself, it saves us from reiterating obvious answers, and above
-            all, it helps you get a more specific and relevant answer
-          </p>
-
-          <form name="question" class="container">
-            <h1>Ask a question</h1>
-            <div>
-              <label for="meetups"><b>Meetup</b></label> <br />
-              <select name="meetups" size="">
-                <option value="gdgAjah">GDG Ajah</option>
-                <option value="concatenate">Concatenate</option>
-                <option value="nodeConf">NodeConf</option>
-                <option value="reactSummit">React Summit</option>
-              </select>
-              <span id="error_text" class="text-danger"></span>
-            </div>
-            <div>
-              <label for="name"><b>Title</b></label> <br />
-              <input
-                id="text"
-                type="text"
-                placeholder="What's your question? Be specific."
-                name="title"
-              />
-              <span id="error_text" class="text-danger"></span>
-            </div>
-            <div>
-              <label for="email"><b>Body</b></label> <br />
-              <textarea></textarea>
-
-              <span id="error_email" class="text-danger"></span>
-            </div>
-
-            <button id="submitBtn" class="dark-button">Post</button>
-          </form>
-        </div>
-
-        <div class="topQuestions">
-            <h2 class="center">FEATURED</h2>
-            <div class="questions">
-                <p>Why hover effect on button using :after element</p>
-            <p>Why animate out when mouse is out of button dimensions</p>
-                <p>Why hover effect on button using :after element</p>
-            <p>Why animate out when mouse is out of button dimensions</p>
-                <p>Why hover effect on button using :after element</p>
-            <p>Why animate out when mouse is out of button dimensions</p>
-                <p>Why hover effect on button using :after element</p>
-            <p>Why animate out when mouse is out of button dimensions</p>
-               
-        </div>
-        </div>
+     <div class="rsvp-section">
+            <div class="rsvp-header center">Are you coming?</div>
+     <div class="rsvp">
+         <div class="response"><i class="fas fa-thumbs-up"></i><span>Yes</span></div>
+         <div class="response"><i class="fas fa-thumbs-down"></i><span>No</span></div>
+     </div>
     </div>
+    <div>
+    <h3>Details</h3>
+     <div class="details shadow">
+         <p>A free conference for Nigerian developers with topics ranging from frameworks to design systems, performance to animation.</p>
+     </div>
+    </div>
+    <p class="small"><b>Would you like to post a question to this meetup?</b></p>
+    <p class="askBtn"><a href="./ask.html">Post question</a></p>
+</div>
     </div>
     <!-- Begin Footer -->
     <footer>

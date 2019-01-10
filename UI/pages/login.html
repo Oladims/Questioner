@@ -1,51 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="../assets/css/signup.css" />
-    <title>Login</title>
-  </head>
-  <body>
-    <section class="section-image">
-      <!-- Begin Nav -->
-      <nav>
-          <ul>
-            <li><a class="active" href="../index.html">Home</a></li>
-            <li><a href="meetup.html">Meetups</a></li>
-            <li><a href="questions.html">Questions</a></li>
-          </ul>
-        </nav>
-      <!-- End Nav -->
 
-      <div class="form">
-        <form name="login" class="container">
-          <h1 class="text-center">Login</h1>
-          <div>
-            <label for="email"><b>Email</b></label>
-            <input id = "email" type="email" placeholder="Enter Email" name="email" />
-            <span id="error_email" class="text-danger"></span>
-          </div>
-          <div>
-            <label for="password"><b>Password</b></label>
-            <input id = "password"
-              type="password"
-              placeholder="Enter Password"
-              name="password"
-            />
-            <input id="showPassword" type="checkbox">Show Password <br>
-            <span id="error_password" class="text-danger"></span>
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="../assets/css/signup.css" />
+  <title>Login</title>
+</head>
+
+<body>
+  <section class="section-image">
+    <!-- Begin Nav -->
+    <nav>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="meetup.html">Meetups</a></li>
+        <li><a href="questions.html">Questions</a></li>
+      </ul>
+    </nav>
+    <!-- End Nav -->
+
+    <div class="form">
+      <form name="login" class="container">
+        <h1 class="text-center">Login</h1>
+        <div>
+          <label for="email"><b>Email</b></label>
+          <input id="email" type="email" placeholder="Enter Email" name="email" />
+          <span id="error_email" class="text-danger"></span>
+        </div>
+        <div>
+          <label for="password"><b>Password</b></label>
+          <input id="password" type="password" placeholder="Enter Password" name="password" />
+          <input id="showPassword" type="checkbox">Show Password <br>
+          <span id="error_password" class="text-danger"></span>
+        </div>
+        <div class="centralizeBtn">
           <button id="submitBtn" class="btn">Login</button>
-          <small>Don't have an account? Click <a class="light-text" href="signup.html">here</a></small>
-          
-        </form>
-      </div>
-    </section>
+        </div>
+        <p><b> Don't have an account? Click <a class="light-text" href="signup.html">here</b></a></p>
+      </form>
+    </div>
+  </section>
 
-    
-    <script src="../assets/js/app.js"></script>
-    <script src="../assets/js/login.js"></script>
-  </body>
+
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/login.js"></script>
+</body>
+
 </html>
