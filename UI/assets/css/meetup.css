@@ -18,6 +18,18 @@ nav ul li a {
 .header {
   margin-bottom: 20px;
 }
+.createIcon{
+  background-color: white;
+  padding: 5px;
+  text-decoration: none;
+  color: #504766;
+}
+.filter{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .meetup-details {
   width: 100%;
   padding: 5px 0;

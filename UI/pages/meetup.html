@@ -23,11 +23,19 @@
     <div class="container">
       <div class="header">
         <div><h3>Meetups</h3></div>
-        <div><a href="./createMeetup.html" class="dark-button">Create</a></div>
+        <div><a href="./createMeetup.html" class="createIcon"><span>New</span> <i class=" fas fa-3x fa-check-circle"></i></a></div>
       </div>
       <div class="meetup-monthly">
         <div class="meetup-section">
-            <h3>October</h3>
+            <div class="filter">
+              <h3>October</h3>
+             <div class="filterby">
+             <b>Filter by</b> <select name="filter" id="filter">
+                <option value="month">Month</option>
+                <option value="name">Name</option>
+              </select>
+             </div>
+            </div>
             <div class="row-4 meetups">
                 <div class="meetup hvrbox ">
                   <img class="meetupimage hvrbox-layer_bottom" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1A8Y_qFHiSjEQV5YnFja04rAMpsL7eyGBjmCN8Qa7P30DjWfR"
