@@ -1,6 +1,13 @@
 export default (req, res, next) => {
   const { id } = req.params;
-  const userId = parseInt(id, 10);
+  const correctInt = /^(-|\+)?(\d+|Infinity)$/;
+  const filterInt = (value) => {
+    if (correctInt.test(value)) {
+      return Number(value);
+    }
+    return NaN;
+  };
+  const userId = filterInt(id);
 
   if (!userId) {
     return res.status(404).send({
