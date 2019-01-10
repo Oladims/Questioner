@@ -11,5 +11,4 @@ router.use('/questions', question);
 
 router.use('/', app);
 
-
 export default router;

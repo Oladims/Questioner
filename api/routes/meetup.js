@@ -6,7 +6,8 @@ import rsvpController from '../controllers/rsvp';
 
 const { response } = rsvpController;
 const {
-    createMeetup, getMeetup, getMeetups, getUpcomingMeetups } = meetupController;
+  createMeetup, getMeetup, getMeetups, getUpcomingMeetups,
+} = meetupController;
 
 const router = express.Router();
 
