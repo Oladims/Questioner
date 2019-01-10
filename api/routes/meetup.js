@@ -13,7 +13,7 @@ const router = express.Router();
 
 router.post('/', meetupValidator, createMeetup);
 router.get('/', getMeetups);
-router.get('/:id', idValidator, getMeetup);
 router.get('/upcoming', getUpcomingMeetups);
+router.get('/:id', idValidator, getMeetup);
 router.post('/:id/rsvps', idValidator, response);
 export default router;
