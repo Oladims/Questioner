@@ -61,18 +61,6 @@ describe('Meetups', () => {
     });
   });
 
-  // describe('GET /meetups/upcoming', () => {
-  //   it('should get all upcoming meetups', (done) => {
-  //     chai.request(app)
-  //       .get('/api/v1/meetups/upcoming')
-  //       .end((err, res) => {
-  //         expect(res).to.have.status(200);
-  //         expect(res.body).to.have.property('data');
-  //           done();
-  //         });
-  //   });
-  // });
-
   describe('GET /meetups/:id', () => {
     it('should return an 404 when meetup id is invalid', (done) => {
       chai.request(app)
