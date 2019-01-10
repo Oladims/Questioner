@@ -4,16 +4,20 @@ import Rsvp from '../models/rsvp';
 export default {
   response: (req, res) => {
     const rsvp = req.body;
-    const meetup = meetupRecords.find(obj => obj.id === parseInt(rsvp.meetup, 10));
+    const rsvpInDb = rsvpRecords.length;
+    const meetup = meetupRecords
+      .find(presentMeetup => presentMeetup.id === parseInt(rsvp.meetup, 10));
 
     if (!meetup) {
       return res.status(404).send({
         status: 404,
-        error: 'Meetup does not exist.',
+        error: 'Meetup can not be found.',
       });
     }
     rsvp.topic = meetup.topic;
+    req.body.id = rsvpInDb > 0 ? rsvpRecords[rsvpInDb - 1].id + 1 : 1;
     const newRsvp = new Rsvp(rsvp);
+    
     rsvpRecords.push(newRsvp);
 
     return res.status(200).send({

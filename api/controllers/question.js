@@ -9,7 +9,7 @@ export default {
       : 1;
     const question = new Questions(req.body);
     const meetup = meetupRecords.find(
-      c => c.id === parseInt(question.meetup, 10),
+      presentMeetup => presentMeetup.id === parseInt(question.meetup, 10),
     );
 
     if (!meetup) {
@@ -43,7 +43,8 @@ export default {
 
   getQuestion: (req, res) => {
     const { id } = req.params;
-    const question = questionRecords.find(c => c.id === id);
+    const question = questionRecords
+      .find(presentQuestion => presentQuestion.id === id);
 
     if (!question) {
       return res.status(404).send({
@@ -59,7 +60,8 @@ export default {
 
   upvoteQuestion: (req, res) => {
     const { id } = req.params;
-    const question = questionRecords.find(c => c.id === id);
+    const question = questionRecords
+      .find(presentQuestion => presentQuestion.id === id);
 
     if (!question) {
       return res.status(404).send({
@@ -76,7 +78,8 @@ export default {
 
   downvoteQuestion: (req, res) => {
     const { id } = req.params;
-    const question = questionRecords.find(c => c.id === id);
+    const question = questionRecords
+      .find(presentQuestion => presentQuestion.id === id);
 
     if (!question) {
       return res.status(404).send({
