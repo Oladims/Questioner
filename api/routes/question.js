@@ -1,7 +1,7 @@
 import express from 'express';
 import questionController from '../controllers/question';
-import questionvalidator from '../validators/questionvalidator';
-import idvalidator from '../validators/idvalidator';
+import questionValidator from '../validators/questionValidator';
+import idValidator from '../validators/idValidator';
 
 const router = express.Router();
 
@@ -10,10 +10,10 @@ const {
   upvoteQuestion, downvoteQuestion,
 } = questionController;
 
-router.post('/', questionvalidator, createQuestion);
+router.post('/', questionValidator, createQuestion);
 router.get('/', getQuestions);
-router.get('/:id', idvalidator, getQuestion);
-router.patch('/:id/upvote', idvalidator, upvoteQuestion);
-router.patch('/:id/downvote', idvalidator, downvoteQuestion);
+router.get('/:id', idValidator, getQuestion);
+router.patch('/:id/upvote', idValidator, upvoteQuestion);
+router.patch('/:id/downvote', idValidator, downvoteQuestion);
 
 export default router;

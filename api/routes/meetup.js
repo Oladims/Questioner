@@ -1,7 +1,7 @@
 import express from 'express';
 import meetupController from '../controllers/meetup';
-import meetupvalidator from '../validators/meetupvalidator';
-import idValidator from '../validators/idvalidator';
+import meetupValidator from '../validators/meetupValidator';
+import idValidator from '../validators/idValidator';
 import rsvpController from '../controllers/rsvp';
 
 const { response } = rsvpController;
@@ -11,7 +11,7 @@ const {
 
 const router = express.Router();
 
-router.post('/', meetupvalidator, createMeetup);
+router.post('/', meetupValidator, createMeetup);
 router.get('/', getMeetups);
 router.get('/:id', idValidator, getMeetup);
 router.get('/upcoming', getUpcomingMeetups);
