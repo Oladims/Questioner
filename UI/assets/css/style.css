@@ -586,16 +586,19 @@ footer {
   color: yellow !important;
 }
 .response div:hover{
-  font-size: 40px;
+  font-size: 30px;
   font-weight: bold;
 }
+
 .viewdetail:hover{
   font-size: 20px
 }
+
 .response div{
-  padding-top: 5px;
-  font-size: 30px
+  /* padding-top: 5px; */
+  font-size: 20px
 }
+
   /* Begin footer */
   footer {
     padding-top: 6px;
