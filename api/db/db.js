@@ -15,11 +15,6 @@ export const meetupRecords = [
     tags: [],
     createdOn: '2019-01-03T07:13:00.135Z',
   },
-  {
-    topic: 'Adobe',
-    location: 'Lagos',
-    happeningOn: '2019-04-23T18:25:43.511Z',
-  },
 ];
 export const questionRecords = [
   {
@@ -55,7 +50,7 @@ export const rsvpRecords = [
     response: 'no',
   },
   {
-    id: 1,
+    id: 3,
     meetup: 1,
     user: 2,
     response: 'maybe',
