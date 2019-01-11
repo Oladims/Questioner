@@ -1,27 +1,41 @@
-// Middleware to validate meetup before posting
-
 export default (req, res, next) => {
-    const correctInput = /[!@#$%^&*()_+\-=[\]{};':"\\|<>/?]/;
-    const correctDate = /[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}/;
-    const meetup = req.body;
-    
-    const meetuperrors = {};
-   
-    if (correctInput.test(meetup.title)) {
-      meetuperrors.validtitle = 'Meetup title should contain only alphabets and numbers.';
+  const correctInput = /[!@#$%^&*()_+\-=[\]{};':"\\|<>/?]/;
+  const correctDate = /[0-9]{4}-[0-9]{2}-[0-9]{2}/;
+  const meetup = req.body;
+  const {
+    topic, location, happeningOn,
+  } = meetup;
+  const fields = [topic, location, happeningOn];
+  const meetupErrors = {};
+  let emptyField;
+  fields.map((field) => {
+    if (!field) {
+      emptyField = true;
     }
-    if (correctInput.test(meetup.location)) {
-      meetuperrors.validtitle = 'Location should can contain only alphabets and numbers.';
-    }
-    if (!correctDate.test(meetup.happeningOn)) {
-      meetuperrors.date = 'Enter a valid date and time';
-    }
-    if (Object.keys(meetuperrors).length != 0) {
-      return res.status(400).send({ 
-        status: 400,
-         error: meetuperrors 
-        });
-    }
-    return next();
-  };
-  
+    return emptyField;
+  });
+  if (emptyField) {
+    return res.status(400).send({
+      status: 400,
+      error: 'Please fill all empty fields.',
+    });
+  }
+
+  if (correctInput.test(meetup.topic)) {
+    meetupErrors.Topic = 'Meetup title should contain only alphabets and numbers.';
+  }
+
+  if (correctInput.test(meetup.location)) {
+    meetupErrors.Location = 'Location should contain only alphabets and numbers.';
+  }
+  if (!correctDate.test(meetup.happeningOn)) {
+    meetupErrors.date = 'Enter a valid date and time';
+  }
+  if (Object.keys(meetupErrors).length !== 0) {
+    return res.status(400).send({
+      status: 400,
+      error: meetupErrors,
+    });
+  }
+  return next();
+};

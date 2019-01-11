@@ -1,10 +1,7 @@
 import express from 'express';
-import app from '../controllers/app';
-
-const { message } = app;
 
 const router = express.Router();
 
-router.get('/', message);
+router.get('/', (req, res) => res.status(200).send('Questioner API Page.'));
 
 export default router;
