@@ -1,6 +1,6 @@
 import express from 'express';
 import meetupController from '../controllers/meetup';
-import meetupValidator from '../validators/meetupValidator';
+import meetupValidator from '../validators/meetupvalidator';
 import idValidator from '../validators/idValidator';
 import rsvpValidator from '../validators/rsvpValidator';
 import rsvpController from '../controllers/rsvp';
