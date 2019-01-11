@@ -1,7 +1,7 @@
 import express from 'express';
 import questionController from '../controllers/question';
-import questionValidator from '../validators/questionValidator';
-import idValidator from '../validators/idValidator';
+import questionValidator from '../validators/question';
+import idValidator from '../validators/id';
 
 const router = express.Router();
 

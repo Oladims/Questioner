@@ -1,8 +1,8 @@
 import express from 'express';
 import meetupController from '../controllers/meetup';
-import meetupValidator from '../validators/meetupvalidator';
-import idValidator from '../validators/idValidator';
-import rsvpValidator from '../validators/rsvpValidator';
+import meetupValidator from '../validators/meetup';
+import idValidator from '../validators/id';
+import rsvpValidator from '../validators/rsvp';
 import rsvpController from '../controllers/rsvp';
 
 const { response } = rsvpController;
