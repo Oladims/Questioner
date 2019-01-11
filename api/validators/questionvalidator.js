@@ -7,6 +7,14 @@ export default (req, res, next) => {
 
   const fields = [meetup, title, body, createdBy];
   let emptyField;
+  const correctInt = /^(-|\+)?(\d+|Infinity)$/;
+  const filterInt = (value) => {
+    if (correctInt.test(value)) {
+      return Number(value);
+    }
+    return NaN;
+  };
+
   fields.map((field) => {
     if (!field) {
       emptyField = true;
@@ -16,17 +24,16 @@ export default (req, res, next) => {
   if (emptyField) {
     return res.status(400).send({
       status: 400,
-      error: 'Please fill in all fields.',
+      error: 'Please fill all empty fields.',
     });
   }
 
-  if (!parseInt(meetup, 10)) {
+  if (!filterInt(fields[0])) {
     errors.meetup = 'Meetup id should be a number';
   }
-  if (!parseInt(createdBy, 10)) {
-    errors.createdBy = 'Meetup id should be a number';
+  if (!filterInt(fields[3])) {
+    errors.createdBy = 'User id should be a number';
   }
-
   if (Object.keys(errors).length > 0) {
     return res.status(400).send({
       status: 400,
