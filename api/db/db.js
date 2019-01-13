@@ -2,15 +2,15 @@ export const meetupRecords = [
   {
     id: 1,
     topic: 'Concatenate',
-    location: 'Lagos',
-    happeningOn: '2020-04-23T18:25:43.511Z',
+    location: 'Zone Tech Park, Gbagada, Lagos',
+    happeningOn: '2020-04-23',
     tags: [],
-    createdOn: '2019-01-03T07:13:00.135Z',
+    
   },
   {
     id: 2,
     topic: 'GDG',
-    location: 'Lagos',
+    location: 'Ikeja, Lagos',
     happeningOn: '2018-04-23T18:25:43.511Z',
     tags: [],
     createdOn: '2019-01-03T07:13:00.135Z',
@@ -20,7 +20,6 @@ export const questionRecords = [
   {
     id: 1,
     meetup: 1,
-    createdOn: '2020-01-03T07:13:00.135Z',
     title: 'When is Concatenate?',
     body: 'What time wil the event beginWhat time wil the event begin.',
     votes: 1,
@@ -29,7 +28,6 @@ export const questionRecords = [
   {
     id: 2,
     meetup: 1,
-    createdOn: '2020-01-03T07:13:00.135Z',
     title: 'When is Concatenate?',
     body: 'What time wil the event beginWhat time wil the event begin.',
     votes: 1,
@@ -38,7 +36,6 @@ export const questionRecords = [
 ];
 export const rsvpRecords = [
   {
-    id: 1,
     meetup: 1,
     user: 2,
     response: 'yes',
