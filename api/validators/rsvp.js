@@ -1,29 +1,19 @@
+import Joi from 'joi';
+
 export default (req, res, next) => {
-  const errors = {};
   const rsvp = req.body;
-  const { meetup } = rsvp;
-  const { response } = rsvp;
+  const schema = {
+    meetup: Joi.number().integer().positive().required(),
+    topic: Joi.string().min(6).required(),
+    response: Joi.any().valid(['yes', 'no', 'maybe']).required(),
+  };
 
-  const responses = ['yes', 'no', 'maybe'];
-
-  const fields = [meetup, response];
-  let emptyField;
-  fields.map((field) => {
-    if (!field) {
-      emptyField = true;
-    }
-    return emptyField;
-  });
-  if (emptyField) {
-    return res.status(400)
-      .send({ status: 400, error: 'Please fill in all fields.' });
-  }
-  if (!responses.includes(response.toLowerCase())) {
-    errors.response = 'Please insert a valid response.';
-  }
-
-  if (Object.keys(errors).length > 0) {
-    return res.status(400).send({ status: 400, error: errors });
+  const result = Joi.validate(rsvp, schema);
+  if (result.error) {
+    return res.status(400).send({
+      status: 400,
+      error: result.error.details[0].message,
+    });
   }
   return next();
 };

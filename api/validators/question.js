@@ -1,43 +1,21 @@
-export default (req, res, next) => {
-  const errors = {};
-  const question = req.body;
-  const {
-    meetup, title, body, createdBy,
-  } = question;
+import Joi from 'joi';
 
-  const fields = [meetup, title, body, createdBy];
-  let emptyField;
-  const correctInt = /^(-|\+)?(\d+|Infinity)$/;
-  const filterInt = (value) => {
-    if (correctInt.test(value)) {
-      return Number(value);
-    }
-    return NaN;
+export default (req, res, next) => {
+  const question = req.body;
+  const schema = {
+    id: Joi.number().integer().positive(),
+    createdBy: Joi.number().integer().positive().required(),
+    meetup: Joi.number().integer().positive().required(),
+    title: Joi.string().min(6).required(),
+    body: Joi.string().min(6).required(),
+    votes: Joi.number().integer(),
   };
 
-  fields.map((field) => {
-    if (!field) {
-      emptyField = true;
-    }
-    return emptyField;
-  });
-  if (emptyField) {
+  const result = Joi.validate(question, schema);
+  if (result.error) {
     return res.status(400).send({
       status: 400,
-      error: 'Please fill all empty fields.',
-    });
-  }
-
-  if (!filterInt(fields[0])) {
-    errors.meetup = 'Meetup id should be a number';
-  }
-  if (!filterInt(fields[3])) {
-    errors.createdBy = 'User id should be a number';
-  }
-  if (Object.keys(errors).length > 0) {
-    return res.status(400).send({
-      status: 400,
-      error: errors,
+      error: result.error.details[0].message,
     });
   }
   return next();
