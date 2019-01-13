@@ -59,6 +59,15 @@ describe('Meetups', () => {
           done();
           });
     });
+    it('should return 200 if meetup record is empty', (done) => {
+      const res = chai.request(app)
+        .get('/api/v1/meetups')
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res.body).to.have.property('data');
+          done();
+          });
+    });
   });
 
   describe('GET /meetups/:id', () => {
@@ -92,5 +101,24 @@ describe('Meetups', () => {
     });
   });
 
+  describe('GET upcoming meetups', () => {
+    it('should return 200', (done) => {
+      chai.request(app)
+        .get('/api/v1/meetups/upcoming')
+        .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.have.property('data');
+          done();
+        });
+    });
+    it('should return 200 if upcoming meetup record is empty', (done) => {
+      chai.request(app)
+        .get('/api/v1/meetups/upcoming')
+        .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.have.property('data');
+          done();
+        });
+    });
+  });
 });
-
