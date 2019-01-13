@@ -7,6 +7,6 @@ export default class Meetups {
     this.location = meetup.location;
     this.happeningOn = meetup.happeningOn;
     this.tags = meetup.tags;
-    this.createdOn = moment("12-25-1995", 'MM-DD-YYYY');
+    this.createdOn = moment();
   }
 }

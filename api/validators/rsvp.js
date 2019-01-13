@@ -4,7 +4,7 @@ export default (req, res, next) => {
   const rsvp = req.body;
   const schema = {
     meetup: Joi.number().integer().positive().required(),
-    topic: Joi.string().min(6).required(),
+    user: Joi.number().integer().positive().required(),
     response: Joi.any().valid(['yes', 'no', 'maybe']).required(),
   };
 
