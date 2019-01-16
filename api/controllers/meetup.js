@@ -1,3 +1,4 @@
+import moment from 'moment';
 import db from '../database';
 import responses from '../validators/responses';
 import auth from '../validators/auth';
@@ -14,8 +15,9 @@ export default class meetupController {
     const {
       topic, location, happeningOn,
     } = req.body;
-    const queryString = 'INSERT INTO meetup (topic, location, happeningOn ) VALUES($1, $2, $3) RETURNING *';
-    const params = [topic, location, happeningOn];
+    const createdOn = moment();
+    const queryString = 'INSERT INTO meetup (topic, location, happeningOn, createdOn ) VALUES($1, $2, $3, $4) RETURNING *';
+    const params = [topic, location, happeningOn, createdOn];
     return db.query(queryString, params, (err, result) => {
       if (err) {
         return res.status(500).json({
