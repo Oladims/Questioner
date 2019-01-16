@@ -1,83 +1,128 @@
-import { meetupRecords, questionRecords } from '../db/db';
-import Questions from '../models/question';
 import db from '../database';
+import auth from '../validators/auth';
 
-export default class QuestionController {
+export default class questionController {
   static createQuestion(req, res) {
-    const questionLength = questionRecords.length;
-    req.body.id = questionLength > 0
-      ? questionRecords[questionLength - 1].id + 1
-      : 1;
-    const question = new Questions(req.body);
-    const meetup = meetupRecords.find(
-      presentMeetup => presentMeetup.id === parseInt(question.meetup, 10),
-    );
-
-    if (!meetup) {
-      return res.status(400).send({
+    const { error } = auth.validateQuestions(req.body);
+    if (error) {
+      return res.status(400).json({
         status: 400,
-        error: 'Meetup does not exist.',
+        error: error.details[0].message,
       });
     }
-    questionRecords.push(question);
-
-    return res.status(201).send({
-      status: 201,
-      message: 'Your question has been created successfully.',
-      data: [question],
+    const {
+      createdBy, meetup, title, body, votes,
+    } = req.body;
+    const queryString = 'INSERT INTO questions (createdBy, meetup, title, body, votes) VALUES($1, $2, $3, $4) RETURNING *';
+    const params = [createdBy, meetup, title, body, votes];
+    return db.query(queryString, params, (err, result) => {
+      if (err) {
+        return res.status(500).json({
+          status: 500,
+          error: err,
+        });
+      }
+      const question = result.rows[0];
+      const token = auth.generateToken(question);
+      return res.status(201).json({
+        status: 201,
+        data: [{
+          token,
+          question,
+        }],
+      });
     });
   }
 
   static getQuestion(req, res) {
     const { id } = req.params;
-    const question = questionRecords
-      .find(presentQuestion => presentQuestion.id === id);
-
-    if (!question) {
-      return res.status(404).send({
-        status: 404,
-        error: 'Question not found',
+    const { error } = auth.validateId(id);
+    if (error) {
+      return res.status(400).json({
+        status: 400,
+        error: error.details[0].message,
       });
     }
-    return res.status(200).send({
-      status: 200,
-      data: [question],
+    const queryString = 'SELECT * FROM questions WHERE id = $1';
+    const params = id;
+    return db.query(queryString, params, (err, result) => {
+      if (err) {
+        return res.status(500).json({
+          status: 500,
+          error: err,
+        });
+      }
+      const question = result.rows[0];
+      const token = auth.generateToken(question);
+      return res.status(201).json({
+        status: 201,
+        data: [{
+          token,
+          question,
+        }],
+      });
     });
   }
 
   static upvoteQuestion(req, res) {
     const { id } = req.params;
-    const question = questionRecords
-      .find(presentQuestion => presentQuestion.id === id);
-
-    if (!question) {
-      return res.status(404).send({
-        status: 404,
-        error: 'Question not found',
+    const { error } = auth.validateId(id);
+    if (error) {
+      return res.status(400).json({
+        status: 400,
+        error: error.details[0].message,
       });
     }
-    question.votes += 1;
-    return res.status(200).send({
-      status: 200,
-      data: [question],
+    
+    const queryString = 'UPDATE questions SET votes = votes + 1 WHERE id = $1';
+    const params = id;
+    return db.query(queryString, params, (err, result) => {
+      if (err) {
+        return res.status(500).json({
+          status: 500,
+          error: err,
+        });
+      }
+      const question = result.rows[0];
+      const token = auth.generateToken(question);
+      return res.status(201).json({
+        status: 201,
+        data: [{
+          token,
+          question,
+        }],
+      });
     });
   }
 
   static downvoteQuestion(req, res) {
     const { id } = req.params;
-    const question = questionRecords
-      .find(presentQuestion => presentQuestion.id === id);
-
-    if (!question) {
-      return res.status(404).send({
-        status: 404,
-        error: 'Question not found',
+    const { error } = auth.validateId(id);
+    if (error) {
+      return res.status(400).json({
+        status: 400,
+        error: error.details[0].message,
       });
     }
-    question.votes -= 1;
-    return res.status(200).send({
-      status: 200,
-      data: [question],
+    
+    const queryString = 'UPDATE questions SET votes = votes - 1 WHERE id = $1';
+    const params = id;
+    return db.query(queryString, params, (err, result) => {
+      if (err) {
+        return res.status(500).json({
+          status: 500,
+          error: err,
+        });
+      }
+      const question = result.rows[0];
+      const token = auth.generateToken(question);
+      return res.status(201).json({
+        status: 201,
+        data: [{
+          token,
+          question,
+        }],
+      });
     });
   }
 }

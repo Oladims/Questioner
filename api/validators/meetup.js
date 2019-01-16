@@ -9,16 +9,10 @@ export default (req, res) => {
     id: Joi.number().integer().positive(),
     topic: Joi.string().min(6).required(),
     location: Joi.string().min(6).required(),
-    happeningOn: dateJoi.date().format('YYYY-MM-DD').required(),
+    happeningOn: dateJoi.date().min('now').required(),
     tags: Joi.any().tags([]),
   };
 
-  const result = Joi.validate(meetup, schema);
-  if (result.error) {
-    return res.status(400).send({
-      status: 400,
-      error: result.error.details[0].message,
-    });
-  }
-  // return next();
+  return Joi.validate(meetup, schema);
+
 };

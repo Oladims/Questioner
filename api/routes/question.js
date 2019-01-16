@@ -1,7 +1,5 @@
 import express from 'express';
 import questionController from '../controllers/question';
-import questionValidator from '../validators/question';
-import idValidator from '../validators/id';
 
 const router = express.Router();
 
@@ -10,9 +8,9 @@ const {
   upvoteQuestion, downvoteQuestion,
 } = questionController;
 
-router.post('/', questionValidator, createQuestion);
-router.get('/:id', idValidator, getQuestion);
-router.patch('/:id/upvote', idValidator, upvoteQuestion);
-router.patch('/:id/downvote', idValidator, downvoteQuestion);
+router.post('/', createQuestion);
+router.get('/:id', getQuestion);
+router.patch('/:id/upvote', upvoteQuestion);
+router.patch('/:id/downvote', downvoteQuestion);
 
 export default router;
