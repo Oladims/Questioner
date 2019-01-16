@@ -3,7 +3,7 @@ import Joidate from 'joi-date-extensions';
 
 const dateJoi = Joi.extend(Joidate);
 
-export default (req, res, next) => {
+export default (req, res) => {
   const meetup = req.body;
   const schema = {
     id: Joi.number().integer().positive(),
@@ -20,5 +20,5 @@ export default (req, res, next) => {
       error: result.error.details[0].message,
     });
   }
-  return next();
+  // return next();
 };
