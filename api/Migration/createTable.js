@@ -1,0 +1,1 @@
+const insert = INSERT INTO COMPANY (Id, createdBy, meetup, title, body, votes) VALUES (1, 1, 1, 'Authentication', 'Authentication 123456', 0);

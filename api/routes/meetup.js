@@ -12,7 +12,7 @@ const {
 
 const router = express.Router();
 
-router.post('/', meetupValidator, createMeetup);
+router.post('/', createMeetup);
 router.get('/', getMeetups);
 router.get('/upcoming', getUpcomingMeetups);
 router.get('/:id', idValidator, getMeetup);
