@@ -24,6 +24,16 @@ auth.validateSignIn = (user) => {
   return Joi.validate(user, loginSchema);
 };
 
+auth.validateComments = (comment) => {
+  const commentSchema = {
+    question: Joi.number().integer().positive(),
+    title: Joi.string().required(),
+    body: Joi.string().required(),
+    comment: Joi.string().required(),
+  };
+  return Joi.validate(comment, commentSchema );
+};
+
 auth.generateToken = (user) => {
   return jwt.sign({
       id: user.id
