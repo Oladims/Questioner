@@ -1,8 +1,9 @@
 import { meetupRecords, rsvpRecords } from '../db/db';
 import Rsvp from '../models/rsvp';
+import db from '../database';
 
-export default {
-  response: (req, res) => {
+export default class RsvpController {
+  static response(req, res) {
     const rsvp = req.body;
     const rsvpInDb = rsvpRecords.length;
     const meetup = meetupRecords
@@ -17,7 +18,7 @@ export default {
     rsvp.topic = meetup.topic;
     req.body.id = rsvpInDb > 0 ? rsvpRecords[rsvpInDb - 1].id + 1 : 1;
     const newRsvp = new Rsvp(rsvp);
-    
+
     rsvpRecords.push(newRsvp);
 
     return res.status(200).send({
@@ -25,5 +26,5 @@ export default {
       message: 'Your response has been added.',
       data: [newRsvp],
     });
-  },
-};
+  }
+}

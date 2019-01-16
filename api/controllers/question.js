@@ -1,8 +1,9 @@
 import { meetupRecords, questionRecords } from '../db/db';
 import Questions from '../models/question';
+import db from '../database';
 
-export default {
-  createQuestion: (req, res) => {
+export default class QuestionController {
+  static createQuestion(req, res) {
     const questionLength = questionRecords.length;
     req.body.id = questionLength > 0
       ? questionRecords[questionLength - 1].id + 1
@@ -25,8 +26,9 @@ export default {
       message: 'Your question has been created successfully.',
       data: [question],
     });
-  },
-  getQuestion: (req, res) => {
+  }
+
+  static getQuestion(req, res) {
     const { id } = req.params;
     const question = questionRecords
       .find(presentQuestion => presentQuestion.id === id);
@@ -41,8 +43,9 @@ export default {
       status: 200,
       data: [question],
     });
-  },
-  upvoteQuestion: (req, res) => {
+  }
+
+  static upvoteQuestion(req, res) {
     const { id } = req.params;
     const question = questionRecords
       .find(presentQuestion => presentQuestion.id === id);
@@ -58,9 +61,9 @@ export default {
       status: 200,
       data: [question],
     });
-  },
+  }
 
-  downvoteQuestion: (req, res) => {
+  static downvoteQuestion(req, res) {
     const { id } = req.params;
     const question = questionRecords
       .find(presentQuestion => presentQuestion.id === id);
@@ -76,5 +79,5 @@ export default {
       status: 200,
       data: [question],
     });
-  },
-};
+  }
+}
