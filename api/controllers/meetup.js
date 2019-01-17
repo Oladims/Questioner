@@ -13,10 +13,10 @@ export default class meetupController {
       });
     }
     const {
-      topic, location, happeningOn,
+      topic, location, happeningOn, images,
     } = req.body;
     const createdOn = moment();
-    const queryString = 'INSERT INTO meetup (topic, location, happeningOn, createdOn ) VALUES($1, $2, $3, $4) RETURNING *';
+    const queryString = 'INSERT INTO meetup (topic, location, happeningOn, createdOn ) VALUES($1, $2, $3, $4, $5) RETURNING *';
     const params = [topic, location, happeningOn, createdOn];
     return db.query(queryString, params, (err, result) => {
       if (err) {
