@@ -8,16 +8,11 @@ import routes from './routes';
 const app = express();
 
 app.use(cors());
-app.use(function(req, res, next){
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  res.header('Access-Control-Allow-Method', 'GET,PUT,POST,PATCH,DELETE');
-});
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use('/api/v1', routes);
 app.use(express.static('UI'));
-app.use(bodyParser.json());
 app.use('/UI', express.static(path.resolve(__dirname, '../../UI/')));
 
 
