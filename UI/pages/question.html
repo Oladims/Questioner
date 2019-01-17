@@ -134,7 +134,7 @@
       
       const getquestion = (questionId) =>{
         let request = new XMLHttpRequest();
-        request.open('GET', `http://localhost:8000/api/v1/questions/${questionId}`, true);
+        request.open('GET', `https://oladims-questioner.herokuapp.com/api/v1/questions/${questionId}`, true);
         request.onload = function () {
     
           var data = JSON.parse(this.response);
