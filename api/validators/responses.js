@@ -20,6 +20,12 @@ responses.nonExistingAccount = (req, res) => {
     error: 'Could not find any user matching your request'
   })
 }
+responses.nonExistingMeetup = (req, res) => {
+  return res.status(404).json({
+    status: 404,
+    error: 'Could not find any user matching your request'
+  })
+}
 
 responses.incorrectPassword = (req, res) => {
   return res.status(400).json({
