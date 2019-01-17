@@ -84,7 +84,7 @@
     
     const getMeetup = (meetupId) => {
       var request1 = new XMLHttpRequest();
-    request1.open('GET', `http://localhost:8000/api/v1/meetups/${meetupId}`, true);
+    request1.open('GET', `https://oladims-questioner.herokuapp.com/api/v1/meetups/${meetupId}`, true);
     request1.onload = function () {
 
       var data = JSON.parse(this.response);
@@ -109,7 +109,7 @@
     const getQuestions = (meetupId) => {
       var request2 = new XMLHttpRequest();
 
-    request2.open('GET', `http://localhost:8000/api/v1/questions/meetup/${meetupId}`, true);
+    request2.open('GET', `https://oladims-questioner.herokuapp.com/api/v1/questions/meetup/${meetupId}`, true);
         request2.onload = function () {
     
           var data = JSON.parse(this.response);
