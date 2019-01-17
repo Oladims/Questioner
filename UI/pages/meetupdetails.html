@@ -1,71 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
     crossorigin="anonymous">
-    <link rel="stylesheet" href="../assets/css/style.css" />
-    <link rel="stylesheet" href="../assets/css/meetupdetails.css" />
-    <title>Questioner</title>
-  </head>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/meetupdetails.css" />
+  <title>Questioner</title>
+</head>
 
-  <body>
-    <!-- Begin Nav -->
-    <nav class="dark-nav">
-        <ul>
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="meetup.html">Meetups</a></li>
-          <li><a href="questions.html">Questions</a></li>
-        </ul>
-      </nav>
-    <!-- End Nav -->
-    <div class="content">
-        <div class="meetupImage">
-     </div>
-     <div class="container">
-         <div class="members">
-             <h3>Concatenate</h3>
-         </div>
-    <div class="meetupInfo shadow">
-            <p class="small">200 people are going</p>
-         <div class="date">
-                <i class="fas fa-clock"></i>
-                <span class="small">Friday,19th October, 2019</span>
-         </div>
-         <div class="venue">
-                <i class="fas fa-map-marker-alt"></i><span class="small">Zone Tech Park, Gbagada, Lagos, Nigeria</span>
-         </div>
-     </div>
-
-     <div class="rsvp-section">
-            <div class="rsvp-header center">Are you coming?</div>
-     <div class="rsvp">
-         <div class="response"><i class="fas fa-thumbs-up"></i><span>Yes</span></div>
-         <div class="response"><i class="fas fa-thumbs-down"></i><span>No</span></div>
-     </div>
+<body>
+  <!-- Begin Nav -->
+  <nav class="dark-nav">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="meetup.html">Meetups</a></li>
+      <li><a href="questions.html">Questions</a></li>
+    </ul>
+  </nav>
+  <!-- End Nav -->
+  <div class="content">
+    <div class="meetupImage">
     </div>
-    <div>
-    <h3>Details</h3>
-     <div class="details shadow">
-         <p>A free conference for Nigerian developers with topics ranging from frameworks to design systems, performance to animation.</p>
-     </div>
-    </div>
-    <p class="small"><b>Would you like to post a question to this meetup?</b></p>
-    <p class="askBtn"><a href="./ask.html">Post question</a></p>
-</div>
-    </div>
-    <!-- Begin Footer -->
-    <footer>
-      <div class="name">
-        <p>Questioner</p>
-        <p>Lagos, Nigeria</p>
-        <p>+2348136715215</p>
-        <p>support@questioner.com </p>
-        <p>@Questioner</p>
+    <div class="container">
+      <div class="members">
+        <h3 id='meetupTopic'></h3>
       </div>
-    </footer>
-    <!-- End Footer -->
-  </body>
+      <div class="meetupInfo shadow">
+        <div class="date">
+          <i class="fas fa-clock"></i>
+          <span class="small" id='meetupDate'></span>
+        </div>
+        <div class="venue">
+          <i class="fas fa-map-marker-alt"></i><span class="small" id='meetupLocation'></span>
+        </div>
+      </div>
+
+      <div class="rsvp-section">
+        <div class="rsvp-header center">Are you coming?</div>
+        <div class="rsvp">
+          <div class="response"><i class="fas fa-thumbs-up"></i><span>Yes</span></div>
+          <div class="response"><i class="fas fa-thumbs-down"></i><span>No</span></div>
+        </div>
+      </div>
+      <div>
+        <h3>Details</h3>
+        <div class="details shadow">
+          <p>A free conference for Nigerian developers with topics ranging from frameworks to design systems,
+            performance to animation.</p>
+        </div>
+      </div>
+      <p class="small"><b>Would you like to post a question to this meetup?</b></p>
+      <p class="askBtn"><a href="./ask.html">Post question</a></p>
+    
+    
+      <div class="header"id="question-summary">
+          <div><h3>Top Questions</h3></div>
+      
+    </div>
+  </div>
+  <!-- Begin Footer -->
+  <footer>
+    <div class="name">
+      <p>Questioner</p>
+      <p>Lagos, Nigeria</p>
+      <p>+2348136715215</p>
+      <p>support@questioner.com </p>
+      <p>@Questioner</p>
+    </div>
+  </footer>
+  <!-- End Footer -->
+
+  <script>
+    let url = window.location.href;
+    const urlSplit = url.split('?')
+    const params = urlSplit[1];
+    const newParams = params.split('=');
+    const meetupId = newParams[1];
+    console.log(meetupId);
+    
+    const getMeetup = (meetupId) => {
+      var request1 = new XMLHttpRequest();
+    request1.open('GET', `http://localhost:8000/api/v1/meetups/${meetupId}`, true);
+    request1.onload = function () {
+
+      var data = JSON.parse(this.response);
+     let meetup = data.data[0].meetup;
+      console.log(meetup);
+      let meetupTopic = document.getElementById('meetupTopic');
+      let meetupDate = document.getElementById('meetupDate')
+      let meetupLocation = document.getElementById('meetupLocation')
+      if (request1.status >= 200 && request1.status < 400) {
+        meetupTopic.innerText = meetup.topic;
+        meetupDate.innerText = meetup.happeningon;
+        meetupLocation.innerText = meetup.location;
+      } else {
+        console.log('error');
+      }
+    }
+
+    request1.send();
+
+  }
+
+    const getQuestions = (meetupId) => {
+      var request2 = new XMLHttpRequest();
+
+    request2.open('GET', `http://localhost:8000/api/v1/questions/meetup/${meetupId}`, true);
+        request2.onload = function () {
+    
+          var data = JSON.parse(this.response);
+         let questions = data.data[0].question;
+          console.log(questions);
+                    
+          let questionSummary = document.getElementById('question-summary');
+          if (request2.status >= 200 && request2.status < 400) {
+            questions.forEach(question => {
+              questionSummary.innerHTML += ` <div class="question-summary" >
+         
+         <div onclick="" class="question-stats">
+           <div class="votes">
+             <div class="mini-counts"><span title="0 votes">${question.votes}</span></div>
+             <small class="small">votes</small>
+           </div>
+           <div class="status">
+             <div class="mini-counts"><span title="0 answers">0</span></div>
+             <small class="small">comments</small>
+           </div>
+           <div class="views">
+             <div class="mini-counts"><span title="2 views">2</span></div>
+             <small class="small">views</small>
+           </div>
+         </div>
+         <div class="summary">
+           <div>
+             <a href="question.html?id=${question.id}" class="question-hyperlink"
+               >${question.body}</a
+             >
+           </div>
+           <div class="tags">
+             <a
+               href="question.html?id=${question.id}"
+               class="post-tag"
+               title=""
+               rel="tag"
+               >View details</a
+             >
+   
+           </div>
+         </div>
+       </div>`;
+            });
+          } else {
+            console.log('error');
+          }
+        }
+    
+        request2.send();
+      }
+
+      getMeetup(meetupId);
+    getQuestions(meetupId);
+
+  </script>
+</body>
+
 </html>

@@ -26,44 +26,23 @@
         <div><h1>Question</h1></div>
         <div><button id="askButton" class="dark-button">Ask</button></div>
       </div>
-      <div class="question-section">
-        <div class="question-summary" id="question-summary-53840910">
-          <div onclick="" class="question-stats">
-            <div class="votes"><small class="small">upvote</small></div>
+      <div class="question-section" >
+        <h3 id="questionTitle"></h3>
+        <div class="question-summary" id="question-summary">
+          <div class="question-stats">
+            <div class="votes">upvote<i class="fas fa-2x fa-arrow-up"></i></div>
             <div class="status">
-              <div class="mini-counts"><span title="5 answers">5</span></div>
+              <div class="mini-counts"><span id='questionVote'></span></div>
             </div>
-            <div class="views"><small class="small">downvote</small></div>
+            <div class="views">downvote<i class="fas fa-2x fa-arrow-down"></i></div>
           </div>
           <div class="summary">
             <div>
               <div>
-                <a href="#" class="question-hyperlink">
-                  WooCommerce 3.0 make checkout company input readonly/disabled
-                  and still pass the input contents to order        WooCommerce 3.0 make checkout company input readonly / disabled and
-                  still pass the input contents to order Woo Commerce 3.0 make checkout
-                  company input and still pass the input contents to
-                  order Woo Commerce 3.0 make checkout company input and
-                  still pass the input contents to order Woo Commerce 3.0 make checkout
-                  company input and still pass the input contents to
-                  order</a
+                <a href="#" class="question-hyperlink" id="questionBody">
+                 </a
                 >
               </div>
-              <div class="tags">
-                <a
-                  href="#"
-                  class="post-tag"
-                  title="show questions tagged 'php'"
-                  rel="tag"
-                  >GDG</a
-                >
-                <a
-                  href=""
-                  class="post-tag"
-                  title="show questions tagged 'checkout'"
-                  rel="tag"
-                  >Concatenate</a
-                >
               </div>
             </div>
           </div>
@@ -143,5 +122,39 @@
       </div>
     </footer>
     <!-- End Footer -->
+
+
+    <script>
+      let url = window.location.href;
+      const urlSplit = url.split('?')
+      const params = urlSplit[1];
+      const newParams = params.split('=');
+      const questionId = newParams[1];
+      console.log(questionId);
+      
+      const getquestion = (questionId) =>{
+        let request = new XMLHttpRequest();
+        request.open('GET', `http://localhost:8000/api/v1/questions/${questionId}`, true);
+        request.onload = function () {
+    
+          var data = JSON.parse(this.response);
+         let question = data.data[0].question[0];
+          console.log(question);
+          let questionBody = document.getElementById('questionBody');
+          let questionVote = document.getElementById('questionVote')
+          let questionTitle = document.getElementById('questionTitle')
+          if (request.status >= 200 && request.status < 400) {
+            questionBody.innerText = question.body;
+            questionVote.innerText = question.votes;
+            questionTitle.innerText = question.title;
+          } else {
+            console.log('error');
+          }
+        }
+    
+        request.send();
+      }
+      getquestion(questionId);
+      </script>
   </body>
 </html>

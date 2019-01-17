@@ -13,16 +13,18 @@ auth.validateUsers = (user) => {
     lastname: Joi.string().regex(/^[A-Z]+$/).uppercase().required(),
     email: Joi.string().email().lowercase().required(),
     phonenumber: Joi.string().required(),
-    password: Joi.string().min(7).alphanum().required().strict(),
-    username: Joi.string().required()
+    password: Joi.string().min(7).alphanum().required()
+.strict(),
+    username: Joi.string().required(),
   };
-  return Joi.validate(user, userSchema );
+  return Joi.validate(user, userSchema);
 };
 
 auth.validateSignIn = (user) => {
   const loginSchema = {
     email: Joi.string().email().lowercase().required(),
-    password: Joi.string().min(7).alphanum().required().strict(),
+    password: Joi.string().min(7).alphanum().required()
+.strict(),
   };
   return Joi.validate(user, loginSchema);
 };
@@ -30,6 +32,7 @@ auth.validateSignIn = (user) => {
 
 auth.validateMeetups = (meetup) => {
   const meetupSchema = {
+    images: Joi.any(),
     topic: Joi.string().min(6).required(),
     location: Joi.string().min(6).required(),
     happeningOn: dateJoi.date().format('YYYY-MM-DD').required(),
@@ -65,22 +68,16 @@ auth.validateRsvp = (rsvp) => {
   return Joi.validate(rsvp, rsvpSchema);
 };
 
-auth.generateToken = (user) => {
-  return jwt.sign({
+auth.generateToken = (user) => jwt.sign({
     id: user.id,
   },
   process.env.JWT_SECRET,
   {
     expiresIn: '1d',
   });
-};
 
-auth.hashPassword = (password) => {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8))
-}
+auth.hashPassword = (password) => bcrypt.hashSync(password, bcrypt.genSaltSync(8));
 
-auth.comparePassword = (reqPassword, hashedPassword) => {
-  return bcrypt.compareSync(reqPassword, hashedPassword)
-}
+auth.comparePassword = (reqPassword, hashedPassword) => bcrypt.compareSync(reqPassword, hashedPassword);
 
 export default auth;

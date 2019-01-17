@@ -36,7 +36,7 @@ export default class questionController {
     });
   }
 
-  static getQuestion(req, res) {
+  static getQuestionByMeetupId(req, res) {
     
     const { error } = auth.validateId(req.params.id);
     if (error) {
@@ -46,6 +46,36 @@ export default class questionController {
       });
     }
     const queryString = 'SELECT * FROM question WHERE meetup = $1';
+    const params = [req.params.id];
+    return db.query(queryString, params, (err, result) => {
+      if (err) {
+        return res.status(500).json({
+          status: 500,
+          error: err,
+        });
+      }
+      const question = result.rows;
+      const token = auth.generateToken(question);
+      return res.status(201).json({
+        status: 201,
+        data: [{
+          token,
+          question,
+        }],
+      });
+    });
+  }
+
+  static getQuestionById(req, res) {
+    
+    const { error } = auth.validateId(req.params.id);
+    if (error) {
+      return res.status(400).json({
+        status: 400,
+        error: error.details[0].message,
+      });
+    }
+    const queryString = 'SELECT * FROM question WHERE id = $1';
     const params = [req.params.id];
     return db.query(queryString, params, (err, result) => {
       if (err) {
