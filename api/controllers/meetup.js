@@ -46,7 +46,7 @@ export default class meetupController {
           error: err,
         });
       }
-      const meetup = result.rows[0];
+      const meetup = result.rows;
       const token = auth.generateToken(meetup);
       return res.status(201).json({
         status: 201,
@@ -59,8 +59,7 @@ export default class meetupController {
   }
 
   static getMeetup(req, res) {
-    const { id } = req.params;
-    const { error } = auth.validateId(id);
+    const { error } = auth.validateId(req.params.id);
     if (error) {
       return res.status(400).json({
         status: 400,
@@ -68,7 +67,8 @@ export default class meetupController {
       });
     }
     const queryString = 'SELECT * FROM meetup WHERE id = $1';
-    const params = id;
+
+    const params = [req.params.id];
     return db.query(queryString, params, (err, result) => {
       if (err) {
         return res.status(500).json({
@@ -77,58 +77,32 @@ export default class meetupController {
         });
       }
       const meetup = result.rows[0];
-      const token = auth.generateToken(meetup);
       return res.status(201).json({
         status: 201,
-        data: [{
-          token,
-          meetup,
-        }],
-      });
-    });
-  }
-
-  static rsvp(req, res) {
-    const { error } = auth.validateRsvp(req.body);
-    if (error) {
-      return res.status(400).json({
-        status: 400,
-        error: error.details[0].message,
-      });
-    }
-    const {
-      meetupId, userId, response,
-    } = req.body;
-
-    const queryString = 'SELECT * FROM rsvp WHERE userId = $1 AND meetupId = $2';
-    const params = [userId, meetupId];
-    return db.query(queryString, params, (err, result) => {
-      if (err) {
-        return responses.errorProcessing(req, res);
-      }
-      if (result.rowCount > 0) {
-        return responses.errorAccountExist(req, res);
-      }
-
-      const queryString2 = 'INSERT INTO rsvps (meetup, userId, response ) VALUES($1, $2, $3) RETURNING *';
-      const params2 = [meetupId, userId, response];
-      return db.query(queryString2, params2, (err, result) => {
-        if (err) {
-          return res.status(500).json({
-            status: 500,
-            error: err,
+        data: [{e
+        const queryString2 = 'INSERT INTO rsvps (meetupId, userId, response ) VALUES($1, $2, $3) RETURNING *';
+        const params2 = [req.params.id, userId, response];
+        return db.query(queryString2, params2, (err, result) => {
+          if (err) {
+            return res.status(500).json({
+              status: 500,
+              error: err,
+            });
+          }
+          const rsvps = result.rows[0];
+          const details = [{
+            meetup: rsvps.meetupid,
+            topic: meetupTopic,
+            status: rsvps.response,
+          }];
+          return res.status(201).json({
+            status: 201,
+            data: [{
+              details,
+            }],
           });
-        }
-        const user = result.rows[0];
-        const token = auth.generateToken(user);
-        return res.status(201).json({
-          status: 201,
-          data: [{
-            token,
-            user,
-          }],
         });
-      });
+      }
     });
   }
 }

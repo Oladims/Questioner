@@ -9,6 +9,6 @@ const router = express.Router();
 
 router.post('/', createMeetup);
 router.get('/', getMeetups);
-router.get('/:id', getMeetup);
 router.post('/:id/rsvps', rsvp);
+router.get('/:id', getMeetup);
 export default router;

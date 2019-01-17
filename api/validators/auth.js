@@ -52,14 +52,13 @@ auth.validateQuestions = (question) => {
 
 auth.validateId = (id) => {
   const idSchema = {
-    id: Joi.number().integer().positive(),
+    id: Joi.number().integer().positive().required(),
   };
-  return Joi.validate(id, idSchema);
+  return Joi.validate({ id }, idSchema);
 };
 
 auth.validateRsvp = (rsvp) => {
   const rsvpSchema = {
-    meetup: Joi.number().integer().positive().required(),
     userId: Joi.number().integer().positive().required(),
     response: Joi.any().valid(['yes', 'no', 'maybe']).required(),
   };

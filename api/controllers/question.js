@@ -1,3 +1,4 @@
+import moment from 'moment';
 import db from '../database';
 import auth from '../validators/auth';
 
@@ -13,8 +14,9 @@ export default class questionController {
     const {
       createdBy, meetup, title, body, votes,
     } = req.body;
-    const queryString = 'INSERT INTO questions (createdBy, meetup, title, body, votes) VALUES($1, $2, $3, $4) RETURNING *';
-    const params = [createdBy, meetup, title, body, votes];
+    const createdOn = moment();
+    const queryString = 'INSERT INTO question (createdBy, createdOn, meetup, title, body) VALUES($1, $2, $3, $4, $5) RETURNING *';
+    const params = [createdBy, createdOn, meetup, title, body];
     return db.query(queryString, params, (err, result) => {
       if (err) {
         return res.status(500).json({
@@ -35,16 +37,16 @@ export default class questionController {
   }
 
   static getQuestion(req, res) {
-    const { id } = req.params;
-    const { error } = auth.validateId(id);
+    
+    const { error } = auth.validateId(req.params.id);
     if (error) {
       return res.status(400).json({
         status: 400,
         error: error.details[0].message,
       });
     }
-    const queryString = 'SELECT * FROM questions WHERE id = $1';
-    const params = id;
+    const queryString = 'SELECT * FROM question WHERE meetup = $1';
+    const params = [req.params.id];
     return db.query(queryString, params, (err, result) => {
       if (err) {
         return res.status(500).json({
@@ -52,7 +54,7 @@ export default class questionController {
           error: err,
         });
       }
-      const question = result.rows[0];
+      const question = result.rows;
       const token = auth.generateToken(question);
       return res.status(201).json({
         status: 201,
@@ -74,8 +76,8 @@ export default class questionController {
       });
     }
     
-    const queryString = 'UPDATE questions SET votes = votes + 1 WHERE id = $1';
-    const params = id;
+    const queryString = 'UPDATE question SET votes = 1 WHERE id = $1 returning *';
+    const params = [id];
     return db.query(queryString, params, (err, result) => {
       if (err) {
         return res.status(500).json({
@@ -84,12 +86,16 @@ export default class questionController {
         });
       }
       const question = result.rows[0];
-      const token = auth.generateToken(question);
+      const data = [{
+        meetup: question.meetup,
+        title: question.title,
+        body: question.body,
+        votes: question.votes,
+      }];
       return res.status(201).json({
         status: 201,
         data: [{
-          token,
-          question,
+          data,
         }],
       });
     });
@@ -105,8 +111,8 @@ export default class questionController {
       });
     }
     
-    const queryString = 'UPDATE questions SET votes = votes - 1 WHERE id = $1';
-    const params = id;
+    const queryString = 'UPDATE question SET votes = 0 WHERE id = $1 returning *';
+    const params = [id];
     return db.query(queryString, params, (err, result) => {
       if (err) {
         return res.status(500).json({
@@ -115,12 +121,16 @@ export default class questionController {
         });
       }
       const question = result.rows[0];
-      const token = auth.generateToken(question);
+      const data = [{
+        meetup: question.meetup,
+        title: question.title,
+        body: question.body,
+        votes: question.votes,
+      }];
       return res.status(201).json({
         status: 201,
         data: [{
-          token,
-          question,
+          data,
         }],
       });
     });

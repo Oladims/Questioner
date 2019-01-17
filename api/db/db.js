@@ -1,10 +1,10 @@
 export const meetupRecords = [
   {
-    id: 1,
+    
     topic: 'Concatenate',
     location: 'Zone Tech Park, Gbagada, Lagos',
     happeningOn: '2020-04-23',
-    tags: [],
+   
     
   },
   {
