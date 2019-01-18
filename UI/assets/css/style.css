@@ -60,7 +60,7 @@ nav {
   opacity: 0.9;
 }
 
-nav h1{
+#logo{
   display: none;
 }
 
@@ -73,7 +73,7 @@ nav ul {
 nav ul li {
   min-width: fit-content;
   display: inline-block;
-  margin-right: 10px;
+  /* margin-right: 10px; */
 }
 
 nav ul li a {
