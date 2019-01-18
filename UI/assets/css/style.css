@@ -66,7 +66,6 @@ nav h1{
 
 nav ul {
   font-size: 15px;
-  font-weight: 400;
   list-style-type: none;
   background-color: transparent;
 }
@@ -82,7 +81,7 @@ nav ul li a {
   color: #ddd;
   text-align: center;
   text-decoration: none;
-  padding: 7px 7px;
+  padding: 7px;
 }
 nav ul li a:hover {
   color: #504766;
@@ -95,6 +94,11 @@ nav ul li a.active {
   border-radius: 5px;  
 }
 
+#logo{
+  color: #504766;
+  background-color: #ddd;
+  border-radius: 5px;  
+}
 /* End Nav */
 
 /* Begin Hero */
@@ -556,7 +560,8 @@ footer {
   }
   .hero-text {
     transform: translate(-90%, -50%);
-    font-size: 30px;
+    font-size: 40px;
+    color: purple;
   }
 
   .hero-text button {
@@ -626,4 +631,17 @@ footer {
     color: #ddd;
   }
   /* End footer */
+}
+@media only screen and (min-width: 868px) {
+  nav ul li a{
+    font-size: 20px;
+  }
+  /* Begin Hero */
+  .nav{
+    font-size: 25px;
+  }
+  .hero-text {
+    font-size: 40px;
+    font-weight: bolder;
+  }
 }
