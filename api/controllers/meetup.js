@@ -8,15 +8,15 @@ export default class meetupController {
     const { error } = auth.validateMeetups(req.body);
     if (error) {
       return res.status(400).json({
-        status: 400,
+        status: 401,
         error: error.details[0].message,
       });
     }
     const {
-      topic, location, happeningOn, images,
+      topic, location, happeningOn,
     } = req.body;
     const createdOn = moment();
-    const queryString = 'INSERT INTO meetup (topic, location, happeningOn, createdOn ) VALUES($1, $2, $3, $4, $5) RETURNING *';
+    const queryString = 'INSERT INTO meetup (topic, location, happeningOn, createdOn ) VALUES($1, $2, $3, $4) RETURNING *';
     const params = [topic, location, happeningOn, createdOn];
     return db.query(queryString, params, (err, result) => {
       if (err) {
@@ -26,11 +26,9 @@ export default class meetupController {
         });
       }
       const meetup = result.rows[0];
-      const token = auth.generateToken(meetup);
       return res.status(201).json({
         status: 201,
         data: [{
-          token,
           meetup,
         }],
       });
@@ -47,11 +45,9 @@ export default class meetupController {
         });
       }
       const meetup = result.rows;
-      const token = auth.generateToken(meetup);
       return res.status(201).json({
         status: 201,
         data: [{
-          token,
           meetup,
         }],
       });

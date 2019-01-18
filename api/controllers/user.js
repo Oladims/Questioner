@@ -20,10 +20,10 @@ export default class userController {
         return responses.errorAccountExist(req, res);
       }
       const {
-        firstname, lastname, email, phonenumber, username,
+        firstname, lastname, email, phonenumber, username, othername,
       } = req.body;
-      const queryString = 'INSERT INTO users (firstname, lastname, email, phonenumber, password, username ) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
-      const params = [firstname, lastname, email, phonenumber, hashedPassword, username];
+      const queryString = 'INSERT INTO users (firstname, othername, lastname, email, phonenumber, password, username ) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *';
+      const params = [firstname, othername, lastname, email, phonenumber, hashedPassword, username];
       return db.query(queryString, params, (err, result) => {
         if (err) {
           return res.status(500).json({

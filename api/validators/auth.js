@@ -11,11 +11,12 @@ auth.validateUsers = (user) => {
   const userSchema = {
     firstname: Joi.string().regex(/^[A-Z]+$/).uppercase().required(),
     lastname: Joi.string().regex(/^[A-Z]+$/).uppercase().required(),
+    othername: Joi.string().regex(/^[A-Z]+$/).uppercase(),
     email: Joi.string().email().lowercase().required(),
     phonenumber: Joi.string().required(),
     password: Joi.string().min(7).alphanum().required()
 .strict(),
-    username: Joi.string().required(),
+    username: Joi.string(),
   };
   return Joi.validate(user, userSchema);
 };
