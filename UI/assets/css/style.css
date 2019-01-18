@@ -98,6 +98,7 @@ nav ul li a.active {
   color: #504766;
   background-color: #ddd;
   border-radius: 5px;  
+  display: none;
 }
 /* End Nav */
 
@@ -389,6 +390,9 @@ footer {
     padding-left: 20px; 
     color: #ddd;
     text-align: center;
+  }
+  #logo{
+    display: inline;
   }
   .hero-text {
     /* text-align: center; */
