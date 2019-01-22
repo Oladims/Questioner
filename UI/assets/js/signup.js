@@ -1,29 +1,45 @@
-function createUser(event) {
-  event.preventDefault;
+async function  createUser(event) {
+  event.preventDefault();
 
-  const firstName = document.getElementById("firstName").value;
-  const lastName = document.getElementById("lastName").value;
-  const emailaddress = document.getElementById("email").value;
-  const userPassword = document.getElementById("password").value;
-  const submitBtn = document.getElementById("submitBtn");
+  const firstName = document.getElementById('firstName').value;
+  const lastName = document.getElementById('lastName').value;
+  const otherName = document.getElementById('otherName').value;
+  const emailaddress = document.getElementById('email').value;
+  const userPassword = document.getElementById('password').value;
+  const phonenumber = '08136715215';
+  const submitBtn = document.getElementById('submitBtn');
 
-  const params = `firstname=${firstName}&lastname=${lastName}&email=${emailaddress}&password=${userPassword}`;
-  const url = "https://oladims-questioner.herokuapp.com/api/v1/user/signup";
+  const url = 'https://oladims-questioner.herokuapp.com/api/v1/user/signup';
 
-//   const params = {
-//     firstname: firstName,
-//     lastname: lastName,
-//     email: emailaddress,
-//     password: userPassword,
-//   };
-    let options = {
-        method: "post",
-        headers: {
-        'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
-      },
-        body:params,
-      }
-  fetch(url, options).catch(err => err);
+  const params = {
+    firstname: firstName,
+    lastname: lastName,
+    email: emailaddress,
+    password: userPassword,
+    username: otherName,
+    phonenumber: phonenumber,
+  };
+try{
+ const response =  await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(params),
+  })
+    const data = await response.json();
+    if(response.ok) {
+      window.location.href = './userProfile.html';
+    }
+    else{
+      alert('error');
+    }
+    console.log(response);
+    console.log(data);
+    
 }
-// createUser();
-submitBtn.addEventListener("click", createUser);
+catch(err){
+  throw err;
+}
+}// createUser();
+submitBtn.addEventListener('click', createUser);
