@@ -13,7 +13,7 @@ request.onload = () => {
                   <img class="meetupimage hvrbox-layer_bottom" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1A8Y_qFHiSjEQV5YnFja04rAMpsL7eyGBjmCN8Qa7P30DjWfR"
                     alt="Avatar" style="width:100%">
                   <div class="meetup-container">
-                    <h4 class="center"><b>${meetup.topic}</b></h4>
+                    <h4 class="center"><b>${meetup.name}</b></h4>
                     <p class="center">${meetup.topic}</p>
                   </div>
                   <div class="meetup-container hvrbox-layer_top">

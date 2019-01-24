@@ -36,9 +36,11 @@ auth.validateMeetups = (meetup) => {
     images: Joi.any(),
     topic: Joi.string().min(6).required(),
     location: Joi.string().min(6).required(),
-    happeningOn: dateJoi.date().format('YYYY-MM-DD').required(),
+    name: Joi.string().min(3).required(),
+    description: Joi.string().min(15).required(),
+    happeningOn: dateJoi.date().format('DD-MM-YYYY').required(),
     tags: Joi.any().tags([]),
-    createdOn: moment().format('YYYY-MM-DD'),
+    createdOn: moment().format('DD-MM-YYYY'),
   };
   return Joi.validate(meetup, meetupSchema);
 };

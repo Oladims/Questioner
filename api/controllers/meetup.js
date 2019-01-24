@@ -10,14 +10,18 @@ export default class meetupController {
       responses.validationError(error, req, res);
     }
     const {
-      topic, location, happeningOn,
+      topic, location, happeningOn, name, description,
     } = req.body;
     const createdOn = moment();
-    const queryString = 'INSERT INTO meetup (topic, location, happeningOn, createdOn ) VALUES($1, $2, $3, $4) RETURNING *';
-    const params = [topic, location, happeningOn, createdOn];
+    const queryString = 'INSERT INTO newmeetups (topic, location, happeningOn, createdOn, name, description) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
+    const params = [topic, location, happeningOn, createdOn, name, description];
     return db.query(queryString, params, (err, result) => {
       if (err) {
-        responses.errorProcessing(err, req, res);
+        return res.status(500).json({
+          status: 500,
+          error: 'Error processing...',
+          errorDetails: err,
+        });
       }
       const meetup = result.rows[0];
       return res.status(201).json({
@@ -30,7 +34,7 @@ export default class meetupController {
   }
 
   static getMeetups(req, res) {
-    const queryString = 'SELECT * FROM meetup';
+    const queryString = 'SELECT * FROM newmeetups';
     return db.query(queryString, [], (err, result) => {
       if (err) {
         responses.errorProcessing(err, req, res);
@@ -50,7 +54,7 @@ export default class meetupController {
     if (error) {
       responses.validationError(error, req, res);
     }
-    const queryString = 'SELECT * FROM meetup WHERE id = $1';
+    const queryString = 'SELECT * FROM newmeetups WHERE id = $1';
 
     const params = [req.params.id];
     return db.query(queryString, params, (err, result) => {
@@ -74,7 +78,7 @@ export default class meetupController {
       responses.validationError(error, req, res);
     }
 
-    const queryString = 'SELECT * FROM meetup WHERE id = $1';
+    const queryString = 'SELECT * FROM newmeetups WHERE id = $1';
     const params = [req.params.id];
     return db.query(queryString, params, (err, result) => {
       if (err) {

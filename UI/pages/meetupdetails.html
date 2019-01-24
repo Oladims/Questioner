@@ -24,6 +24,7 @@
   <!-- End Nav -->
   <div class="content">
     <div class="meetupImage">
+<h1 id="meetupName"></h1>
     </div>
     <div class="container">
       <div class="members">
@@ -49,8 +50,7 @@
       <div>
         <h3>Details</h3>
         <div class="details shadow">
-          <p>A free conference for Nigerian developers with topics ranging from frameworks to design systems,
-            performance to animation.</p>
+          <p id="meetupDescription"></p>
         </div>
       </div>
       <p class="small"><b>Would you like to post a question to this meetup?</b></p>
@@ -93,10 +93,14 @@
       let meetupTopic = document.getElementById('meetupTopic');
       let meetupDate = document.getElementById('meetupDate')
       let meetupLocation = document.getElementById('meetupLocation')
+      let meetupDescription = document.getElementById('meetupDescription')
+      let meetupName = document.getElementById('meetupName')
       if (request1.status >= 200 && request1.status < 400) {
         meetupTopic.innerText = meetup.topic;
         meetupDate.innerText = meetup.happeningon;
         meetupLocation.innerText = meetup.location;
+        meetupDescription.innerText = meetup.description;
+        meetupName.innerText = meetup.name;
       } else {
         console.log('error');
       }
