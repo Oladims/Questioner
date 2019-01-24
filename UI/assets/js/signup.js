@@ -32,7 +32,7 @@ try{
       window.location.href = './userProfile.html';
     }
     else{
-      alert('error');
+      // alert('error');
     }
     console.log(response);
     console.log(data);

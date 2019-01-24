@@ -114,12 +114,17 @@ nav ul li a.active {
   transform: translate(-90%, -50%);
   color: black;
 }
-
 .hero-text .button {
-  color: #ddd;
-  background-color: #504766 !important;
-  opacity: 0.9;
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 10px 25px;
+  background-color: #504766;
+  text-align: center;
+  cursor: pointer;
   text-decoration: none;
+  color: #ddd;
+  opacity: 0.9;
 }
 
 .hero-text .button:hover {
@@ -371,6 +376,7 @@ footer {
   color: #ddd;
 }
 /* End footer */
+
 @media only screen and (min-width: 500px) {
   .hero-text {
     /* text-align: center; */
@@ -435,8 +441,8 @@ footer {
     font-size: 30px;
   }
   
-  #signupBtn{
-    display: none;
+  #signinBtn{
+   display: none;
   }
   #postBtn{
     display: inline;
@@ -541,15 +547,7 @@ footer {
     font-size: 30px;
   }
 
-  .hero-text button {
-    border: none;
-    outline: 0;
-    display: inline-block;
-    padding: 10px 25px;
-    background-color: #504766;
-    text-align: center;
-    cursor: pointer;
-  }
+ 
 
   .register small a {
     color: #d79cbc;
