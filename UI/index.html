@@ -21,6 +21,7 @@
     </ul>
   </nav>
   <!-- End Nav -->
+  
   <!-- Begin Hero -->
   <div class="hero-image">
 
@@ -103,83 +104,8 @@
     <div class="meetup-section">
       <h3 class="center featured-heading">Meetups</h3>
       <div class="shadow">
-        <div class="row-4 meetups">
-          <div class="meetup hvrbox ">
-            <img class="meetupimage hvrbox-layer_bottom" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1A8Y_qFHiSjEQV5YnFja04rAMpsL7eyGBjmCN8Qa7P30DjWfR"
-              alt="Avatar" style="width:100%">
-            <div class="meetup-container">
-              <h4 class="center"><b>GDG Ajah</b></h4>
-              <p class="center">Building Apps with Flutter</p>
-            </div>
-            <div class="meetup-container hvrbox-layer_top">
-              <div class="hvrbox-text">
-                <h4><a class="viewdetail light-text" href="./pages/meetupdetails.html">View Details</a></h4>
-                <h4> Are you coming?</h4>
-                <div class="response">
-                  <div class="yes"><i class="yes fas fa-check-circle"></i><span>Yes</span></div>
-                  <div class="no"><i class="no fas fa-times-circle"></i><span>No</span></div>
-                  <div class="maybe"><i class="maybe fas fa-meh-rolling-eyes"></i><span>Maybe</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="meetup hvrbox">
-            <img class="meetupimage hvrbox-layer_bottom" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1A8Y_qFHiSjEQV5YnFja04rAMpsL7eyGBjmCN8Qa7P30DjWfR"
-              alt="Avatar" style="width:100%">
-            <div class="meetup-container">
-              <h4 class="center"><b>React Summit</b></h4>
-              <p class="center">Demystifying React Hooks</p>
-            </div>
-            <div class="meetup-container hvrbox-layer_top">
-              <div class="hvrbox-text">
-                <h4><a class="viewdetail light-text" href="./pages/meetupdetails.html">View Details</a></h4>
-                <h4> Are you coming?</h4>
-                <div class="response">
-                    <div class="yes"><i class="yes fas fa-check-circle"></i><span>Yes</span></div>
-                    <div class="no"><i class="no fas fa-times-circle"></i><span>No</span></div>
-                    <div class="maybe"><i class="maybe fas fa-meh-rolling-eyes"></i><span>Maybe</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="meetup hvrbox">
-            <img class="meetupimage hvrbox-layer_bottom" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1A8Y_qFHiSjEQV5YnFja04rAMpsL7eyGBjmCN8Qa7P30DjWfR"
-              alt="Avatar" style="width:100%">
-            <div class="meetup-container">
-              <h4 class="center"><b>Concatenate</b></h4>
-              <p class="center">Importance of Authentication in your Apps</p>
-            </div>
-            <div class="meetup-container hvrbox-layer_top">
-              <div class="hvrbox-text">
-                <h4><a class="viewdetail light-text" href="./pages/meetupdetails.html">View Details</a></h4>
-                <h4> Are you coming?</h4>
-                <div class="response">
-                    <div class="yes"><i class="yes fas fa-check-circle"></i><span>Yes</span></div>
-                    <div class="no"><i class="no fas fa-times-circle"></i><span>No</span></div>
-                    <div class="maybe"><i class="maybe fas fa-meh-rolling-eyes"></i><span>Maybe</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="meetup hvrbox">
-            <img class="meetupimage hvrbox-layer_bottom" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1A8Y_qFHiSjEQV5YnFja04rAMpsL7eyGBjmCN8Qa7P30DjWfR"
-              alt="Avatar" style="width:100%">
-            <div class="meetup-container">
-              <h4 class="center"><b>Node Conf</b></h4>
-              <p class="center">Debugging Node Apps</p>
-            </div>
-            <div class="meetup-container hvrbox-layer_top">
-              <div class="hvrbox-text">
-                <h4><a class="viewdetail light-text" href="./pages/meetupdetails.html">View Details</a></h4>
-                <h4> Are you coming?</h4>
-                <div class="response">
-                    <div class="yes"><i class="yes fas fa-check-circle"></i><span>Yes</span></div>
-                    <div class="no"><i class="no fas fa-times-circle"></i><span>No</span></div>
-                    <div class="maybe"><i class="maybe fas fa-meh-rolling-eyes"></i><span>Maybe</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="row-4 meetups" id="meetups">
+         
         </div>
         <div class="viewmore"><a href="./pages/meetup.html">View All</a></div>
       </div>
@@ -237,6 +163,49 @@
   </footer>
   <!-- End Footer -->
 
+  <script>
+      var request = new XMLHttpRequest();
+  
+      request.open('GET', 'https://oladims-questioner.herokuapp.com/api/v1/meetups', true);
+      request.onload = function () {
+  
+        var data = JSON.parse(this.response);
+       let meetups = data.data[0].meetup;
+        
+     
+              console.log(meetups[0].topic);
+              
+        let meetupRow = document.getElementById('meetups');
+        if (request.status >= 200 && request.status < 400) {
+          for (meetup = 0; meetup< 4; meetup++) {
+            meetupRow.innerHTML += ` <div class="meetup hvrbox">
+                <img class="meetupimage hvrbox-layer_bottom" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1A8Y_qFHiSjEQV5YnFja04rAMpsL7eyGBjmCN8Qa7P30DjWfR"
+                  alt="Avatar" style="width:100%">
+                <div class="meetup-container">
+                  <h4 class="center"><b>${meetups[meetup].name}</b></h4>
+                  <p class="center">${meetups[meetup].topic}</p>
+                </div>
+                <div class="meetup-container hvrbox-layer_top">
+                  <div class="hvrbox-text">
+                   <h4><a class="viewdetail light-text" href="./meetupdetails.html?id=${meetup.id}">View Details</a></h4>
+                    <h4> Are you coming?</h4>
+                    <div class="response">
+                        <div class="yes"><i class="yes fas fa-check-circle"></i><span>Yes</span></div>
+                        <div class="no"><i class="no fas fa-times-circle"></i><span>No</span></div>
+                        <div class="maybe"><i class="maybe fas fa-meh-rolling-eyes"></i><span>Maybe</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>`;
+          };
+        } else {
+          console.log('error');
+        }
+      }
+  
+      request.send();
+  
+    </script>
 </body>
 
 </html>

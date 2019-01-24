@@ -4,6 +4,15 @@
     height:200px;
     background-repeat:no-repeat;
     background-size:cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #meetupName{
+    padding: 5px;
+    background-color: #ddd;
+    color: #504766;
+
 }
 .meetupInfo{
     padding: 3px 10px;

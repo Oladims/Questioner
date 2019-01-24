@@ -5,7 +5,6 @@ const showPassword = document.getElementById("showPassword");
 const error_name = document.getElementById("error_name");
 const error_email = document.getElementById("error_email");
 const error_password = document.getElementById("error_password");
-const submitBtn = document.getElementById("submitBtn");
 const letters = /^[A-Za-z]*$/;
 const emailAdd = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
