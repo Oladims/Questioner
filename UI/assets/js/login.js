@@ -1,13 +1,3 @@
-
-// email.addEventListener('focusout', checkEmail, true);
-
-// password.addEventListener('focusout', checkPassword, true);
-
-// submitBtn.onclick = () => {
-//     checkEmail();
-//     checkPassword();
-// };
-
 async function loginUser(event) {
   event.preventDefault();
 
@@ -31,7 +21,7 @@ async function loginUser(event) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(params),
+      body: JSON.stringify(params),   
     });
     const data = await response.json();
     if (response.ok) {
@@ -49,4 +39,3 @@ async function loginUser(event) {
   }
 }// createUser();
 submitBtn.addEventListener('click', loginUser);
-
