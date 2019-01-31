@@ -2,9 +2,9 @@ import Joi from 'joi';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import Joidate from 'joi-date-extensions';
+import 'babel-polyfill';
 import moment from 'moment';
 import db from '../database';
-import { log } from 'util';
 
 const dateJoi = Joi.extend(Joidate);
 class auth {
