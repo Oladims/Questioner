@@ -4,10 +4,10 @@ import bcrypt from 'bcryptjs';
 import Joidate from 'joi-date-extensions';
 import moment from 'moment';
 import db from '../database';
+import { log } from 'util';
 
 const dateJoi = Joi.extend(Joidate);
 class auth {
-
   static validateUsers(user) {
     const userSchema = {
       firstname: Joi.string().regex(/^[A-Z]+$/).uppercase().required(),
@@ -15,8 +15,7 @@ class auth {
       othername: Joi.string().regex(/^[A-Z]+$/).uppercase(),
       email: Joi.string().email().lowercase().required(),
       phonenumber: Joi.string().required(),
-      password: Joi.string().min(7).alphanum().required()
-        .strict(),
+      password: Joi.string().min(7).alphanum().required(),
       username: Joi.string(),
     };
     return Joi.validate(user, userSchema);
@@ -73,7 +72,7 @@ class auth {
   }
 
   static generateToken(user) {
-    jwt.sign({
+    return jwt.sign({
       id: user.id,
     },
     process.env.JWT_SECRET,
@@ -94,7 +93,9 @@ class auth {
       const text = 'SELECT * FROM users WHERE id = $1';
       const {
         rows,
-      } = await db.query(text, [decoded.userId]);
+      } = await db.query(text, [decoded.id]);
+      console.log(decoded.id);
+      
       if (!rows[0]) {
         return res.status(400).send({
           message: 'The token you provided is invalid',
@@ -109,12 +110,12 @@ class auth {
     }
   }
 
-  static hashPassword(password) {
-    bcrypt.hashSync(password, bcrypt.genSaltSync(8));
+  static hashPassword(pass) {
+    return bcrypt.hashSync(pass, bcrypt.genSaltSync(10));
   }
 
   static comparePassword(reqPassword, hashedPassword) {
-    bcrypt.compareSync(reqPassword, hashedPassword);
+    return bcrypt.compareSync(reqPassword, hashedPassword);
   }
 }
 

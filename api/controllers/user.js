@@ -8,22 +8,25 @@ export default class userController {
     if (error) {
       return responses.validationError(error, req, res);
     }
-    const hashedPassword = auth.hashPassword(req.body.password);
-    return db.query(`SELECT email FROM users WHERE email = '${req.body.email}'`, (err, result) => {
+    const {
+      firstname, lastname, othername, email, phonenumber, username, password,
+    } = req.body;
+    const hashedPassword = auth.hashPassword(password);
+    return db.query(`SELECT email FROM users WHERE email = '${email}'`, (err, result) => {
       if (err) {
         return responses.errorProcessing(req, res);
       }
       if (result.rowCount > 0) {
         return responses.alreadyExist('Email', req, res);
       }
-      const {
-        firstname, lastname, email, phonenumber, username, othername,
-      } = req.body;
-      const queryString = 'INSERT INTO users (firstname, othername, lastname, email, phonenumber, password, username ) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *';
-      const params = [firstname, othername, lastname, email, phonenumber, hashedPassword, username];
+      const queryString = 'INSERT INTO users (firstname, lastname, othername, email, phonenumber, password, username ) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *';
+      const params = [firstname, lastname, othername, email, phonenumber, hashedPassword, username];
       return db.query(queryString, params, (err, result) => {
         if (err) {
-        return responses.errorProcessing(err, req, res);
+          return res.status(500).json({
+            status: 500,
+            error: err,
+          });
         }
         const user = result.rows[0];
         const token = auth.generateToken(user);
