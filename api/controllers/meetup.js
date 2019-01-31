@@ -40,8 +40,8 @@ export default class meetupController {
         responses.errorProcessing(err, req, res);
       }
       const meetup = result.rows;
-      return res.status(201).json({
-        status: 201,
+      return res.status(200).json({
+        status: 200,
         data: [{
           meetup,
         }],
@@ -62,12 +62,15 @@ export default class meetupController {
         responses.errorProcessing(err, req, res);
       }
       const meetup = result.rows[0];
-      return res.status(201).json({
-        status: 201,
-        data: [{
-          meetup,
-        }],
-      });
+      if (result.rowCount > 0) {
+        return res.status(200).json({
+          status: 200,
+          data: [{
+            meetup,
+          }],
+        });
+      }
+      return responses.nonExisting('meetup', req, res);
     });
   }
 

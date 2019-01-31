@@ -1,6 +1,7 @@
 import moment from 'moment';
 import db from '../database';
 import auth from '../validators/auth';
+import responses from '../validators/responses';
 
 export default class questionController {
   static createQuestion(req, res) {
@@ -55,14 +56,15 @@ export default class questionController {
         });
       }
       const question = result.rows;
-      const token = auth.generateToken(question);
-      return res.status(201).json({
-        status: 201,
-        data: [{
-          token,
-          question,
-        }],
-      });
+      if (result.rowCount > 0) {
+        return res.status(200).json({
+          status: 200,
+          data: [{
+            question,
+          }],
+        });
+      }
+      return responses.nonExisting('question', req, res);
     });
   }
 
