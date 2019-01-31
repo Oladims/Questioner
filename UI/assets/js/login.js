@@ -5,7 +5,6 @@ async function loginUser(event) {
   const emailaddress = document.getElementById('email').value;
   const userPassword = document.getElementById('password').value;
 
-  const submitBtn = document.getElementById('submitBtn');
 
   const url = 'https://oladims-questioner.herokuapp.com/api/v1/user/login';
 
@@ -21,21 +20,44 @@ async function loginUser(event) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(params),   
+      body: JSON.stringify(params),
     });
-    const data = await response.json();
+    const body = await response.json();
     if (response.ok) {
-      window.location.href = './userProfile.html';
+      const userData = JSON.stringify({
+        token: body.data[0].token,
+        firstname: body.data[0].user.firstname,
+        lastname: body.data[0].user.lastname,
+        othername: body.data[0].user.othername,
+        username: body.data[0].user.username,
+        email: body.data[0].user.email,
+        phonenumber: body.data[0].user.phonenumber,
+        access: body.data[0].user.access,
+      });
+    console.log(userData);
+    console.log(body);
+
+      localStorage.setItem('user', userData);
+
+      if (body.data[0].user.access) {
+        setTimeout(() => {
+          window.location.href = '#';
+        }, 2000);
+      } else {
+        setTimeout(() => {
+          window.location.href = './userProfile.html';
+        }, 2000);
+      }
     }
     else {
-    //   alert('error');
+      //   alert('error');
     }
     console.log(response);
-    console.log(data);
 
   }
   catch (err) {
     throw err;
   }
 }// createUser();
+const submitBtn = document.getElementById('submitBtn');
 submitBtn.addEventListener('click', loginUser);

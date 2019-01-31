@@ -1,4 +1,4 @@
-async function  createUser(event) {
+async function createUser(event) {
   event.preventDefault();
 
   const firstName = document.getElementById('firstName').value;
@@ -7,39 +7,53 @@ async function  createUser(event) {
   const emailaddress = document.getElementById('email').value;
   const userPassword = document.getElementById('password').value;
   const phonenumber = '08136715215';
-  const submitBtn = document.getElementById('submitBtn');
-
+  
   const url = 'https://oladims-questioner.herokuapp.com/api/v1/user/signup';
-
+  
   const params = {
     firstname: firstName,
     lastname: lastName,
     email: emailaddress,
     password: userPassword,
     username: otherName,
-    phonenumber: phonenumber,
+    phonenumber,
   };
-try{
- const response =  await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(params),
-  })
-    const data = await response.json();
-    if(response.ok) {
-      window.location.href = './userProfile.html';
-    }
-    else{
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(params),
+    });
+    const body = await response.json();
+    if (response.ok) {
+      const userData = JSON.stringify({
+        username: body.data[0].user.username,
+        token: body.data[0].token,
+        access: body.data[0].user.access,
+      });
+      localStorage.setItem('user', userData);
+
+      if (body.data[0].user.access) {
+        setTimeout(() => {
+          window.location.href = '#';
+        }, 2000);
+      } else {
+        setTimeout(() => {
+          window.location.href = './userProfile.html';
+        }, 2000);
+      }
+    } else {
       // alert('error');
     }
     console.log(response);
     console.log(data);
-    
-}
-catch(err){
-  throw err;
-}
+
+  }
+  catch (err) {
+    throw err;
+  }
 }// createUser();
+const submitBtn = document.getElementById('submitBtn');
 submitBtn.addEventListener('click', createUser);

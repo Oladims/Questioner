@@ -46,22 +46,22 @@
           <div>
             <label for="fullname"> Full name</label>
             <br>
-            <input value="Olufowora Ibrahim Oladimeji" type="text" name="Full Name" class="info-text-box" id="fullName" disabled>
+            <input value="" type="text" name="Full Name" class="info-text-box" id="fullName" disabled>
           </div>
           <div>
-            <label for="username">Username</label>
+            <label for="">Username</label>
             <br>            
-            <input value="Ibrodev" type="text" name="Username" class="info-text-box" id="userName" disabled>
+            <input value="" type="text" name="Username" class="info-text-box" id="userName" disabled>
           </div>
           <div>
             <label for="phone">Phone</label>
             <br>
-            <input value="08136715215" type="text" name="Phone" class="info-text-box" id="phone" disabled>
+            <input value="" type="text" name="Phone" class="info-text-box" id="phone" disabled>
           </div>
           <div>
             <label for="email">Email</label>
             <br>
-            <input value="olufoworaibrahim@gmail.com" type="text" name="email" class="info-text-box" id="email" disabled>
+            <input value="" type="text" name="email" class="info-text-box" id="email" disabled>
           </div>
         </div>
 
@@ -177,15 +177,23 @@
   </div>
 
   <script>
-    // function openNav() {
-    //   document.getElementById("mySidebar").style.width = "200px";
-    //   document.getElementById("main").style.marginLeft = "200px";
-    // }
+  let fullname = document.getElementById('fullName');
+  let username = document.getElementById('userName');
+  let phonenumber = document.getElementById('phone');
+  let email = document.getElementById('email');
+  
+  if (localStorage.getItem('user')) {
+  const rawUserData = localStorage.getItem('user');
+  const userData = JSON.parse(rawUserData);
 
-    // function closeNav() {
-    //   document.getElementById("mySidebar").style.width = "0";
-    //   document.getElementById("main").style.marginLeft = "0";
-    // }
+  console.log(userData);
+  
+  // set username
+  fullname.value = userData.firstname + ' ' + userData.lastname + ' ' + userData.othername;
+  username.value = userData.username;
+  phonenumber.value = userData.phonenumber;
+  email.value = userData.email;
+}
   </script>
 </body>
 
