@@ -23,6 +23,7 @@ if (app.get('env') === 'development') {
 app.all('/*', (req, res) => res.status(404).send({ message: 'Request is not valid' }));
 
 const port = process.env.PORT || 8000;
+console.log(`App running on port: ${port}....`);
 
 app.listen(port);
 
