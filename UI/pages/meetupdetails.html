@@ -17,8 +17,8 @@
   <nav class="dark-nav">
     <ul>
       <li><a href="../index.html">Home</a></li>
-      <li><a href="meetup.html">Meetups</a></li>
-      <li><a href="questions.html">Questions</a></li>
+      <li><a class="active" onclick="linker('meetup')" href="">Meetups</a></li>
+      <li><a onclick="linker('questions')" href="">Questions</a></li>
     </ul>
   </nav>
   <!-- End Nav -->
@@ -54,7 +54,7 @@
         </div>
       </div>
       <p class="small"><b>Would you like to post a question to this meetup?</b></p>
-      <p class="askBtn"><a href="./ask.html">Post question</a></p>
+      <p class="askBtn"><a onclick="linker(ask)" href="">Post question</a></p>
     
     
       <div class="header"id="question-summary">
@@ -73,7 +73,7 @@
     </div>
   </footer>
   <!-- End Footer -->
-
+<script src="../assets/js/link.js"></script>
   <script>
     let url = window.location.href;
     const urlSplit = url.split('?')

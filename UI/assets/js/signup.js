@@ -15,6 +15,7 @@ async function createUser(event) {
     lastname: lastName,
     email: emailaddress,
     password: userPassword,
+    othername: otherName,
     username: otherName,
     phonenumber,
   };
@@ -29,8 +30,13 @@ async function createUser(event) {
     const body = await response.json();
     if (response.ok) {
       const userData = JSON.stringify({
-        username: body.data[0].user.username,
         token: body.data[0].token,
+        firstname: body.data[0].user.firstname,
+        lastname: body.data[0].user.lastname,
+        othername: body.data[0].user.othername,
+        username: body.data[0].user.username,
+        email: body.data[0].user.email,
+        phonenumber: body.data[0].user.phonenumber,
         access: body.data[0].user.access,
       });
       localStorage.setItem('user', userData);
@@ -48,8 +54,6 @@ async function createUser(event) {
       // alert('error');
     }
     console.log(response);
-    console.log(data);
-
   }
   catch (err) {
     throw err;

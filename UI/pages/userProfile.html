@@ -16,26 +16,12 @@
   <nav class="dark-nav">
     <ul>
       <li><a href="../index.html">Home</a></li>
-      <li><a href="meetup.html">Meetups</a></li>
-      <li><a href="questions.html">Questions</a></li>
+      <li><a onclick="linker('meetup')" href="">Meetups</a></li>
+      <li><a onclick="linker('questions')" href="">Questions</a></li>
     </ul>
   </nav>
   <!-- End Nav -->
-  <!-- <div class="profile-container">
-    <div id="mySidebar" class="side-bar">
-      <button href="" class="closebtn" onclick="closeNav()">×</button>
-      <div class="profile-pic"><img src="" alt="" /></div>
-      <div><small class="light-text center">Olufowora Ibrahim</small></div>
-      <div><small class="light-text center">Developer</small></div>
-      <div><small class="light-text center user-actions">Posts</small></div>
-      <div><small class="light-text center user-actions">Meetups</small></div>
-      <div><small class="light-text center user-actions">Tags</small></div>
-
-      <a href="./createMeetup.html" id="meetupBtn">Create Meetup</a href="./createMeetup.html">
-    </div> -->
-
     <div id="mainContainer" class="main">
-      <!-- <button class="openbtn" onclick="openNav()">☰ Menu</button> -->
       <button class="editProfile" onclick="">Edit Profile</button>
       
       <h2>Personal details</h2>
@@ -108,7 +94,7 @@
           </div>
           <div class="summary">
             <div>
-              <a href="../pages/question.html" class="question-hyperlink">WooCommerce 3.0 make checkout company input
+              <a onclick="linker('question')" href="" class="question-hyperlink">WooCommerce 3.0 make checkout company input
                 readonly/disabled
                 and still pass the input contents to order</a>
             </div>
@@ -135,7 +121,7 @@
           </div>
           <div class="summary">
             <div>
-              <a href="../pages/question.html" class="question-hyperlink">WooCommerce 3.0 make checkout company input
+              <a onclick="linker('question')" href="" class="question-hyperlink">WooCommerce 3.0 make checkout company input
                 readonly/disabled
                 and still pass the input contents to order</a>
             </div>
@@ -162,7 +148,7 @@
           </div>
           <div class="summary">
             <div>
-              <a href="../pages/question.html" class="question-hyperlink">WooCommerce 3.0 make checkout company input
+              <a onclick="linker('question')" href="" class="question-hyperlink">WooCommerce 3.0 make checkout company input
                 readonly/disabled
                 and still pass the input contents to order</a>
             </div>
@@ -195,6 +181,7 @@
   email.value = userData.email;
 }
   </script>
+  <script src="../assets/js/link.js"></script>
 </body>
 
 </html>

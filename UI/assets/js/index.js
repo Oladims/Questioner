@@ -42,7 +42,6 @@ async function loginUser(event) {
   const emailaddress = document.getElementById('email').value;
   const userPassword = document.getElementById('password').value;
 
-  const submitBtn = document.getElementById('submitBtn');
 
   const url = 'https://oladims-questioner.herokuapp.com/api/v1/user/login';
 
@@ -65,7 +64,7 @@ async function loginUser(event) {
       window.location.href = './pages/userProfile.html';
     }
     else {
-    //   alert('error');
+      //   alert('error');
     }
     console.log(response);
     console.log(data);
@@ -75,5 +74,6 @@ async function loginUser(event) {
     throw err;
   }
 }// createUser();
+const submitBtn = document.getElementById('submitBtn');
 submitBtn.addEventListener('click', loginUser);
 

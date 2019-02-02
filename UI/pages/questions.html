@@ -15,8 +15,8 @@
     <nav class="dark-nav">
         <ul>
           <li><a href="../index.html">Home</a></li>
-          <li><a href="meetup.html">Meetups</a></li>
-          <li><a class="active" href="questions.html">Questions</a></li>
+          <li><a onclick="linker('meetup')" href="">Meetups</a></li>
+          <li><a class="active" onclick="linker('questions')" href="">Questions</a></li>
         </ul>
       </nav>
     <!-- End Nav -->
@@ -24,7 +24,7 @@
     <div class="container">
       <div class="header">
         <div><h3>Questions</h3></div>
-       <div> <a href="ask.html" class="dark-button" id="askButton">Ask Question</a> </div>
+       <div> <a onclick="linker('ask')" href="" class="dark-button" id="askButton">Ask Question</a> </div>
       </div>
       <div class="question-summary" id="question-summary-53840910">
         <div onclick="" class="question-stats">
@@ -43,7 +43,7 @@
         </div>
         <div class="summary">
           <div>
-            <a href="question.html" class="question-hyperlink"
+            <a onclick="linker('question')" href="" class="question-hyperlink"
               >WooCommerce 3.0 make checkout company input readonly/disabled and
               still pass the input contents to order</a
             >
@@ -83,7 +83,7 @@
         </div>
         <div class="summary">
           <div>
-            <a href="question.html" class="question-hyperlink"
+            <a onclick="linker('question')" href="" class="question-hyperlink"
               >WooCommerce 3.0 make checkout company input readonly/disabled and
               still pass the input contents to order</a
             >
@@ -123,7 +123,7 @@
         </div>
         <div class="summary">
           <div>
-            <a href="question.html" class="question-hyperlink"
+            <a onclick="linker('question')" href="" class="question-hyperlink"
               >WooCommerce 3.0 make checkout company input readonly/disabled and
               still pass the input contents to order</a
             >
@@ -163,7 +163,7 @@
         </div>
         <div class="summary">
           <div>
-            <a href="question.html" class="question-hyperlink"
+            <a onclick="linker('question')" href="" class="question-hyperlink"
               >WooCommerce 3.0 make checkout company input readonly/disabled and
               still pass the input contents to order</a
             >
@@ -200,5 +200,7 @@
       </div>
     </footer>
     <!-- End Footer -->
+    <script src="../assets/js/link.js"></script>
+
   </body>
 </html>

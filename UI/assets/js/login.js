@@ -1,6 +1,6 @@
 async function loginUser(event) {
   event.preventDefault();
-
+  document.getElementById("loader").style.display = "block";
 
   const emailaddress = document.getElementById('email').value;
   const userPassword = document.getElementById('password').value;
@@ -34,8 +34,8 @@ async function loginUser(event) {
         phonenumber: body.data[0].user.phonenumber,
         access: body.data[0].user.access,
       });
-    console.log(userData);
-    console.log(body);
+      console.log(userData);
+      console.log(body);
 
       localStorage.setItem('user', userData);
 
@@ -53,11 +53,10 @@ async function loginUser(event) {
       //   alert('error');
     }
     console.log(response);
-
   }
   catch (err) {
     throw err;
   }
-}// createUser();
+}
 const submitBtn = document.getElementById('submitBtn');
 submitBtn.addEventListener('click', loginUser);

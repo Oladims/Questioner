@@ -65,3 +65,4 @@ const togglePassword = () => {
 }
 
 showPassword.onclick = togglePassword;
+

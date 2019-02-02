@@ -15,8 +15,8 @@
     <nav class="dark-nav">
         <ul>
           <li><a  href="../index.html">Home</a></li>
-          <li><a href="meetup.html">Meetups</a></li>
-          <li><a class="active" href="questions.html">Questions</a></li>
+          <li><a onclick="linker('meetup')" href="">Meetups</a></li>
+          <li><a class="active" onclick="linker('questions')" href="">Questions</a></li>
         </ul>
       </nav>
     <!-- End Nav -->
@@ -123,6 +123,7 @@
     </footer>
     <!-- End Footer -->
 
+    <script src="../assets/js/link.js"></script>
 
     <script>
       let url = window.location.href;
