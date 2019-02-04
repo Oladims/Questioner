@@ -10,11 +10,11 @@ export default class meetupController {
       responses.validationError(error, req, res);
     }
     const {
-      topic, location, happeningOn, name, description,
+      topic, location, happeningOn, name, description, createdBy,
     } = req.body;
     const createdOn = moment();
-    const queryString = 'INSERT INTO newmeetups (topic, location, happeningOn, createdOn, name, description) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
-    const params = [topic, location, happeningOn, createdOn, name, description];
+    const queryString = 'INSERT INTO newmeetups (topic, location, happeningOn, createdOn, name, description, createdBy) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *';
+    const params = [topic, location, happeningOn, createdBy, createdOn, name, description];
     return db.query(queryString, params, (err, result) => {
       if (err) {
         return res.status(500).json({
@@ -74,6 +74,23 @@ export default class meetupController {
     });
   }
 
+  static async deleteMeetup(req, res) {
+    const { error } = auth.validateId(req.params.id);
+    if (error) {
+      return responses.validationError(error, req, res);
+    }
+    const queryString = 'DELETE FROM newmeetups WHERE id = $1  AND userid = $2 returning *';
+    const params = [req.params.id, req.params.userId];
+    try {
+      const { rows } = await db.query(queryString, params);
+      if (!rows[0]) {
+        return responses.nonExisting('meetup', req, res);
+      }
+      return res.status(204).send({ message: 'meetup deleted successfully' });
+    } catch (error) {
+      return res.status(400).send(error);
+    }
+  }
 
   static rsvp(req, res) {
     const { error } = auth.validateId(req.params.id);
