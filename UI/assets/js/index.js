@@ -1,3 +1,6 @@
+const rawUserData = localStorage.getItem('user');
+const userData = JSON.parse(rawUserData);
+
 const request = new XMLHttpRequest();
 
 request.open('GET', 'https://oladims-questioner.herokuapp.com/api/v1/meetups', true);

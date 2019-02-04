@@ -1,10 +1,12 @@
-const request = new XMLHttpRequest();
+const rawUserData = localStorage.getItem('user');
+const userData = JSON.parse(rawUserData);
 
+const request = new XMLHttpRequest();
 request.open('GET', 'https://oladims-questioner.herokuapp.com/api/v1/meetups', true);
+request.setRequestHeader('tokens', userData.token);
 request.onload = () => {
   const data = JSON.parse(request.response);
   const meetups = data.data[0].meetup;
-  // console.log(meetups[0].topic);
 
   const meetupRow = document.getElementById('meetups');
   if (request.status >= 200 && request.status < 400) {

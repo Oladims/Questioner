@@ -54,7 +54,7 @@
         </div>
       </div>
       <p class="small"><b>Would you like to post a question to this meetup?</b></p>
-      <p class="askBtn"><a onclick="linker(ask)" href="">Post question</a></p>
+      <p id="askBtn" class="askBtn"></p>
     
     
       <div class="header"id="question-summary">
@@ -75,28 +75,34 @@
   <!-- End Footer -->
 <script src="../assets/js/link.js"></script>
   <script>
+    const rawUserData = localStorage.getItem('user');
+const userData = JSON.parse(rawUserData);
+
     let url = window.location.href;
     const urlSplit = url.split('?')
     const params = urlSplit[1];
     const newParams = params.split('=');
     const meetupId = newParams[1];
-    console.log(meetupId);
+    // console.log(meetupId);
     
     const getMeetup = (meetupId) => {
-      var request1 = new XMLHttpRequest();
+      let request1 = new XMLHttpRequest();
     request1.open('GET', `https://oladims-questioner.herokuapp.com/api/v1/meetups/${meetupId}`, true);
+request1.setRequestHeader('tokens', userData.token);
     request1.onload = function () {
 
-      var data = JSON.parse(this.response);
+      let data = JSON.parse(this.response);
      let meetup = data.data[0].meetup;
-      console.log(meetup);
+      // console.log(meetup);
       let meetupTopic = document.getElementById('meetupTopic');
       let meetupDate = document.getElementById('meetupDate')
       let meetupLocation = document.getElementById('meetupLocation')
       let meetupDescription = document.getElementById('meetupDescription')
       let meetupName = document.getElementById('meetupName')
+      let askBtn = document.getElementById('askBtn')
       if (request1.status >= 200 && request1.status < 400) {
-        meetupTopic.innerText = meetup.topic;
+        
+        askBtn.innerHtml =`<a href='ask.html?id=${meetup.id}&name=${meetup.name}'>Post question</a>`;
         meetupDate.innerText = meetup.happeningon;
         meetupLocation.innerText = meetup.location;
         meetupDescription.innerText = meetup.description;
@@ -111,14 +117,15 @@
   }
 
     const getQuestions = (meetupId) => {
-      var request2 = new XMLHttpRequest();
+      let request2 = new XMLHttpRequest();
 
     request2.open('GET', `https://oladims-questioner.herokuapp.com/api/v1/questions/meetup/${meetupId}`, true);
+  request2.setRequestHeader('tokens', userData.token);
         request2.onload = function () {
     
-          var data = JSON.parse(this.response);
+          let data = JSON.parse(this.response);
          let questions = data.data[0].question;
-          console.log(questions);
+          // console.log(questions);
                     
           let questionSummary = document.getElementById('question-summary');
           if (request2.status >= 200 && request2.status < 400) {
