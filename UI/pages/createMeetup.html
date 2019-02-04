@@ -1,109 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="../assets/css/style.css" />
-    <link rel="stylesheet" href="../assets/css/createMeetup.css" />
-    <title>Questioner</title>
-  </head>
 
-  <body>
-    <!-- Begin Nav -->
-    <nav class="dark-nav">
-        <ul>
-          <li><a class="active" href="../index.html">Home</a></li>
-          <li><a class="active" onclick="linker('meetup')" href="">Meetups</a></li>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/createMeetup.css" />
+  <title>Questioner</title>
+</head>
+
+<body>
+  <!-- Begin Nav -->
+  <nav class="dark-nav">
+    <ul>
+      <li><a class="active" href="../index.html">Home</a></li>
+      <li><a class="active" onclick="linker('meetup')" href="">Meetups</a></li>
       <li><a onclick="linker('questions')" href="">Questions</a></li>
-        </ul>
-      </nav>
-    <!-- End Nav -->
+    </ul>
+  </nav>
+  <!-- End Nav -->
 
-    <div class="container">
-        <div class="form">
-          <!-- <h1 class="text-center">Create Meetup</h1> -->
-          <form name="meetup" class="container">
-            <h1>Create Meetup</h1>
-            <p class="small required">All fields marked * are required.</p>
-            <div>
-              <label for="name"><b>Topics*</b></label> <br />
-              <input
-                id="text"
-                type="text"
-                placeholder="What will your meetup be about?"
-                name="title"
-              />
-              <span id="error_text" class="text-danger"></span>
-            </div>
-            <div>
-              <label for="name"><b>Name*</b></label> <br />
-              <input
-                id="text"
-                type="text"
-                placeholder="What will your meetup name be?"
-                name="title"
-              />
-              <span id="error_text" class="text-danger"></span>
-            </div>
-            <div>
-              <label for="meetups"><b>Location*</b></label> <br />
-              <select name="meetups" size="">
-                <option value="Lagos">Lagos</option>
-                <option value="Ibadan">Ibadan</option>
-                <option value="Abuja">Abuja</option>
-                <option value="Kaduna">Kaduna</option>
-              </select>
-              <span id="error_text" class="text-danger"></span>
-            </div>
-            <div>
-                    <label for="date"><b>Happening on*</b></label> <br />
-                    <input
-                      id="text"
-                      type="date"
-                      placeholder="When will the meetup hold?"
-                      name="title"
-                    />
-                    <span id="error_text" class="text-danger"></span>
-                  </div>
-            <div>
-            <div>
-                    <label for="name"><b>Address*</b></label> <br />
-                    <input
-                      id="text"
-                      type="text"
-                      placeholder="Where will the meetup hold? Be specific."
-                      name="title"
-                    />
-                    <span id="error_text" class="text-danger"></span>
-                  </div>
-            <div>
-              <label for="email"><b>Description*</b></label> <br />
-              <textarea>
-Describe who should join, and what your meetup will do.</textarea
-              >
+  <div class="container">
+    <div class="form">
+      <!-- <h1 class="text-center">Create Meetup</h1> -->
+      <form name="meetup" class="container">
+        <h1>Create Meetup</h1>
+        <p class="small required">All fields marked * are required.</p>
+        <div>
+          <label for="name"><b>Topics*</b></label> <br />
+          <input id="meetupTopic" type="text" placeholder="What will your meetup be about?" name="title" />
+          <span id="error_topic" class="text-danger"></span>
+        </div>
+        <div>
+          <label for="name"><b>Name*</b></label> <br />
+          <input id="meetupName" type="text" placeholder="What will your meetup name be?" name="title" />
+          <span id="error_name" class="text-danger"></span>
+        </div>
+        <div>
+          <label for="meetups"><b>Location*</b></label> <br />
+          <select id="meetupLocation" name="meetups" size="">
+            <option value="Lagos">Lagos</option>
+            <option value="Ibadan">Ibadan</option>
+            <option value="Abuja">Abuja</option>
+            <option value="Kaduna">Kaduna</option>
+          </select>
+          <span id="error_location" class="text-danger"></span>
+        </div>
+        <div>
+          <label for="date"><b>Happening on*</b></label> <br />
+          <input id="meetupDate" type="date" placeholder="When will the meetup hold?" name="title" />
+          <span id="error_date" class="text-danger"></span>
+        </div>
+        <div>
+          <div>
+            <label for="name"><b>Address*</b></label> <br />
+            <input id="meetupAddress" type="text" placeholder="Where will the meetup hold? Be specific." name="title" />
+            <span id="error_address" class="text-danger"></span>
+          </div>
+          <div>
+            <label for="email"><b>Description*</b></label> <br />
+            <textarea id="meetupDescription">Describe who should join, and what your meetup will do.</textarea>
+            <span id="error_description" class="text-danger"></span>
+          </div>
 
-              <span id="error_text" class="text-danger"></span>
-            </div>
-
-            <button id="submitBtn" class="dark-button">Create</button>
-          </form>
-      </div>
+          <button id="submitBtn" class="dark-button">Create</button>
+      </form>
     </div>
+  </div>
+  </div>
+  <!-- Begin Footer -->
+  <footer>
+    <div class="name">
+      <p>Questioner</p>
+      <p>Lagos, Nigeria</p>
+      <p>+2348136715215</p>
+      <p>support@questioner.com </p>
+      <p>@Questioner</p>
     </div>
-    <!-- Begin Footer -->
-    <footer>
-      <div class="name">
-        <p>Questioner</p>
-        <p>Lagos, Nigeria</p>
-        <p>+2348136715215</p>
-        <p>support@questioner.com </p>
-        <p>@Questioner</p>
-      </div>
-    </footer>
-    <!-- End Footer -->
+  </footer>
+  <!-- End Footer -->
 
-<script src="../assets/js/link.js"></script>
+  <script src="../assets/js/link.js"></script>
 
-  </body>
+  <script>
+
+const rawUserData = localStorage.getItem('user');
+const userData = JSON.parse(rawUserData);
+    async function createMeetup(event) {
+      event.preventDefault();
+
+      const topic = documentp.getElementById('meetupTopic').value;
+      const name = document.getElementById('meetupName').value;
+      const meetupLocation = document.getElementById('meetupLocation').value;
+      const happenningOn = document.getElementById('meetupDate').value;
+      const meetupAddress = document.getElementById('meetupAddress').value;
+      const description = document.getElementById('meetupDescription').value;
+      const createdBy = userData.id;
+      const location = meetupAddress + ', ' + meetupLocation;
+      const url = 'https://oladims-questioner.herokuapp.com/api/v1/meetups';
+
+      const params = {
+        createdBy,
+        topic,
+        name,
+        location,
+        happenningOn,
+        description,
+      };
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'tokens': userData.token,            
+          },
+          body: JSON.stringify(params),
+        });
+        const body = await response.json();
+        if (response.ok) {
+            setTimeout(() => {
+              alert('created successfully')
+              window.location.href = '/meetup.html';
+            }, 2000);
+          
+        } else {
+          alert('error');
+        }
+        console.log(response);
+      }
+      catch (err) {
+        throw err;
+      }
+    }
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.addEventListener('click', createUser);
+
+
+  </script>
+</body>
+
 </html>

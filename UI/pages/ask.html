@@ -42,37 +42,38 @@
           <form name="question" class="container">
             <h1>Ask a question</h1>
             <div>
-              <label for="meetups"><b>Meetup</b></label> <br />
-              <select name="meetups" size="">
-                <option value="gdgAjah">GDG Ajah</option>
-                <option value="concatenate">Concatenate</option>
-                <option value="nodeConf">NodeConf</option>
-                <option value="reactSummit">React Summit</option>
-              </select>
-              <span id="error_text" class="text-danger"></span>
+              <label for="meetupName"><b>Meetup</b></label> <br />
+              <input
+                id="meetupName"
+                type="text"
+                name="title"
+                disabled
+                />
+              
+              <span id="error_meetupName" class="text-danger"></span>
             </div>
             <div>
-              <label for="name"><b>Title</b></label> <br />
+              <label for="questionTitle"><b>Title</b></label> <br />
               <input
-                id="text"
+                id="questionTitle"
                 type="text"
                 placeholder="What's your question? Be specific."
                 name="title"
               />
-              <span id="error_text" class="text-danger"></span>
+              <span id="error_questionTitle" class="text-danger"></span>
             </div>
             <div>
-              <label for="email"><b>Body</b></label> <br />
-              <textarea></textarea>
+              <label for="questionBody"><b>Body</b></label> <br />
+              <textarea id="questionBody"></textarea>
 
-              <span id="error_email" class="text-danger"></span>
+              <span id="error_questionBody" class="text-danger"></span>
             </div>
 
             <button id="submitBtn" class="dark-button">Post</button>
           </form>
         </div>
 
-        <div class="topQuestions">
+        <!-- <div class="topQuestions">
             <h2 class="center">FEATURED</h2>
             <div class="questions">
                 <p>Why hover effect on button using :after element</p>
@@ -84,7 +85,7 @@
                 <p>Why hover effect on button using :after element</p>
             <p>Why animate out when mouse is out of button dimensions</p>
                
-        </div>
+        </div> -->
         </div>
     </div>
     </div>
@@ -101,6 +102,66 @@
     <!-- End Footer -->
   
 <script src="../assets/js/link.js"></script>
-  
+<script>
+
+    const rawUserData = localStorage.getItem('user');
+    const userData = JSON.parse(rawUserData);
+
+    let url = window.location.href;
+    const urlSplit = url.split('?')
+    const splittedUrl = urlSplit[1];
+    const params = splittedUrl.split('&');
+    const idParams = params[0].split('=');
+    const nameParams = params[1].split('=');
+    const meetupId = idParams[1];
+    const meetupName = nameParams[1];
+
+        async function createMeetup(event) {
+          event.preventDefault();
+    
+          const name = document.getElementById('meetupName');
+          const title = document.getElementById('questionTitle').value;
+          const body = document.getElementById('questionBody').value;
+          const createdBy = userData.id;
+          name.value = meetupName;
+          const url = 'https://oladims-questioner.herokuapp.com/api/v1/meetups';
+          
+          const params = {
+            meetup: meetupId,
+            createdBy,
+            title,
+            body,
+          };
+          try {
+            const response = await fetch(url, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'tokens': userData.token,            
+              },
+              body: JSON.stringify(params),
+            });
+            const body = await response.json();
+            if (response.ok) {
+                setTimeout(() => {
+                  alert('created successfully')
+                  window.location.href = `/meetupdetails.html?id=${meetupId}`;
+                }, 2000);
+              
+            } else {
+              alert('error');
+            }
+            console.log(response);
+          }
+          catch (err) {
+            throw err;
+          }
+        }
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.addEventListener('click', createUser);
+    
+    
+      </script>
+    
   </body>
 </html>
