@@ -13,11 +13,11 @@ export default class questionController {
       });
     }
     const {
-      createdBy, meetup, title, body, votes,
+      createdBy, meetupId, title, body, votes,
     } = req.body;
     const createdOn = moment();
     const queryString = 'INSERT INTO question (createdBy, createdOn, meetup, title, body) VALUES($1, $2, $3, $4, $5) RETURNING *';
-    const params = [createdBy, createdOn, meetup, title, body];
+    const params = [createdBy, createdOn, meetupId, title, body];
     return db.query(queryString, params, (err, result) => {
       if (err) {
         return res.status(500).json({

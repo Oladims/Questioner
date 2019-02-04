@@ -2,7 +2,7 @@ import Joi from 'joi';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import Joidate from 'joi-date-extensions';
-import 'babel-polyfill';
+// import 'babel-polyfill';
 import moment from 'moment';
 import db from '../database';
 
@@ -30,10 +30,10 @@ class auth {
     return Joi.validate(user, loginSchema);
   }
 
-
   static validateMeetups(meetup) {
     const meetupSchema = {
       images: Joi.any(),
+      createdBy: Joi.number().integer().positive().required(),
       topic: Joi.string().min(6).required(),
       location: Joi.string().min(6).required(),
       name: Joi.string().min(3).required(),
@@ -48,7 +48,7 @@ class auth {
   static validateQuestions(question) {
     const questionSchema = {
       createdBy: Joi.number().integer().positive().required(),
-      meetup: Joi.number().integer().positive().required(),
+      meetupId: Joi.number().integer().positive().required(),
       title: Joi.string().min(6).required(),
       body: Joi.string().min(6).required(),
       votes: Joi.number().integer(),
@@ -95,7 +95,6 @@ class auth {
         rows,
       } = await db.query(text, [decoded.id]);
       console.log(decoded.id);
-      
       if (!rows[0]) {
         return res.status(400).send({
           message: 'The token you provided is invalid',
