@@ -50,6 +50,10 @@ nav ul li a {
   background-color: white;
 }
 
+#user-details {
+  padding: 10px 0;
+}
+
 #info-div div {
   margin: 20px 10px;
 }
@@ -94,12 +98,14 @@ nav ul li a {
   display: grid;
   grid-gap: 3px;
   grid-template-columns: 1fr;
+  color: #ddd;
 }
 .user-activity h5 {
-  border-bottom: 1px solid #504766;
+  border-bottom: 1px solid #ddd;
 }
 .user-activity div {
-  height: 100px;
+  padding: 10px;
+  background-color: #504766;
 }
 .tags .small {
   font-size: smaller;
@@ -111,16 +117,12 @@ nav ul li a {
   .profile-pic {
     width: 200px;
     height: 200px;
-    /* border: 1px solid red; */
   }
   #user-details{
     display: grid;
     grid-template-columns: 250px 1fr;
     align-items: center;
     margin: 30px 0;
-  }
-  #info-div{
-    /* border: 1px solid red; */
   }
   label{
     color: #504766;
@@ -130,9 +132,6 @@ nav ul li a {
     font-size: 20px;
   }
   .user-activity {
-    background-color: #504766;
-    padding: 10px;
-    display: grid;
     grid-gap: 10px;
     grid-template-columns: 1fr 1fr;
   }
