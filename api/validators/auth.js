@@ -17,6 +17,7 @@ class auth {
       phonenumber: Joi.string().required(),
       password: Joi.string().min(7).alphanum().required(),
       username: Joi.string(),
+      isadmin: Joi.bool(),
     };
     return Joi.validate(user, userSchema);
   }
@@ -94,7 +95,6 @@ class auth {
       const {
         rows,
       } = await db.query(text, [decoded.id]);
-      console.log(decoded.id);
       if (!rows[0]) {
         return res.status(400).send({
           message: 'The token you provided is invalid',
