@@ -13,7 +13,7 @@ responses.alreadyExist = (field, req, res) => res.status(403).json({
 
 responses.nonExisting = (field, req, res) => res.status(404).json({
   status: 404,
-  error: `Could not find any ${field} matching your request`,
+  error: `${field} does not exist`,
 });
 
 responses.incorrectPassword = (req, res) => res.status(400).json({

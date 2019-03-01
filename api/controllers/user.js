@@ -81,4 +81,18 @@ export default class userController {
       return responses.nonExisting('Account', req, res);
     });
   }
+
+  static getUsersCount(req, res) {
+    const queryString = 'SELECT * FROM users';
+    return db.query(queryString, [], (err, result) => {
+      if (err) {
+        responses.errorProcessing(err, req, res);
+      }
+      const data = result.rowCount;
+      return res.status(200).json({
+        status: 200,
+        data,
+      });
+    });
+  }
 }

@@ -7,12 +7,18 @@ const { verifyToken } = auth;
 const router = express.Router();
 
 const {
-  createQuestion, getQuestionByMeetupId, getQuestionById,
-  upvoteQuestion, downvoteQuestion,
+  createQuestion, getQuestionsByMeetupId, getQuestionById,
+  upvoteQuestion, downvoteQuestion, comment, getComments,
+  getQuestionsCount, getQuestionsByUserId, getCommentsByUserId,
 } = questionController;
 
 router.post('/', verifyToken, createQuestion);
-router.get('/meetup/:id', verifyToken, getQuestionByMeetupId);
+router.post('/comments', verifyToken, comment);
+router.get('/count', getQuestionsCount);
+router.get('/user', getQuestionsByUserId);
+router.get('/:id/comments', verifyToken, getComments);
+router.get('/userComments', verifyToken, getCommentsByUserId);
+router.get('/meetup/:id', verifyToken, getQuestionsByMeetupId);
 router.get('/:id', verifyToken, getQuestionById);
 router.patch('/:id/upvote', verifyToken, upvoteQuestion);
 router.patch('/:id/downvote', verifyToken, downvoteQuestion);

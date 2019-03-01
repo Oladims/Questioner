@@ -3,7 +3,7 @@ import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import path from 'path';
 import cors from 'cors';
-import 'babel-polyfill';
+// import 'babel-polyfill';
 import routes from './routes';
 
 const app = express();

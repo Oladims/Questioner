@@ -34,7 +34,6 @@ class auth {
   static validateMeetups(meetup) {
     const meetupSchema = {
       images: Joi.any(),
-      createdBy: Joi.number().integer().positive().required(),
       topic: Joi.string().min(6).required(),
       location: Joi.string().min(6).required(),
       name: Joi.string().min(3).required(),
@@ -48,13 +47,20 @@ class auth {
 
   static validateQuestions(question) {
     const questionSchema = {
-      createdBy: Joi.number().integer().positive().required(),
       meetupId: Joi.number().integer().positive().required(),
       title: Joi.string().min(6).required(),
       body: Joi.string().min(6).required(),
       votes: Joi.number().integer(),
     };
     return Joi.validate(question, questionSchema);
+  }
+
+  static validateComments(comment) {
+    const commentSchema = {
+      question: Joi.number().integer().positive().required(),
+      comment: Joi.string().min(6).required(),
+    };
+    return Joi.validate(comment, commentSchema);
   }
 
   static validateId(id) {
@@ -66,7 +72,6 @@ class auth {
 
   static validateRsvp(rsvp) {
     const rsvpSchema = {
-      userId: Joi.number().integer().positive().required(),
       response: Joi.any().valid(['yes', 'no', 'maybe']).required(),
     };
     return Joi.validate(rsvp, rsvpSchema);
@@ -101,8 +106,9 @@ class auth {
         });
       }
       req.user = {
-        id: decoded.userId,
+        id: decoded.id,
       };
+      
       next();
     } catch (error) {
       return res.status(400).send(error);
