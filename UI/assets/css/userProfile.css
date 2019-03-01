@@ -67,10 +67,20 @@ nav ul li a {
 }
 #meetupBtn {
   padding: 10px 5px;
-  background-color: #ddd;
+  background-color: #504766;
+  color: #ddd;
   border: none;
   margin: auto;
   text-decoration: none;
+  opacity: 1;
+}
+#meetupBtn:hover{
+  opacity: 0.9;
+  padding: 15px 10px;
+}
+#meetupBtn-div{
+  display: none;
+  margin: 50px 0;
 }
 /* .sidebar .closebtn {
     position: absolute;
@@ -89,6 +99,9 @@ nav ul li a {
     display: block;
     transition: 0.3s;
   } */
+  #deletemeetup{
+
+  }
 .user-actions {
   margin: 10px auto;
   padding: 3px 10px;

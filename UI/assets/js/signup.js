@@ -1,15 +1,16 @@
 async function createUser(event) {
   event.preventDefault();
+  document.getElementById("loader").style.display = "block";
 
-  const firstName = document.getElementById('firstName').value;
-  const lastName = document.getElementById('lastName').value;
-  const otherName = document.getElementById('otherName').value;
-  const emailaddress = document.getElementById('email').value;
-  const userPassword = document.getElementById('password').value;
+  const firstName = document.getElementById("firstName").value;
+  const lastName = document.getElementById("lastName").value;
+  const otherName = document.getElementById("otherName").value;
+  const emailaddress = document.getElementById("email").value;
+  const userPassword = document.getElementById("password").value;
   const phonenumber = '08136715215';
-  
-  const url = 'https://oladims-questioner.herokuapp.com/api/v1/user/signup';
-  
+
+  const url = "http://localhost:8000/api/v1/user/signup";
+
   const params = {
     firstname: firstName,
     lastname: lastName,
@@ -17,15 +18,15 @@ async function createUser(event) {
     password: userPassword,
     othername: otherName,
     username: otherName,
-    phonenumber,
+    phonenumber
   };
   try {
     const response = await fetch(url, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify(params),
+      body: JSON.stringify(params)
     });
     const body = await response.json();
     if (response.ok) {
@@ -37,27 +38,19 @@ async function createUser(event) {
         username: body.data[0].user.username,
         email: body.data[0].user.email,
         phonenumber: body.data[0].user.phonenumber,
-        access: body.data[0].user.access,
+        access: body.data[0].user.access
       });
-      localStorage.setItem('user', userData);
-
-      if (body.data[0].user.access) {
-        setTimeout(() => {
-          window.location.href = '#';
-        }, 2000);
-      } else {
-        setTimeout(() => {
-          window.location.href = './userProfile.html';
-        }, 2000);
-      }
+      localStorage.setItem("user", userData);
+      setTimeout(() => {
+        window.location.href = "./userProfile.html";
+      }, 2000);
     } else {
-      // alert('error');
+      document.getElementById("loader").style.display = "none";
+      errorText.innerText = body.error;
     }
-    console.log(response);
-  }
-  catch (err) {
+  } catch (err) {
     throw err;
   }
-}// createUser();
-const submitBtn = document.getElementById('submitBtn');
-submitBtn.addEventListener('click', createUser);
+} // createUser();
+const submitBtn = document.getElementById("submitBtn");
+submitBtn.addEventListener("click", createUser);

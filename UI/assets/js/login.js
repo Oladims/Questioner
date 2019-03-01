@@ -1,18 +1,14 @@
 async function loginUser(event) {
+  const title = document.getElementById('title').innerHTML;
   event.preventDefault();
   document.getElementById("loader").style.display = "block";
-
+  const errorText = document.getElementById('errorText');
   const emailaddress = document.getElementById('email').value;
   const userPassword = document.getElementById('password').value;
-
-
-  const url = 'https://oladims-questioner.herokuapp.com/api/v1/user/login';
-
+  const url = 'http://localhost:8000/api/v1/user/login';
   const params = {
-
     email: emailaddress,
     password: userPassword,
-
   };
   try {
     const response = await fetch(url, {
@@ -32,31 +28,25 @@ async function loginUser(event) {
         username: body.data[0].user.username,
         email: body.data[0].user.email,
         phonenumber: body.data[0].user.phonenumber,
-        access: body.data[0].user.access,
+        isadmin: body.data[0].user.isadmin,
       });
-      console.log(userData);
-      console.log(body);
-
       localStorage.setItem('user', userData);
-
-      if (body.data[0].user.access) {
-        setTimeout(() => {
-          window.location.href = '#';
-        }, 2000);
-      } else {
-        setTimeout(() => {
-          window.location.href = './userProfile.html';
-        }, 2000);
-      }
+      setTimeout(() => {
+        if (title == "Questioner") {
+          window.location.href = './pages/userProfile.html';
+        }
+        else window.location.href = './userProfile.html';
+      }, 2000);
     }
     else {
-      //   alert('error');
+      document.getElementById("loader").style.display = "none";
+      errorText.innerText = body.error;
     }
-    console.log(response);
   }
   catch (err) {
     throw err;
   }
 }
+
 const submitBtn = document.getElementById('submitBtn');
 submitBtn.addEventListener('click', loginUser);

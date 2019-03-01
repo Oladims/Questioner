@@ -1,39 +1,91 @@
 const rawUserData = localStorage.getItem('user');
 const userData = JSON.parse(rawUserData);
+const urlink = window.location.href;
+const urlSplit = urlink.split('?');
+const params = urlSplit[1];
+const newParams = params.split('=');
+const meetupId = newParams[1];
+const meetupTopic = document.getElementById('meetupTopic');
+const meetupDate = document.getElementById('meetupDate');
+const meetupLocation = document.getElementById('meetupLocation');
+const meetupDescription = document.getElementById('meetupDescription');
+const meetupName = document.getElementById('meetupName');
+const askBtn = document.getElementById('askBtn');
 
-const request = new XMLHttpRequest();
-request.open('GET', 'https://oladims-questioner.herokuapp.com/api/v1/meetups', true);
-request.setRequestHeader('tokens', userData.token);
-request.onload = () => {
-  const data = JSON.parse(request.response);
-  const meetups = data.data[0].meetup;
+async function getMeetup(meetupId) {
+  const url = `http://localhost:8000/api/v1/meetups/${meetupId}`;
+  try {
+    const response = await fetch(url,
+      {
+        method: 'GET',
+        headers: {
+          tokens: `${userData.token}`,
+        },
+      });
+    const body = await response.json();
+    const meetup = body.data[0].meetup;
 
-  const meetupRow = document.getElementById('meetups');
-  if (request.status >= 200 && request.status < 400) {
-    meetups.forEach((meetup) => {
-      meetupRow.innerHTML += ` <div class="meetup hvrbox">
-                  <img class="meetupimage hvrbox-layer_bottom" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1A8Y_qFHiSjEQV5YnFja04rAMpsL7eyGBjmCN8Qa7P30DjWfR"
-                    alt="Avatar" style="width:100%">
-                  <div class="meetup-container">
-                    <h4 class="center"><b>${meetup.name}</b></h4>
-                    <p class="center">${meetup.topic}</p>
-                  </div>
-                  <div class="meetup-container hvrbox-layer_top">
-                    <div class="hvrbox-text">
-                     <h4><a class="viewdetail light-text" href="./meetupdetails.html?id=${meetup.id}">View Details</a></h4>
-                      <h4> Are you coming?</h4>
-                      <div class="response">
-                          <div class="yes"><i class="yes fas fa-check-circle"></i><span>Yes</span></div>
-                          <div class="no"><i class="no fas fa-times-circle"></i><span>No</span></div>
-                          <div class="maybe"><i class="maybe fas fa-meh-rolling-eyes"></i><span>Maybe</span></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>`;
-    });
-  } else {
-    // console.log('error');
+    if (response.ok) {
+      meetupDate.innerText = meetup.happeningon;
+      meetupLocation.innerText = meetup.location;
+      meetupDescription.innerText = meetup.description;
+      meetupName.innerText = meetup.name;
+      askBtn.innerHTML = `<a href='ask.html?id=${meetup.id}&name=${meetup.name}'>Post question</a>`;
+    } else {
+      alert('error');
+    }
+  } catch (err) {
+    throw err;
   }
-};
+}
 
-request.send();
+async function getQuestions(meetupId) {
+  const url = `http://localhost:8000/api/v1/questions/meetup/${meetupId}`;
+  try {
+    const response = await fetch(url,
+      {
+        method: 'GET',
+        headers: {
+          tokens: `${userData.token}`,
+        },
+      });
+    const body = await response.json();
+    const questions = body.data[0].question;
+    const questionSummary = document.getElementById('question-summary');
+
+    if (response.ok) {
+      questions.forEach((question) => {
+        questionSummary.innerHTML += ` <div class="question-summary" >
+     
+     <div onclick="" class="question-stats">
+       <div class="votes">
+         <div class="mini-counts"><span title="0 votes">${question.votes}</span></div>
+         <small class="small">votes</small>
+       </div>
+     </div>
+     <div class="summary">
+       <div>
+         <a href="question.html?id=${question.id}" class="question-hyperlink"
+           >${question.title}</a>
+       </div>
+       <div class="tags">
+         <a
+           href="question.html?id=${question.id}"
+           class="post-tag"
+           title=""
+           rel="tag"
+           >View details</a>
+       </div>
+     </div>
+   </div>`;
+      });
+    } else {
+      alert('error');
+    }
+  } catch (err) {
+    throw err;
+  }
+}
+
+getMeetup(meetupId);
+getQuestions(meetupId);

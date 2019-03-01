@@ -13,7 +13,7 @@
 <body>
   <!-- Begin Nav -->
   <nav class="dark-nav">
-    <ul>
+    <ul id="navList">
       <li><a class="active" href="../index.html">Home</a></li>
       <li><a class="active" onclick="linker('meetup')" href="">Meetups</a></li>
       <li><a onclick="linker('questions')" href="">Questions</a></li>
@@ -90,22 +90,21 @@ const userData = JSON.parse(rawUserData);
     async function createMeetup(event) {
       event.preventDefault();
 
-      const topic = documentp.getElementById('meetupTopic').value;
+      const topic = document.getElementById('meetupTopic').value;
       const name = document.getElementById('meetupName').value;
       const meetupLocation = document.getElementById('meetupLocation').value;
-      const happenningOn = document.getElementById('meetupDate').value;
+      const meetupTime = document.getElementById('meetupDate').value;
       const meetupAddress = document.getElementById('meetupAddress').value;
       const description = document.getElementById('meetupDescription').value;
-      const createdBy = userData.id;
       const location = meetupAddress + ', ' + meetupLocation;
-      const url = 'https://oladims-questioner.herokuapp.com/api/v1/meetups';
-
+      const url = 'http://localhost:8000/api/v1/meetups';
+      let finaltime = meetupTime.split('-');
+      let happeningOn = finaltime[2] + '-' + finaltime[1] + '-' + finaltime[0];
       const params = {
-        createdBy,
         topic,
         name,
         location,
-        happenningOn,
+        happeningOn,
         description,
       };
       try {
@@ -119,11 +118,10 @@ const userData = JSON.parse(rawUserData);
         });
         const body = await response.json();
         if (response.ok) {
+          alert('created successfully')
             setTimeout(() => {
-              alert('created successfully')
-              window.location.href = '/meetup.html';
+              window.location.href = '/pages/meetup.html';
             }, 2000);
-          
         } else {
           alert('error');
         }
@@ -134,7 +132,7 @@ const userData = JSON.parse(rawUserData);
       }
     }
     const submitBtn = document.getElementById('submitBtn');
-    submitBtn.addEventListener('click', createUser);
+    submitBtn.addEventListener('click', createMeetup);
 
 
   </script>

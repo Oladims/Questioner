@@ -12,7 +12,7 @@
   <body>
     <!-- Begin Nav -->
     <nav class="dark-nav">
-        <ul>
+      <ul id="navList">
           <li><a href="../index.html">Home</a></li>
           <li><a onclick="linker('meetup')" href="">Meetups</a></li>
           <li><a class="active" onclick="linker('questions')" href="">Questions</a></li>
@@ -42,6 +42,7 @@
           <form name="question" class="container">
             <h1>Ask a question</h1>
             <div>
+        <p class="small errorText" id="errorText"></p>
               <label for="meetupName"><b>Meetup</b></label> <br />
               <input
                 id="meetupName"
@@ -72,20 +73,6 @@
             <button id="submitBtn" class="dark-button">Post</button>
           </form>
         </div>
-
-        <!-- <div class="topQuestions">
-            <h2 class="center">FEATURED</h2>
-            <div class="questions">
-                <p>Why hover effect on button using :after element</p>
-            <p>Why animate out when mouse is out of button dimensions</p>
-                <p>Why hover effect on button using :after element</p>
-            <p>Why animate out when mouse is out of button dimensions</p>
-                <p>Why hover effect on button using :after element</p>
-            <p>Why animate out when mouse is out of button dimensions</p>
-                <p>Why hover effect on button using :after element</p>
-            <p>Why animate out when mouse is out of button dimensions</p>
-               
-        </div> -->
         </div>
     </div>
     </div>
@@ -103,7 +90,7 @@
   
 <script src="../assets/js/link.js"></script>
 <script>
-
+  const submitBtn = document.getElementById('submitBtn');
     const rawUserData = localStorage.getItem('user');
     const userData = JSON.parse(rawUserData);
 
@@ -114,24 +101,28 @@
     const idParams = params[0].split('=');
     const nameParams = params[1].split('=');
     const meetupId = idParams[1];
-    const meetupName = nameParams[1];
-
-        async function createMeetup(event) {
-          event.preventDefault();
+    const meetupName = nameParams[1].split('%20');
+    let filteredName = "";
+    meetupName.forEach(element =>{
+    filteredName += element + " ";
+    })
     
-          const name = document.getElementById('meetupName');
-          const title = document.getElementById('questionTitle').value;
-          const body = document.getElementById('questionBody').value;
-          const createdBy = userData.id;
-          name.value = meetupName;
-          const url = 'https://oladims-questioner.herokuapp.com/api/v1/meetups';
-          
-          const params = {
-            meetup: meetupId,
-            createdBy,
-            title,
-            body,
-          };
+const name = document.getElementById('meetupName');
+name.value = filteredName;
+
+async function askQuestion(event) {
+  event.preventDefault();
+  
+  const title = document.getElementById('questionTitle').value;
+  const questionBody = document.getElementById('questionBody').value;
+  const url = 'http://localhost:8000/api/v1/questions';
+  
+  const params = {
+    meetupId,
+    title,
+    body: questionBody,
+  };
+ 
           try {
             const response = await fetch(url, {
               method: 'POST',
@@ -143,22 +134,22 @@
             });
             const body = await response.json();
             if (response.ok) {
+              // alert('created successfully')
                 setTimeout(() => {
-                  alert('created successfully')
-                  window.location.href = `/meetupdetails.html?id=${meetupId}`;
+                  window.location.href = `/pages/meetupdetails.html?id=${meetupId}`;
                 }, 2000);
               
             } else {
-              alert('error');
+      errorText.innerText = body.error;              
+              // alert('error');
             }
-            console.log(response);
           }
           catch (err) {
             throw err;
           }
         }
-        const submitBtn = document.getElementById('submitBtn');
-        submitBtn.addEventListener('click', createUser);
+        
+        submitBtn.addEventListener('click', askQuestion);
     
     
       </script>
