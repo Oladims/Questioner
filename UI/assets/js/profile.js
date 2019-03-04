@@ -54,7 +54,7 @@ async function loadmeetup() {
                 </div>`;
       });
     } else {
-      alert('error');
+      meetupRow.innerHTML += `<h4>${body.error}</h4>`;
     }
   } catch (err) {
     throw err;
@@ -76,9 +76,8 @@ async function deleteMeetup(meetupId) {
         window.location.href = './userProfile.html';
       }, 2000);
     } else {
-      alert('error');
+      // alert('error');
     }
-    console.log(response);
   } catch (err) {
     throw err;
   }
@@ -103,7 +102,8 @@ async function getquestions() {
       questionCount.innerText = `(${questions})`;
       userQuestion.innerHTML += `<p>You have asked ${questions} questions</p>`;
     } else {
-      alert('error');
+      questionCount.innerText = '(0)';
+      userQuestion.innerHTML += '<p>You have asked 0 questions</p>';
     }
   } catch (err) {
     throw err;
@@ -127,7 +127,8 @@ async function getComments() {
       commentCount.innerText = `(${userCommentsCount})`;
       userComments.innerHTML += `<p>You have ${userCommentsCount} comments</p>`;
     } else {
-      alert('error');
+      commentCount.innerText = '(0)';
+      userComments.innerHTML += '<p>You have made 0 comments</p>';
     }
   } catch (err) {
     throw err;
