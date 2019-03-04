@@ -5,7 +5,7 @@ async function loginUser(event) {
   const errorText = document.getElementById('errorText');
   const emailaddress = document.getElementById('email').value;
   const userPassword = document.getElementById('password').value;
-  const url = 'http://localhost:8000/api/v1/user/login';
+  const url = 'https://oladims-questioner.herokuapp.com/api/v1/user/login';
   const params = {
     email: emailaddress,
     password: userPassword,

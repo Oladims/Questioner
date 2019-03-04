@@ -16,7 +16,7 @@ const no = document.getElementById('no');
 const responseText = document.getElementById('responseText');
 
 async function getMeetup(meetupId) {
-  const url = `http://localhost:8000/api/v1/meetups/${meetupId}`;
+  const url = `https://oladims-questioner.herokuapp.com/api/v1/meetups/${meetupId}`;
   try {
     const response = await fetch(url, {
       method: 'GET',
@@ -44,7 +44,7 @@ async function getMeetup(meetupId) {
 }
 
 async function getQuestions(meetupId) {
-  const url = `http://localhost:8000/api/v1/questions/meetup/${meetupId}`;
+  const url = `https://oladims-questioner.herokuapp.com/api/v1/questions/meetup/${meetupId}`;
   try {
     const response = await fetch(url, {
       method: 'GET',
@@ -91,7 +91,7 @@ async function getQuestions(meetupId) {
 }
 
 async function rsvp(userResponse) {
-  const url = `http://localhost:8000/api/v1/meetups/${meetupId}/rsvps`;
+  const url = `https://oladims-questioner.herokuapp.com/api/v1/meetups/${meetupId}/rsvps`;
   try {
     const response = await fetch(url, {
       method: 'POST',

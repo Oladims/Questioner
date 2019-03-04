@@ -21,7 +21,7 @@ if (localStorage.getItem('user')) {
 }
 
 async function loadmeetup() {
-  const url = 'http://localhost:8000/api/v1/meetups/admin';
+  const url = 'https://oladims-questioner.herokuapp.com/api/v1/meetups/admin';
   try {
     const response = await fetch(url, {
       method: 'GET',
@@ -62,7 +62,7 @@ async function loadmeetup() {
 }
 
 async function deleteMeetup(meetupId) {
-  const url = `http://localhost:8000/api/v1/meetups/${meetupId}`;
+  const url = `https://oladims-questioner.herokuapp.com/api/v1/meetups/${meetupId}`;
   try {
     const response = await fetch(url, {
       method: 'DELETE',
@@ -84,7 +84,7 @@ async function deleteMeetup(meetupId) {
 }
 
 async function getquestions() {
-  const url = 'http://localhost:8000/api/v1/questions/user';
+  const url = 'https://oladims-questioner.herokuapp.com/api/v1/questions/user';
   try {
     const response = await fetch(url, {
       method: 'GET',
@@ -111,7 +111,7 @@ async function getquestions() {
 }
 
 async function getComments() {
-  const url = 'http://localhost:8000/api/v1/questions/userComments';
+  const url = 'https://oladims-questioner.herokuapp.com/api/v1/questions/userComments';
   const commentCount = document.getElementById('commentCount');
   const userComments = document.getElementById('user-comments');
   try {

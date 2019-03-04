@@ -2,7 +2,7 @@ const rawUserData = localStorage.getItem('user');
 const userData = JSON.parse(rawUserData);
 
 async function loadMeetups() {
-  const url = 'http://localhost:8000/api/v1/meetups';
+  const url = 'https://oladims-questioner.herokuapp.com/api/v1/meetups';
   try {
     const response = await fetch(url,
       {

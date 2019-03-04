@@ -4,7 +4,7 @@ const userData = JSON.parse(rawUserData);
 function loadMeetups() {
   const request = new XMLHttpRequest();
 
-  request.open("GET", "http://localhost:8000/api/v1/meetups", true);
+  request.open("GET", "https://oladims-questioner.herokuapp.com/api/v1/meetups", true);
   request.setRequestHeader("tokens", userData.token);
   request.onload = () => {
     const data = JSON.parse(request.response);
@@ -47,7 +47,7 @@ if (rawUserData) {
 }
 
 async function getCount(field, fieldCount) {
-  const url = `http://localhost:8000/api/v1/${field}/count`;
+  const url = `https://oladims-questioner.herokuapp.com/api/v1/${field}/count`;
   try {
     const response = await fetch(url, {
       method: "GET"

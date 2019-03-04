@@ -93,7 +93,7 @@
 
               
 async function getquestion() {
-  const url = `http://localhost:8000/api/v1/questions/${questionId}`;
+  const url = `https://oladims-questioner.herokuapp.com/api/v1/questions/${questionId}`;
   try {
     const response = await fetch(url, {
       method: "GET",
@@ -121,7 +121,7 @@ async function comment(event) {
   event.preventDefault();
   
   const commentBox = document.getElementById('commentBox').value;
-  const url = `http://localhost:8000/api/v1/questions/comments`;
+  const url = `https://oladims-questioner.herokuapp.com/api/v1/questions/comments`;
   
   const params = {
     question: questionId,
@@ -154,7 +154,7 @@ async function comment(event) {
         askButton.addEventListener('click', comment);
         
 async function getComments() {
-  const url = `http://localhost:8000/api/v1/questions/${questionId}/comments`;
+  const url = `https://oladims-questioner.herokuapp.com/api/v1/questions/${questionId}/comments`;
   const comments = document.getElementById('comments');
   try {
     const response = await fetch(url, {
@@ -197,7 +197,7 @@ getComments();
   /*
   async function upVote() {
     event.preventDefault();
-    const url = `http://localhost:8000/api/v1/questions/${questionId}/upvote`;
+    const url = `https://oladims-questioner.herokuapp.com/api/v1/questions/${questionId}/upvote`;
   try {
     const response = await fetch(url, {
       method: "PATCH",
@@ -222,7 +222,7 @@ getComments();
 
 async function downVote() {
   event.preventDefault();
-  const url = `http://localhost:8000/api/v1/questions/${questionId}/downvote`;
+  const url = `https://oladims-questioner.herokuapp.com/api/v1/questions/${questionId}/downvote`;
   try {
     const response = await fetch(url, {
       method: "PATCH",

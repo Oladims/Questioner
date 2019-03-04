@@ -9,7 +9,7 @@ async function createUser(event) {
   const userPassword = document.getElementById("password").value;
   const phonenumber = '08136715215';
 
-  const url = "http://localhost:8000/api/v1/user/signup";
+  const url = "https://oladims-questioner.herokuapp.com/api/v1/user/signup";
 
   const params = {
     firstname: firstName,
