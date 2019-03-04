@@ -21,7 +21,7 @@ export default class questionController {
     } = req.body;
     const createdBy = decoded.id;
     const createdOn = moment();
-    const queryString = 'INSERT INTO question (createdBy, createdOn, meetup, title, body) VALUES($1, $2, $3, $4, $5) RETURNING *';
+    const queryString = 'INSERT INTO questions (createdBy, createdOn, meetup, title, body) VALUES($1, $2, $3, $4, $5) RETURNING *';
     const params = [createdBy, createdOn, meetupId, title, body];
     return db.query(queryString, params, (err, result) => {
       if (err) {
@@ -48,7 +48,7 @@ export default class questionController {
     } = req.body;
     const createdBy = decoded.id;
     const createdOn = moment();
-    const queryString = 'SELECT * FROM question WHERE id = $1';
+    const queryString = 'SELECT * FROM questions WHERE id = $1';
     const params = [question];
     const { error } = auth.validateComments(req.body);
     const queryString2 = 'INSERT INTO comments (createdBy, createdOn, question, comment) VALUES($1, $2, $3, $4) RETURNING *';
@@ -112,12 +112,12 @@ export default class questionController {
           data,
         });
       }
-      return responses.nonExisting('question', req, res);
+      return responses.nonExisting('comment', req, res);
     });
   }
 
   static getQuestionsCount(req, res) {
-      const queryString = 'SELECT * FROM question';
+      const queryString = 'SELECT * FROM questions';
       return db.query(queryString, [], (err, result) => {
         if (err) {
           responses.errorProcessing(err, req, res);
@@ -160,7 +160,7 @@ export default class questionController {
     const token = req.headers.tokens;
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const createdBy = decoded.id;
-    const queryString = 'SELECT * FROM question WHERE createdby = $1';
+    const queryString = 'SELECT * FROM questions WHERE createdby = $1';
     const params = [createdBy];
     return db.query(queryString, params, (err, result) => {
       if (err) {
@@ -190,7 +190,7 @@ export default class questionController {
         error: error.details[0].message,
       });
     }
-    const queryString = 'SELECT * FROM question WHERE meetup = $1';
+    const queryString = 'SELECT * FROM questions WHERE meetup = $1';
     const params = [req.params.id];
     return db.query(queryString, params, (err, result) => {
       if (err) {
@@ -222,7 +222,7 @@ export default class questionController {
         error: error.details[0].message,
       });
     }
-    const queryString = 'SELECT * FROM question WHERE id = $1';
+    const queryString = 'SELECT * FROM questions WHERE id = $1';
     const params = [req.params.id];
     return db.query(queryString, params, (err, result) => {
       if (err) {
@@ -252,7 +252,7 @@ export default class questionController {
       });
     }
     
-    const queryString = 'UPDATE question SET votes = 1 WHERE id = $1 returning *';
+    const queryString = 'UPDATE questions SET votes = 1 WHERE id = $1 returning *';
     const params = [id];
     return db.query(queryString, params, (err, result) => {
       if (err) {
@@ -287,7 +287,7 @@ export default class questionController {
       });
     }
     
-    const queryString = 'UPDATE question SET votes = 0 WHERE id = $1 returning *';
+    const queryString = 'UPDATE questions SET votes = 0 WHERE id = $1 returning *';
     const params = [id];
     return db.query(queryString, params, (err, result) => {
       if (err) {
