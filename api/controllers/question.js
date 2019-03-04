@@ -210,7 +210,7 @@ export default class questionController {
           }],
         });
       }
-      return responses.nonExisting('question', req, res);
+      return responses.nonExistingYet('questions', 'meetup', req, res);
     });
   }
 

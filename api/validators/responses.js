@@ -16,6 +16,11 @@ responses.nonExisting = (field, req, res) => res.status(404).json({
   error: `${field} does not exist`,
 });
 
+responses.nonExistingYet = (field1, field2, req, res) => res.status(404).json({
+  status: 404,
+  error: `There are no ${field1} yet for this ${field2}`,
+});
+
 responses.incorrectPassword = (req, res) => res.status(400).json({
   status: 400,
   error: 'Incorrect Password',

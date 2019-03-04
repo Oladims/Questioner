@@ -157,33 +157,27 @@ export default class meetupController {
     const params = [req.params.id];
     return db.query(queryString, params, (err, result) => {
       if (err) responses.errorProcessing(err, req, res);
-      if (result.rowCount > 0) {
+      else if (result.rowCount > 0) {
         const meetupTopic = result.rows[0].topic;
         const { validationError } = auth.validateRsvp(req.body);
         if (validationError) responses.validationError(req, res);
         const { response } = req.body;
         const userId = decoded.id;
-        return db.query(`SELECT * FROM rsvps WHERE meetupId = '${req.params.id}`, (err, result) => {
-          if (err) responses.errorProcessing(req, res);
-          if (result.rowCount > 0) return responses.alreadyExist('Rsvp', req, res);
-
-          const queryString2 = 'INSERT INTO rsvps (meetupId, userId, response ) VALUES($1, $2, $3) RETURNING *';
-          const params2 = [req.params.id, userId, response];
-          return db.query(queryString2, params2, (err, result) => {
-            if (err) responses.errorProcessing(err, req, res);
-            if (result.rowCount > 0) {
-              const rsvps = result.rows[0];
-
-              return res.status(201).json({
-                status: 201,
-                data: [{
-                  meetup: rsvps.meetupid,
-                  topic: meetupTopic,
-                  status: rsvps.response,
-                }],
-              });
-            }
-          });
+        const queryString2 = 'INSERT INTO rsvps (meetupId, userId, response ) VALUES($1, $2, $3) RETURNING *';
+        const params2 = [req.params.id, userId, response];
+        return db.query(queryString2, params2, (err, result) => {
+          if (err) responses.errorProcessing(err, req, res);
+          if (result.rowCount > 0) {
+            const rsvps = result.rows[0];
+            return res.status(201).json({
+              status: 201,
+              data: [{
+                meetup: rsvps.meetupid,
+                topic: meetupTopic,
+                status: rsvps.response,
+              }],
+            });
+          }
         });
       }
       responses.alreadyExist('Meetup', req, res);
