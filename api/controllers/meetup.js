@@ -150,7 +150,7 @@ export default class meetupController {
 
   static rsvp(req, res) {
     const { error } = auth.validateId(req.params.id);
-    if (error) responses.validationError(error, req, res);
+    if (error) return responses.validationError(error, req, res);
     const token = req.headers.tokens;
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const queryString = 'SELECT * FROM meetups WHERE id = $1';
@@ -158,29 +158,40 @@ export default class meetupController {
     return db.query(queryString, params, (err, result) => {
       if (err) responses.errorProcessing(err, req, res);
       else if (result.rowCount > 0) {
+        const userId = decoded.id;
         const meetupTopic = result.rows[0].topic;
         const { validationError } = auth.validateRsvp(req.body);
         if (validationError) responses.validationError(req, res);
-        const { response } = req.body;
-        const userId = decoded.id;
-        const queryString2 = 'INSERT INTO rsvps (meetupId, userId, response ) VALUES($1, $2, $3) RETURNING *';
-        const params2 = [req.params.id, userId, response];
-        return db.query(queryString2, params2, (err, result) => {
+        return db.query(`SELECT * FROM rsvps WHERE userId = ${userId} AND meetupid = ${req.params.id}`, (err, result) => {
           if (err) responses.errorProcessing(err, req, res);
-          if (result.rowCount > 0) {
-            const rsvps = result.rows[0];
-            return res.status(201).json({
-              status: 201,
-              data: [{
-                meetup: rsvps.meetupid,
-                topic: meetupTopic,
-                status: rsvps.response,
-              }],
+          else if (result.rowCount > 0) {
+            return res.status(403).json({
+              status: 403,
+              error: 'You have already rsvp for this meetup',
+            });
+          }
+          else {
+            const { response } = req.body;
+            const queryString2 = 'INSERT INTO rsvps (meetupId, userId, response ) VALUES($1, $2, $3) RETURNING *';
+            const params2 = [req.params.id, userId, response];
+            return db.query(queryString2, params2, (err, result) => {
+              if (err) responses.errorProcessing(err, req, res);
+              if (result.rowCount > 0) {
+                const rsvps = result.rows[0];
+                return res.status(201).json({
+                  status: 201,
+                  data: [{
+                    meetup: rsvps.meetupid,
+                    topic: meetupTopic,
+                    status: rsvps.response,
+                  }],
+                });
+              }
             });
           }
         });
       }
-      responses.alreadyExist('Meetup', req, res);
+      return responses.nonExisting('Meetup', req, res);
     });
   }
 }
