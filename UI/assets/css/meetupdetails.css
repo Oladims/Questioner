@@ -36,6 +36,7 @@
   .response{
     background-color: #504766;
     padding: 10px 30px;
+    border: none;
   }
   .response:hover{
       background-color: #fff;

@@ -11,8 +11,8 @@ html {
 .text-center {
   text-align: center;
 }
-.light-text{
-  color: #ddd;  
+.light-text {
+  color: #ddd;
 }
 /* Begin Nav */
 
@@ -46,23 +46,99 @@ nav ul li a {
 nav ul li a:hover {
   color: #504766;
   background-color: #ddd;
-  border-radius: 5px;  
+  border-radius: 5px;
 }
 nav ul li a.active {
   color: #504766;
   background-color: #ddd;
-  border-radius: 5px;  
+  border-radius: 5px;
 }
 
+.errorText{
+  color: red;
+}
 /* End Nav */
-
+@keyframes lds-blocks {
+  0% {
+    background: #504766;
+  }
+  25% {
+    background: #504766;
+  }
+  25.25% {
+    background: #ddd;
+  }
+  100% {
+    background: #ddd;
+  }
+}
+.outer {
+  display: none;
+  background: #232c30b6;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 99;
+}
+.lds-blocks {
+  position: absolute;
+  top: calc(50% - 100px);
+  left: calc(50% - 100px);
+}
+.lds-blocks div {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: #ddd;
+  -webkit-animation: lds-blocks 1s linear infinite;
+  animation: lds-blocks 1s linear infinite;
+}
+.lds-blocks :nth-child(1) {
+  left: 39px;
+  top: 39px;
+  animation-delay: 0s;
+}
+.lds-blocks :nth-child(2) {
+  left: 80px;
+  top: 39px;
+  animation-delay: 0.12s;
+}
+.lds-blocks :nth-child(3) {
+  left: 121px;
+  top: 39px;
+  animation-delay: 0.24s;
+}
+.lds-blocks :nth-child(4) {
+  left: 121px;
+  top: 80px;
+  animation-delay: 0.36s;
+}
+.lds-blocks :nth-child(5) {
+  left: 121px;
+  top: 121px;
+  animation-delay: 0.48s;
+}
+.lds-blocks :nth-child(6) {
+  left: 80px;
+  top: 121px;
+  animation-delay: 0.56s;
+}
+.lds-blocks :nth-child(7) {
+  left: 39px;
+  top: 80px;
+  animation-delay: 0.68s;
+}
+.lds-blocks :nth-child(8) {
+  left: 39px;
+  top: 121px;
+  animation-delay: 0.8s;
+}
 /* Begin Signup */
 .container {
   display: inline-block;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 20px auto;
   text-align: left;
   min-width: 300px;
   max-width: 500px;
@@ -75,7 +151,7 @@ nav ul li a.active {
 form h1 {
   color: whitesmoke;
 }
-label{
+label {
   color: white;
 }
 
@@ -87,10 +163,10 @@ input[type="password"] {
   border: none;
   background: white;
 }
-form div{
-    margin: 5px 0 22px 0;
+form div {
+  margin: 5px 0 22px 0;
 }
-div.form {
+.form {
   display: block;
   text-align: center;
 }
@@ -111,15 +187,15 @@ input[type="password"]:focus {
   font-size: 18px;
   border-radius: 5px;
 }
-.centralizeBtn{
+.centralizeBtn {
   display: flex;
   justify-content: center;
 }
 .btn:hover {
   background-color: #ddd;
 }
-.text-danger{
-color:red;
+.text-danger {
+  color: red;
 }
 .section-image {
   background-image: url("../images/download.png");
@@ -149,8 +225,8 @@ color:red;
     margin-right: 10px;
   }
   /* End Nav */
-  .container{
-    margin-bottom: 50px;
+  .container {
+    /* margin-bottom: 50px; */
     margin-top: 50px;
   }
 }

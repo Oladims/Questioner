@@ -92,6 +92,22 @@ nav ul li a {
   justify-content: space-between;
   align-items: center;
 }
+@media only screen and (min-width: 375px) {
+  .row-4 {
+    display: grid;
+    grid-template-columns:1fr 1fr;
+    grid-column-gap: 5px;
+    grid-row-gap: 20px;
+    }
+  }
+@media only screen and (min-width: 500px) {
+  .row-4 {
+    display: grid;
+    grid-template-columns:1fr 1fr 1fr;
+    grid-column-gap: 5px;
+    grid-row-gap: 20px;
+    }
+  }
 
 @media only screen and (min-width: 600px) {
   .container {

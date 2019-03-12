@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import path from 'path';
 import cors from 'cors';
+import 'babel-polyfill';
 import routes from './routes';
 
 const app = express();
@@ -23,6 +24,7 @@ if (app.get('env') === 'development') {
 app.all('/*', (req, res) => res.status(404).send({ message: 'Request is not valid' }));
 
 const port = process.env.PORT || 8000;
+console.log(`App running on port: ${port}....`);
 
 app.listen(port);
 

@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Questioner</title>
+  <title id="title">Questioner</title>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
     crossorigin="anonymous">
   <link rel="stylesheet" href="./assets/css/style.css" />
@@ -14,14 +14,26 @@
 <body>
   <!-- Begin Nav -->
   <nav>
-    <ul>
+    <ul id="navList">
       <li><a class="active" href="./index.html">Home</a></li>
-      <li><a href="./pages/meetup.html">Meetups</a></li>
-      <li><a href="./pages/questions.html">Questions</a></li>
+      <li><a onclick="linker('meetup')" href="">Meetups</a></li>
+      <li><a onclick="linker('questions')" href="">Questions</a></li>
     </ul>
   </nav>
   <!-- End Nav -->
-  
+  <div class="outer" id="loader">
+    <div class="lds-blocks">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    </div>
+  </div>
   <!-- Begin Hero -->
   <div class="hero-image">
 
@@ -30,23 +42,24 @@
       <p><b>Crowd-source</b> questions for a meetup.</p>
       <p>Want to <b>attend</b> a meetup?</p>
       <p>Have <b>Questions</b> for a <b>Meetup</b> you're <b>attending</b> ?</p>
-      <a id="signupBtn" class="button" href="./pages/login.html">Sign in</a>
+      <a id="signinBtn" class="button" href="./pages/login.html">Sign in</a>
     </div>
   </div>
 
-  <div class="hero-forms">
+  <div id="hero-forms" class="hero-forms">
     <div class="sign-in light-text">
       <h4>Sign In</h4>
       <small>Already registered?</small>
       <form>
+        <p class="small errorText" id="errorText"></p>
         <div class="form-group">
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+          <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
         </div>
         <div class="form-group">
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          <input type="password" class="form-control" id="password" placeholder="Password">
         </div>
         <div class="form-group">
-          <button type="submit" class="light-button">
+          <button type="submit" class="light-button" id="submitBtn">
             Sign In</button>
         </div>
       </form>
@@ -76,7 +89,7 @@
 
       <div class="center steps" id="browsemeetups">
         <h4>Browse Meetups</h4><br>
-        <div> <a href="./pages/meetup.html"><i class="fas fa-search-plus fa-5x"></i></a></div>
+        <div> <a onclick="linker('meetup')" href=""><i class="fas fa-search-plus fa-5x"></i></a></div>
         <br>
         <p>Join a Meetup</p>
       </div>
@@ -84,7 +97,7 @@
       <div class="center steps" id="askquestion">
         <h4>Ask Questions</h4>
         <br>
-        <div> <a href="./pages/ask.html"><i class="fas fa-question fa-5x"></i></a></div>
+        <div> <a onclick="linker('ask')" href=""><i class="fas fa-question fa-5x"></i></a></div>
         <br>
         <p>Post Questions to Meetups you're attending</p>
       </div>
@@ -92,7 +105,7 @@
       <div class="center steps" id="interact">
         <h4>Interact</h4>
         <br>
-        <div> <a href="./pages/questions.html"><i class="fas fa-comment-alt fa-5x"></i></a></div>
+        <div> <a onclick="linker('questions')" href=""><i class="fas fa-comment-alt fa-5x"></i></a></div>
         <br>
         <p>view, vote, and comment on questions</p>
       </div>
@@ -101,13 +114,13 @@
     <!-- End intro-section -->
 
     <!-- Begin meetup section -->
-    <div class="meetup-section">
+    <div id="meetup-section" class="meetup-section">
       <h3 class="center featured-heading">Meetups</h3>
       <div class="shadow">
         <div class="row-4 meetups" id="meetups">
          
         </div>
-        <div class="viewmore"><a href="./pages/meetup.html">View All</a></div>
+        <div class="viewmore"><a onclick="linker('meetup')" href="">View All</a></div>
       </div>
     </div>
     <!-- End meetup section -->
@@ -117,15 +130,15 @@
       <h3 class="center featured-heading">Activity</h3>
       <div class="featured featured1">
         <div>
-          <div class="featured-contents featured-contents2 ">90</div>
+          <div id="questionCount" class="featured-contents featured-contents2"></div>
           <span class="center light-text centralize">Questions</span>
         </div>
         <div>
-          <div class="featured-contents featured-contents2 ">20</div>
+          <div id="meetupCount" class="featured-contents featured-contents2 "></div>
           <span class="center light-text centralize">Meetups</span>
         </div>
         <div>
-          <div class="featured-contents featured-contents2 ">30</div>
+          <div id="userCount" class="featured-contents featured-contents2 "></div>
           <span class="center light-text centralize">Users</span>
         </div>
       </div>
@@ -162,7 +175,9 @@
     </div>
   </footer>
   <!-- End Footer -->
-<script src="./assets/js/index.js"></script>
+  <script src="./assets/js/link.js"></script>
+  <script src="./assets/js/login.js"></script>
+  <script src="./assets/js/index.js"></script>
 </body>
 
 </html>

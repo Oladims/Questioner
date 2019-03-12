@@ -15,10 +15,10 @@
 <body>
   <!-- Begin Nav -->
   <nav class="dark-nav">
-    <ul>
+    <ul id="navList">
       <li><a href="../index.html">Home</a></li>
-      <li><a href="meetup.html">Meetups</a></li>
-      <li><a href="questions.html">Questions</a></li>
+      <li><a class="active" onclick="linker('meetup')" href="">Meetups</a></li>
+      <li><a onclick="linker('questions')" href="">Questions</a></li>
     </ul>
   </nav>
   <!-- End Nav -->
@@ -41,11 +41,12 @@
       </div>
 
       <div class="rsvp-section">
-        <div class="rsvp-header center">Are you coming?</div>
+        <div class="rsvp-header center"><h4>Are you coming?</h4></div>
         <div class="rsvp">
-          <div class="response"><i class="fas fa-thumbs-up"></i><span>Yes</span></div>
-          <div class="response"><i class="fas fa-thumbs-down"></i><span>No</span></div>
+          <div class=""><button class="response" type="submit"id="yes">Yes</button></div>
+          <div class=""><button class="response" type="submit"id="no">No</button></div>
         </div>
+        <h4 class="center" id="responseText"></h4>
       </div>
       <div>
         <h3>Details</h3>
@@ -54,7 +55,7 @@
         </div>
       </div>
       <p class="small"><b>Would you like to post a question to this meetup?</b></p>
-      <p class="askBtn"><a href="./ask.html">Post question</a></p>
+      <p id="askBtn" class="askBtn"></p>
     
     
       <div class="header"id="question-summary">
@@ -73,103 +74,7 @@
     </div>
   </footer>
   <!-- End Footer -->
-
-  <script>
-    let url = window.location.href;
-    const urlSplit = url.split('?')
-    const params = urlSplit[1];
-    const newParams = params.split('=');
-    const meetupId = newParams[1];
-    console.log(meetupId);
-    
-    const getMeetup = (meetupId) => {
-      var request1 = new XMLHttpRequest();
-    request1.open('GET', `https://oladims-questioner.herokuapp.com/api/v1/meetups/${meetupId}`, true);
-    request1.onload = function () {
-
-      var data = JSON.parse(this.response);
-     let meetup = data.data[0].meetup;
-      console.log(meetup);
-      let meetupTopic = document.getElementById('meetupTopic');
-      let meetupDate = document.getElementById('meetupDate')
-      let meetupLocation = document.getElementById('meetupLocation')
-      let meetupDescription = document.getElementById('meetupDescription')
-      let meetupName = document.getElementById('meetupName')
-      if (request1.status >= 200 && request1.status < 400) {
-        meetupTopic.innerText = meetup.topic;
-        meetupDate.innerText = meetup.happeningon;
-        meetupLocation.innerText = meetup.location;
-        meetupDescription.innerText = meetup.description;
-        meetupName.innerText = meetup.name;
-      } else {
-        console.log('error');
-      }
-    }
-
-    request1.send();
-
-  }
-
-    const getQuestions = (meetupId) => {
-      var request2 = new XMLHttpRequest();
-
-    request2.open('GET', `https://oladims-questioner.herokuapp.com/api/v1/questions/meetup/${meetupId}`, true);
-        request2.onload = function () {
-    
-          var data = JSON.parse(this.response);
-         let questions = data.data[0].question;
-          console.log(questions);
-                    
-          let questionSummary = document.getElementById('question-summary');
-          if (request2.status >= 200 && request2.status < 400) {
-            questions.forEach(question => {
-              questionSummary.innerHTML += ` <div class="question-summary" >
-         
-         <div onclick="" class="question-stats">
-           <div class="votes">
-             <div class="mini-counts"><span title="0 votes">${question.votes}</span></div>
-             <small class="small">votes</small>
-           </div>
-           <div class="status">
-             <div class="mini-counts"><span title="0 answers">0</span></div>
-             <small class="small">comments</small>
-           </div>
-           <div class="views">
-             <div class="mini-counts"><span title="2 views">2</span></div>
-             <small class="small">views</small>
-           </div>
-         </div>
-         <div class="summary">
-           <div>
-             <a href="question.html?id=${question.id}" class="question-hyperlink"
-               >${question.body}</a
-             >
-           </div>
-           <div class="tags">
-             <a
-               href="question.html?id=${question.id}"
-               class="post-tag"
-               title=""
-               rel="tag"
-               >View details</a
-             >
-   
-           </div>
-         </div>
-       </div>`;
-            });
-          } else {
-            console.log('error');
-          }
-        }
-    
-        request2.send();
-      }
-
-      getMeetup(meetupId);
-    getQuestions(meetupId);
-
-  </script>
+<script src="../assets/js/link.js"></script>
+<script src="../assets/js/meetup.js"></script>
 </body>
-
 </html>

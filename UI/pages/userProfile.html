@@ -1,397 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="../assets/css/style.css" />
-    <link rel="stylesheet" href="../assets/css/userProfile.css" />
-    <link rel="stylesheet" href="../assets/css/questions.css" />
-    <title>Questioner</title>
-  </head>
 
-  <body>
-    <!-- Begin Nav -->
-    <nav class="dark-nav">
-        <ul>
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="meetup.html">Meetups</a></li>
-          <li><a href="questions.html">Questions</a></li>
-        </ul>
-      </nav>
-    <!-- End Nav -->
-    <div class="profile-container">
-      <div id="mySidebar" class="side-bar">
-        <button href="" class="closebtn" onclick="closeNav()">×</button>
-        <div class="profile-pic"><img src="" alt="" /></div>
-        <div><small class="light-text center">Olufowora Ibrahim</small></div>
-        <div><small class="light-text center">Developer</small></div>
-        <div><small class="light-text center user-actions">Posts</small></div>
-        <div><small class="light-text center user-actions">Meetups</small></div>
-        <div><small class="light-text center user-actions">Tags</small></div>
-        
-        <button id="meetupBtn">Create Meetup</button>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/userProfile.css" />
+  <link rel="stylesheet" href="../assets/css/questions.css" />
+  <title>Questioner</title>
+</head>
+
+<body>
+  <!-- Begin Nav -->
+  <nav class="dark-nav">
+    <ul id="navList">
+     
+      <li><a href="../index.html">Home</a></li>
+      <li><a onclick="linker('meetup')" href="">Meetups</a></li>
+      <li><a onclick="linker('questions')" href="">Questions</a></li>
+    </ul>
+  </nav>
+  <!-- End Nav -->
+    <div id="mainContainer" class="main">
+      <!-- <button class="editProfile" onclick="">Edit Profile</button> -->
+      
+      <h2>Personal details</h2>
+      <div id="user-details" class="shadow">
+        <div class="profile-pic"></div>
+
+        <div id="info-div">
+          <div>
+            <label for="fullname"> Full name</label>
+            <br>
+            <input value="" type="text" name="Full Name" class="info-text-box" id="fullName" disabled>
+          </div>
+          <div>
+            <label for="">Username</label>
+            <br>            
+            <input value="" type="text" name="Username" class="info-text-box" id="userName" disabled>
+          </div>
+          <div>
+            <label for="phone">Phone</label>
+            <br>
+            <input value="" type="text" name="Phone" class="info-text-box" id="phone" disabled>
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <br>
+            <input value="" type="text" name="email" class="info-text-box" id="email" disabled>
+          </div>
+        </div>
+
       </div>
 
-      <div id="main" class="main">
-          <button class="openbtn" onclick="openNav()">☰ Menu</button>
-        <div class="user-activity">
-          <div class="user-question">
-            <h5>Questions(0)</h5>
-            <p>You have not answered any questions</p>
-          </div>
-          <div class="user-comments">
-            <h5>Comments(0)</h5>
-            <p>You have not comment any questions</p>
-          </div>
-          <div class="user-votes">
-            <h5>Votes(0)</h5>
-            <p>You have not voted any question</p>
-          </div>
-          <div class="user-meetups">
-            <h5>Meetups(0)</h5>
-            <p>You have not attended any meetups</p>
-          </div>
+      <h2>Activity</h2>
+      <div class="user-activity ">
+        <div class="user-question" id="user-question">
+          <h5>Questions <span id="questionCount"></span></h5>
+          
         </div>
+        <div class="user-comments" id="user-comments">
+          <h5>Comments <span id="commentCount"></span></h5>
+        </div>
+        <div class="user-votes">
+          <h5>Votes(0)</h5>
+          <p>You have not voted any question</p>
+        </div>
+        <div class="user-meetups">
+          <h5>Meetups(0)</h5>
+          <p>You have not attended any meetups</p>
+        </div>
+      </div>
 
-        <div class="top-questions-feed">
-          <h2>Top questions</h2>
-          <h5>Top questions from meetups you are scheduled to attend</h5>
-          <br />
-          <div class="question-summary" id="question-summary-53840910">
-            <div onclick="" class="question-stats">
-              <div class="votes">
-                <div class="mini-counts"><span title="0 votes">0</span></div>
-                <small class="small">votes</small>
-              </div>
-              <div class="status">
-                <div class="mini-counts"><span title="0 answers">0</span></div>
-                <small class="small">answers</small>
-              </div>
-              <div class="views">
-                <div class="mini-counts"><span title="2 views">2</span></div>
-                <small class="small">views</small>
-              </div>
+      <div id="meetupBtn-div">
+        <h2>Meetups you've created</h2>
+        <div class="row-4 meetups" id="meetups">
+          </div>
+        <h4>Would you like to create a new meetup?</h4>
+        <a href="./createMeetup.html" id="meetupBtn">Create Meetup</a>
+      </div>
+
+      <div class="top-questions-feed">
+        <h2>Top questions</h2>
+        <h5>Top questions from meetups you are scheduled to attend</h5>
+        <br />
+        <!-- <div class="question-summary" id="question-summary-53840910">
+          <div onclick="" class="question-stats">
+            <div class="votes">
+              <div class="mini-counts"><span title="0 votes">0</span></div>
+              <small class="small">votes</small>
             </div>
-            <div class="summary">
-              <div>
-                <a href="../pages/question.html" class="question-hyperlink"
-                  >WooCommerce 3.0 make checkout company input readonly/disabled
-                  and still pass the input contents to order</a
-                >
-              </div>
-              <div class="tags t-php t-wordpress t-woocommerce t-checkout">
-                <a
-                  href="#"
-                  class="post-tag"
-                  title=""
-                  rel="tag"
-                  >GDG</a
-                >
-                <a
-                  href="#"
-                  class="small"
-                  title=""
-                  rel="tag"
-                  >3 days to go</a
-                >
-              </div>
+            <div class="status">
+              <div class="mini-counts"><span title="0 answers">0</span></div>
+              <small class="small">answers</small>
+            </div>
+            <div class="views">
+              <div class="mini-counts"><span title="2 views">2</span></div>
+              <small class="small">views</small>
             </div>
           </div>
-          <div class="question-summary" id="question-summary-53840910">
-            <div onclick="" class="question-stats">
-              <div class="votes">
-                <div class="mini-counts"><span title="0 votes">0</span></div>
-                <small class="small">votes</small>
-              </div>
-              <div class="status">
-                <div class="mini-counts"><span title="0 answers">0</span></div>
-                <small class="small">answers</small>
-              </div>
-              <div class="views">
-                <div class="mini-counts"><span title="2 views">2</span></div>
-                <small class="small">views</small>
-              </div>
+          <div class="summary">
+            <div>
+              <a onclick="linker('question')" href="" class="question-hyperlink">WooCommerce 3.0 make checkout company input
+                readonly/disabled
+                and still pass the input contents to order</a>
             </div>
-            <div class="summary">
-              <div>
-                <a href="../pages/question.html" class="question-hyperlink"
-                  >WooCommerce 3.0 make checkout company input readonly/disabled
-                  and still pass the input contents to order</a
-                >
-              </div>
-              <div class="tags t-GDG t-wordpress t-woocommerce t-checkout">
-                <a
-                  href=""
-                  class="post-tag"
-                  title="show questions tagged 'checkout'"
-                  rel="tag"
-                  >Concatenate</a
-                >
-                <a
-                href="#"
-                class="small"
-                title=""
-                rel="tag"
-                >7 days to go</a
-              >
-              </div>
-            </div>
-          </div>
-          <div class="question-summary" id="question-summary-53840910">
-            <div onclick="" class="question-stats">
-              <div class="votes">
-                <div class="mini-counts"><span title="0 votes">0</span></div>
-                <small class="small">votes</small>
-              </div>
-              <div class="status">
-                <div class="mini-counts"><span title="0 answers">0</span></div>
-                <small class="small">answers</small>
-              </div>
-              <div class="views">
-                <div class="mini-counts"><span title="2 views">2</span></div>
-                <small class="small">views</small>
-              </div>
-            </div>
-            <div class="summary">
-              <div>
-                <a href="../pages/question.html" class="question-hyperlink"
-                  >WooCommerce 3.0 make checkout company input readonly/disabled
-                  and still pass the input contents to order</a
-                >
-              </div>
-              <div class="tags t-GDG t-wordpress t-woocommerce t-checkout">
-                <a
-                  href="#"
-                  class="post-tag"
-                  title="show questions tagged 'GDG'"
-                  rel="tag"
-                  >node-conf</a
-                >
-                <a
-                href="#"
-                class="small"
-                title=""
-                rel="tag"
-                >5 days to go</a
-              >
-              </div>
-            </div>
-          </div>
-          <div class="question-summary" id="question-summary-53840910">
-            <div onclick="" class="question-stats">
-              <div class="votes">
-                <div class="mini-counts"><span title="0 votes">0</span></div>
-                <small class="small">votes</small>
-              </div>
-              <div class="status">
-                <div class="mini-counts"><span title="0 answers">0</span></div>
-                <small class="small">answers</small>
-              </div>
-              <div class="views">
-                <div class="mini-counts"><span title="2 views">2</span></div>
-                <small class="small">views</small>
-              </div>
-            </div>
-            <div class="summary">
-              <div>
-                <a href="../pages/question.html" class="question-hyperlink"
-                  >WooCommerce 3.0 make checkout company input readonly/disabled
-                  and still pass the input contents to order</a
-                >
-              </div>
-              <div class="tags t-php t-wordpress t-woocommerce t-checkout">
-                <a
-                  href="#"
-                  class="post-tag"
-                  title="show questions tagged 'php'"
-                  rel="tag"
-                  >pyConf</a
-                >
-                <a
-                href="#"
-                class="small"
-                title=""
-                rel="tag"
-                >Tomorrow</a
-              >
-              </div>
-            </div>
-          </div>
-          <div class="question-summary" id="question-summary-53840910">
-            <div onclick="" class="question-stats">
-              <div class="votes">
-                <div class="mini-counts"><span title="0 votes">0</span></div>
-                <small class="small">votes</small>
-              </div>
-              <div class="status">
-                <div class="mini-counts"><span title="0 answers">0</span></div>
-                <small class="small">answers</small>
-              </div>
-              <div class="views">
-                <div class="mini-counts"><span title="2 views">2</span></div>
-                <small class="small">views</small>
-              </div>
-            </div>
-            <div class="summary">
-              <div>
-                <a href="../pages/question.html" class="question-hyperlink"
-                  >WooCommerce 3.0 make checkout company input readonly/disabled
-                  and still pass the input contents to order</a
-                >
-              </div>
-              <div class="tags t-php t-wordpress t-woocommerce t-checkout">
-                <a
-                  href="#"
-                  class="post-tag"
-                  title=""
-                  rel="tag"
-                  >GDG</a
-                >
-                <a
-                  href="#"
-                  class="small"
-                  title=""
-                  rel="tag"
-                  >3 days to go</a
-                >
-              </div>
-            </div>
-          </div>
-          <div class="question-summary" id="question-summary-53840910">
-            <div onclick="" class="question-stats">
-              <div class="votes">
-                <div class="mini-counts"><span title="0 votes">0</span></div>
-                <small class="small">votes</small>
-              </div>
-              <div class="status">
-                <div class="mini-counts"><span title="0 answers">0</span></div>
-                <small class="small">answers</small>
-              </div>
-              <div class="views">
-                <div class="mini-counts"><span title="2 views">2</span></div>
-                <small class="small">views</small>
-              </div>
-            </div>
-            <div class="summary">
-              <div>
-                <a href="../pages/question.html" class="question-hyperlink"
-                  >WooCommerce 3.0 make checkout company input readonly/disabled
-                  and still pass the input contents to order</a
-                >
-              </div>
-              <div class="tags t-GDG t-wordpress t-woocommerce t-checkout">
-                <a
-                  href=""
-                  class="post-tag"
-                  title="show questions tagged 'checkout'"
-                  rel="tag"
-                  >Concatenate</a
-                >
-                <a
-                href="#"
-                class="small"
-                title=""
-                rel="tag"
-                >7 days to go</a
-              >
-              </div>
-            </div>
-          </div>
-          <div class="question-summary" id="question-summary-53840910">
-            <div onclick="" class="question-stats">
-              <div class="votes">
-                <div class="mini-counts"><span title="0 votes">0</span></div>
-                <small class="small">votes</small>
-              </div>
-              <div class="status">
-                <div class="mini-counts"><span title="0 answers">0</span></div>
-                <small class="small">answers</small>
-              </div>
-              <div class="views">
-                <div class="mini-counts"><span title="2 views">2</span></div>
-                <small class="small">views</small>
-              </div>
-            </div>
-            <div class="summary">
-              <div>
-                <a href="../pages/question.html" class="question-hyperlink"
-                  >WooCommerce 3.0 make checkout company input readonly/disabled
-                  and still pass the input contents to order</a
-                >
-              </div>
-              <div class="tags t-GDG t-wordpress t-woocommerce t-checkout">
-                <a
-                  href="#"
-                  class="post-tag"
-                  title="show questions tagged 'GDG'"
-                  rel="tag"
-                  >node-conf</a
-                >
-                <a
-                href="#"
-                class="small"
-                title=""
-                rel="tag"
-                >5 days to go</a
-              >
-              </div>
-            </div>
-          </div>
-          <div class="question-summary" id="question-summary-53840910">
-            <div onclick="" class="question-stats">
-              <div class="votes">
-                <div class="mini-counts"><span title="0 votes">0</span></div>
-                <small class="small">votes</small>
-              </div>
-              <div class="status">
-                <div class="mini-counts"><span title="0 answers">0</span></div>
-                <small class="small">answers</small>
-              </div>
-              <div class="views">
-                <div class="mini-counts"><span title="2 views">2</span></div>
-                <small class="small">views</small>
-              </div>
-            </div>
-            <div class="summary">
-              <div>
-                <a href="../pages/question.html" class="question-hyperlink"
-                  >WooCommerce 3.0 make checkout company input readonly/disabled
-                  and still pass the input contents to order</a
-                >
-              </div>
-              <div class="tags t-php t-wordpress t-woocommerce t-checkout">
-                <a
-                  href="#"
-                  class="post-tag"
-                  title="show questions tagged 'php'"
-                  rel="tag"
-                  >pyConf</a
-                >
-                <a
-                href="#"
-                class="small"
-                title=""
-                rel="tag"
-                >Tomorrow</a
-              >
-              </div>
+            <div class="tags t-php t-wordpress t-woocommerce t-checkout">
+              <a href="#" class="post-tag" title="" rel="tag">GDG</a>
+              <a href="#" class="small" title="" rel="tag">3 days to go</a>
             </div>
           </div>
         </div>
+        <div class="question-summary" id="question-summary-53840910">
+          <div onclick="" class="question-stats">
+            <div class="votes">
+              <div class="mini-counts"><span title="0 votes">0</span></div>
+              <small class="small">votes</small>
+            </div>
+            <div class="status">
+              <div class="mini-counts"><span title="0 answers">0</span></div>
+              <small class="small">answers</small>
+            </div>
+            <div class="views">
+              <div class="mini-counts"><span title="2 views">2</span></div>
+              <small class="small">views</small>
+            </div>
+          </div>
+          <div class="summary">
+            <div>
+              <a onclick="linker('question')" href="" class="question-hyperlink">WooCommerce 3.0 make checkout company input
+                readonly/disabled
+                and still pass the input contents to order</a>
+            </div>
+            <div class="tags t-GDG t-wordpress t-woocommerce t-checkout">
+              <a href="" class="post-tag" title="show questions tagged 'checkout'" rel="tag">Concatenate</a>
+              <a href="#" class="small" title="" rel="tag">7 days to go</a>
+            </div>
+          </div>
+        </div>
+        <div class="question-summary" id="question-summary-53840910">
+          <div onclick="" class="question-stats">
+            <div class="votes">
+              <div class="mini-counts"><span title="0 votes">0</span></div>
+              <small class="small">votes</small>
+            </div>
+            <div class="status">
+              <div class="mini-counts"><span title="0 answers">0</span></div>
+              <small class="small">answers</small>
+            </div>
+            <div class="views">
+              <div class="mini-counts"><span title="2 views">2</span></div>
+              <small class="small">views</small>
+            </div>
+          </div>
+          <div class="summary">
+            <div>
+              <a onclick="linker('question')" href="" class="question-hyperlink">WooCommerce 3.0 make checkout company input
+                readonly/disabled
+                and still pass the input contents to order</a>
+            </div>
+            <div class="tags t-GDG t-wordpress t-woocommerce t-checkout">
+              <a href="#" class="post-tag" title="show questions tagged 'GDG'" rel="tag">node-conf</a>
+              <a href="#" class="small" title="" rel="tag">5 days to go</a>
+            </div>
+          </div>
+        </div> -->
       </div>
     </div>
+  </div>
 
-    <script>
-      function openNav() {
-        document.getElementById("mySidebar").style.width = "200px";
-        document.getElementById("main").style.marginLeft = "200px";
-      }
+  <script src="../assets/js/link.js"></script>
+  <script src="../assets/js/profile.js"></script>
+</body>
 
-      function closeNav() {
-        document.getElementById("mySidebar").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
-      }
-    </script>
-  </body>
 </html>

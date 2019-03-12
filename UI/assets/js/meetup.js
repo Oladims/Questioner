@@ -1,37 +1,136 @@
-const request = new XMLHttpRequest();
+const rawUserData = localStorage.getItem('user');
+const userData = JSON.parse(rawUserData);
+const urlink = window.location.href;
+const urlSplit = urlink.split('?');
+const params = urlSplit[1];
+const newParams = params.split('=');
+const meetupId = newParams[1];
+// const meetupTopic = document.getElementById('meetupTopic');
+const meetupDate = document.getElementById('meetupDate');
+const meetupLocation = document.getElementById('meetupLocation');
+const meetupDescription = document.getElementById('meetupDescription');
+const meetupName = document.getElementById('meetupName');
+const askBtn = document.getElementById('askBtn');
+const yes = document.getElementById('yes');
+const no = document.getElementById('no');
+const responseText = document.getElementById('responseText');
 
-request.open('GET', 'https://oladims-questioner.herokuapp.com/api/v1/meetups', true);
-request.onload = () => {
-  const data = JSON.parse(request.response);
-  const meetups = data.data[0].meetup;
-  // console.log(meetups[0].topic);
-
-  const meetupRow = document.getElementById('meetups');
-  if (request.status >= 200 && request.status < 400) {
-    meetups.forEach((meetup) => {
-      meetupRow.innerHTML += ` <div class="meetup hvrbox">
-                  <img class="meetupimage hvrbox-layer_bottom" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1A8Y_qFHiSjEQV5YnFja04rAMpsL7eyGBjmCN8Qa7P30DjWfR"
-                    alt="Avatar" style="width:100%">
-                  <div class="meetup-container">
-                    <h4 class="center"><b>${meetup.name}</b></h4>
-                    <p class="center">${meetup.topic}</p>
-                  </div>
-                  <div class="meetup-container hvrbox-layer_top">
-                    <div class="hvrbox-text">
-                     <h4><a class="viewdetail light-text" href="./meetupdetails.html?id=${meetup.id}">View Details</a></h4>
-                      <h4> Are you coming?</h4>
-                      <div class="response">
-                          <div class="yes"><i class="yes fas fa-check-circle"></i><span>Yes</span></div>
-                          <div class="no"><i class="no fas fa-times-circle"></i><span>No</span></div>
-                          <div class="maybe"><i class="maybe fas fa-meh-rolling-eyes"></i><span>Maybe</span></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>`;
+async function getMeetup(meetupId) {
+  const url = `https://oladims-questioner.herokuapp.com/api/v1/meetups/${meetupId}`;
+  try {
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        tokens: `${userData.token}`,
+      },
     });
-  } else {
-    // console.log('error');
-  }
-};
+    const body = await response.json();
+    const { meetup } = body.data[0];
 
-request.send();
+    if (response.ok) {
+      meetupDate.innerText = meetup.happeningon;
+      meetupLocation.innerText = meetup.location;
+      meetupDescription.innerText = meetup.description;
+      meetupName.innerText = meetup.name;
+      askBtn.innerHTML = `<a href='ask.html?id=${meetup.id}&name=${
+        meetup.name
+      }'>Post question</a>`;
+    } else {
+      alert(body.error);
+    }
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function getQuestions(meetupId) {
+  const url = `https://oladims-questioner.herokuapp.com/api/v1/questions/meetup/${meetupId}`;
+  try {
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        tokens: `${userData.token}`,
+      },
+    });
+    const body = await response.json();
+    const questionSummary = document.getElementById('question-summary');
+    if (body.data) {
+      const questions = body.data[0].question;
+      questions.forEach((question) => {
+        questionSummary.innerHTML += ` <div class="question-summary" >
+     <div onclick="" class="question-stats">
+       <div class="votes">
+         <div class="mini-counts"><span title="0 votes">${
+  question.votes
+}</span></div>
+         <small class="small">votes</small>
+       </div>
+     </div>
+     <div class="summary">
+       <div>
+         <a href="question.html?id=${question.id}" class="question-hyperlink"
+           >${question.title}</a>
+       </div>
+       <div class="tags">
+         <a
+         href="question.html?id=${question.id}"
+           class="post-tag"
+           title=""
+           rel="tag"
+           >View details</a>
+           </div>
+           </div>
+           </div>`;
+      });
+    } else {
+      questionSummary.innerHTML += `<h4>${body.error}</h4>`;
+    }
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function rsvp(userResponse) {
+  const url = `https://oladims-questioner.herokuapp.com/api/v1/meetups/${meetupId}/rsvps`;
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        tokens: `${userData.token}`,
+      },
+      body: JSON.stringify({ response: userResponse }),
+    });
+    const body = await response.json();
+
+    if (response.ok) {
+  responseText.innerText = 'Your response ha been recorded successfully';
+    } else {
+      alert('error');
+    }
+  } catch (err) {
+    throw err;
+  }
+}
+
+function coming(event) {
+  event.preventDefault();
+  // rsvp('yes');
+  no.toggleAttribute('disabled', false);
+  responseText.innerText = 'Your response has been recorded successfully';
+  yes.toggleAttribute('disabled');
+}
+
+function notComing(event) {
+  event.preventDefault();
+  // rsvp('no');
+  yes.toggleAttribute('disabled', false);
+  responseText.innerText = 'Your response has been recorded successfully';
+  no.toggleAttribute('disabled');
+}
+
+yes.addEventListener('click', coming);
+no.addEventListener('click', notComing);
+
+getMeetup(meetupId);
+getQuestions(meetupId);
